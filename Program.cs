@@ -2,4 +2,4 @@
 
 Trainer jeff = new Trainer(7, "jeff", "123 dirt road", "jefflucas@ua.edu");
 
-System.Console.WriteLine(jeff.GetAddress());
+System.Console.WriteLine(jeff.GetTrainerAddress());

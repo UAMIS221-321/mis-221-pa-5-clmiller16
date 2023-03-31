@@ -4,19 +4,21 @@ namespace mis_221_pa_5_clmiller16
     {
         private int trainerID;
         private string trainerName;
-        private string address;
+        private string trainerAddress;
         private string trainerEmail;
+
+        static private int count;
 
         public Trainer()
         {
 
         }
 
-        public Trainer(int trainerID, string trainerName, string address, string trainerEmail)
+        public Trainer(int trainerID, string trainerName, string trainerAddress, string trainerEmail)
         {
             this.trainerID = trainerID;
             this.trainerName = trainerName;
-            this.address = address;
+            this.trainerAddress = trainerAddress;
             this.trainerEmail = trainerEmail;
         }
 
@@ -36,12 +38,12 @@ namespace mis_221_pa_5_clmiller16
             return trainerName;
         }
 
-        public void SetAddress(string address){
-            this.address = address;
+        public void SetTrainerAddress(string trainerAddress){
+            this.trainerAddress = trainerAddress;
         }
 
-        public string GetAddress(){
-            return address;
+        public string GetTrainerAddress(){
+            return trainerAddress;
         }
 
         public void SetTrainerEmail(string trainerEmail){
@@ -50,6 +52,29 @@ namespace mis_221_pa_5_clmiller16
 
         public string GetTrainerEmail(){
             return trainerEmail;
+        }
+
+        static public void SetCount(int count)
+        {
+            Trainer.count = count;
+        }
+
+        static public int GetCount()
+        {
+            return Trainer.count;
+        }
+
+        static public void IncCount()
+        {
+            Trainer.count++;
+        }
+
+        public override string ToString(){
+            return $"The trainer ID is {trainerID}, the name is {trainerName}, the address is {trainerAddress}, and the email is {trainerEmail}";
+        }
+
+        public string ToFile(){
+            return $"{trainerID}#{trainerName}#{trainerAddress}#{trainerEmail}";
         }
 
 
