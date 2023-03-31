@@ -1,0 +1,15 @@
+/Users/carsonmiller/Desktop/221code/PAs/mis-221-pa-5-clmiller16/bin/Debug/net6.0/mis-221-pa-5-clmiller16
+/Users/carsonmiller/Desktop/221code/PAs/mis-221-pa-5-clmiller16/bin/Debug/net6.0/mis-221-pa-5-clmiller16.deps.json
+/Users/carsonmiller/Desktop/221code/PAs/mis-221-pa-5-clmiller16/bin/Debug/net6.0/mis-221-pa-5-clmiller16.runtimeconfig.json
+/Users/carsonmiller/Desktop/221code/PAs/mis-221-pa-5-clmiller16/bin/Debug/net6.0/mis-221-pa-5-clmiller16.dll
+/Users/carsonmiller/Desktop/221code/PAs/mis-221-pa-5-clmiller16/bin/Debug/net6.0/mis-221-pa-5-clmiller16.pdb
+/Users/carsonmiller/Desktop/221code/PAs/mis-221-pa-5-clmiller16/obj/Debug/net6.0/mis-221-pa-5-clmiller16.csproj.AssemblyReference.cache
+/Users/carsonmiller/Desktop/221code/PAs/mis-221-pa-5-clmiller16/obj/Debug/net6.0/mis-221-pa-5-clmiller16.GeneratedMSBuildEditorConfig.editorconfig
+/Users/carsonmiller/Desktop/221code/PAs/mis-221-pa-5-clmiller16/obj/Debug/net6.0/mis-221-pa-5-clmiller16.AssemblyInfoInputs.cache
+/Users/carsonmiller/Desktop/221code/PAs/mis-221-pa-5-clmiller16/obj/Debug/net6.0/mis-221-pa-5-clmiller16.AssemblyInfo.cs
+/Users/carsonmiller/Desktop/221code/PAs/mis-221-pa-5-clmiller16/obj/Debug/net6.0/mis-221-pa-5-clmiller16.csproj.CoreCompileInputs.cache
+/Users/carsonmiller/Desktop/221code/PAs/mis-221-pa-5-clmiller16/obj/Debug/net6.0/mis-221-pa-5-clmiller16.dll
+/Users/carsonmiller/Desktop/221code/PAs/mis-221-pa-5-clmiller16/obj/Debug/net6.0/refint/mis-221-pa-5-clmiller16.dll
+/Users/carsonmiller/Desktop/221code/PAs/mis-221-pa-5-clmiller16/obj/Debug/net6.0/mis-221-pa-5-clmiller16.pdb
+/Users/carsonmiller/Desktop/221code/PAs/mis-221-pa-5-clmiller16/obj/Debug/net6.0/mis-221-pa-5-clmiller16.genruntimeconfig.cache
+/Users/carsonmiller/Desktop/221code/PAs/mis-221-pa-5-clmiller16/obj/Debug/net6.0/ref/mis-221-pa-5-clmiller16.dll

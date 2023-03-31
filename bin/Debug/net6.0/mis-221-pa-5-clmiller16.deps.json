@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "mis-221-pa-5-clmiller16/1.0.0": {
+        "runtime": {
+          "mis-221-pa-5-clmiller16.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "mis-221-pa-5-clmiller16/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
