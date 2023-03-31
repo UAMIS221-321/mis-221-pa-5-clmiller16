@@ -2,10 +2,10 @@ namespace mis_221_pa_5_clmiller16
 {
     public class Trainer
     {
-        private int trainerID;
-        private string trainerName;
-        private string trainerAddress;
-        private string trainerEmail;
+        private int ID;
+        private string name;
+        private string address;
+        private string email;
 
         static private int count;
 
@@ -14,44 +14,44 @@ namespace mis_221_pa_5_clmiller16
 
         }
 
-        public Trainer(int trainerID, string trainerName, string trainerAddress, string trainerEmail)
+        public Trainer(int ID, string name, string address, string email)
         {
-            this.trainerID = trainerID;
-            this.trainerName = trainerName;
-            this.trainerAddress = trainerAddress;
-            this.trainerEmail = trainerEmail;
+            this.ID = ID;
+            this.name = name;
+            this.address = address;
+            this.email = email;
         }
 
-        public void SetID(int trainerID){
-            this.trainerID = trainerID;
+        public void SetID(int ID){
+            this.ID = ID;
         }
 
         public int GetID(){
-            return trainerID;
+            return ID;
         }
 
-        public void SetTrainerName(string trainerName){
-            this.trainerName = trainerName;
+        public void SetTrainerName(string name){
+            this.name = name;
         }
 
         public string GetTrainerName(){
-            return trainerName;
+            return name;
         }
 
-        public void SetTrainerAddress(string trainerAddress){
-            this.trainerAddress = trainerAddress;
+        public void SetAddress(string address){
+            this.address = address;
         }
 
-        public string GetTrainerAddress(){
-            return trainerAddress;
+        public string GetAddress(){
+            return address;
         }
 
-        public void SetTrainerEmail(string trainerEmail){
-            this.trainerEmail = trainerEmail;
+        public void SetEmail(string email){
+            this.email = email;
         }
 
-        public string GetTrainerEmail(){
-            return trainerEmail;
+        public string GetEmail(){
+            return email;
         }
 
         static public void SetCount(int count)
@@ -70,11 +70,11 @@ namespace mis_221_pa_5_clmiller16
         }
 
         public override string ToString(){
-            return $"The trainer ID is {trainerID}, the name is {trainerName}, the address is {trainerAddress}, and the email is {trainerEmail}";
+            return $"The trainer ID is {ID}, the name is {name}, the address is {address}, and the email is {email}";
         }
 
         public string ToFile(){
-            return $"{trainerID}#{trainerName}#{trainerAddress}#{trainerEmail}";
+            return $"{ID}#{name}#{address}#{email}";
         }
 
 

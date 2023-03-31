@@ -10,7 +10,7 @@ namespace mis_221_pa_5_clmiller16
 
 
 
-        public void GetAllBooksFromFile()
+        public void GetAllTrainersFromFile()
         {
             //open
             StreamReader inFile = new StreamReader("input.txt");
