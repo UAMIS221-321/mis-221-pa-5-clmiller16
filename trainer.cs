@@ -30,11 +30,11 @@ namespace mis_221_pa_5_clmiller16
             return ID;
         }
 
-        public void SetTrainerName(string name){
+        public void SetName(string name){
             this.name = name;
         }
 
-        public string GetTrainerName(){
+        public string GetName(){
             return name;
         }
 
@@ -71,6 +71,10 @@ namespace mis_221_pa_5_clmiller16
 
         public override string ToString(){
             return $"The trainer ID is {ID}, the name is {name}, the address is {address}, and the email is {email}";
+        }
+
+        public string ToStringFormatted(){
+            return $"ID: {ID} \nName: {name} \nAddress: {address} \nEmail: {email}";
         }
 
         public string ToFile(){

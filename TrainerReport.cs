@@ -8,7 +8,7 @@ namespace mis_221_pa_5_clmiller16
         }
         public void PrintAllTrainers(){
             for (int i = 0; i < Trainer.GetCount(); i++){
-                System.Console.WriteLine(trainers[i].ToString());
+                System.Console.WriteLine(trainers[i].ToStringFormatted());
             }
         }
 
