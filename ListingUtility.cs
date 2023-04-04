@@ -19,7 +19,7 @@ namespace mis_221_pa_5_clmiller16
 
 
             //process
-            Trainer.SetCount(0);
+            Listing.SetCount(0);
             string line = inFile.ReadLine();
             while(line != null)
             {
