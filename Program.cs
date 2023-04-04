@@ -44,8 +44,7 @@ static void Route(string userInput){
     if (userInput == "1"){
         ManageTrainers();
     } else if (userInput == "2"){
-        System.Console.WriteLine("YOU ARE INSIDE 2");
-        Console.ReadKey();
+        ManageListings();
     } else if (userInput == "3"){
         System.Console.WriteLine("YOU ARE INSIDE 3");
         Console.ReadKey();
@@ -136,6 +135,80 @@ static void EditTrainer(){
     System.Console.WriteLine("Press any key to continue");
     Console.ReadKey();
 }
+
+// _____________________________________________________________________
+
+static void ManageListings(){
+    string userInput = GetListingChoice();
+    while (userInput != "4"){
+        RouteListing(userInput);
+        userInput = GetListingChoice();
+    }    
+}
+
+static string GetListingChoice(){
+    DisplayListingMenu();
+    string userInput = Console.ReadLine();
+
+    while (!ValidMenuChoiceTrainer(userInput)){
+        Console.WriteLine("Invalid menu choice.  Please Enter a Valid Menu Choice");
+        Console.WriteLine("Press any key to continue....");
+        Console.ReadKey();
+
+        DisplayListingMenu();
+        userInput = Console.ReadLine();
+    }
+
+    return userInput;
+}
+
+static void DisplayListingMenu(){
+    Console.Clear();
+    Console.WriteLine("1:   Add Listing");
+    Console.WriteLine("2:   Edit Listing");
+    Console.WriteLine("3:   Delete Listing");
+    Console.WriteLine("4:   Exit");
+}
+
+static void RouteListing(string userInput){
+
+    if (userInput == "1"){
+        AddListing();
+    } else if (userInput == "2"){
+        EditListing();
+    } else{
+        System.Console.WriteLine("delete listing here");
+        Console.ReadKey();
+    }
+}
+
+static void AddListing(){
+    Listing[] listings = new Listing[50];
+    ListingUtility utility = new ListingUtility(listings);
+    ListingReport report = new ListingReport(listings);
+
+    utility.GetAllListingsFromFile();
+    utility.AddListing();
+    utility.Save();
+
+    System.Console.WriteLine("Press any key to continue");
+    Console.ReadKey();
+}
+
+static void EditListing(){
+    Listing[] listings = new Listing[50];
+    ListingUtility utility = new ListingUtility(listings);
+    ListingReport report = new ListingReport(listings);
+
+    utility.GetAllListingsFromFile();
+    utility.UpdateListing();
+
+    System.Console.WriteLine("Press any key to continue");
+    Console.ReadKey();
+}
+
+
+
 
 
 

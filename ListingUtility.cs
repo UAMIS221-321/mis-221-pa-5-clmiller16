@@ -80,7 +80,7 @@ namespace mis_221_pa_5_clmiller16
             return -1;
         }
 
-        public void UpdateTrainer()
+        public void UpdateListing()
         {
             System.Console.WriteLine("What is the ID of the listing you want to update");
             int searchVal = int.Parse(Console.ReadLine());
@@ -101,11 +101,10 @@ namespace mis_221_pa_5_clmiller16
                 listings[foundIndex].SetTaken(Console.ReadLine());
 
                 Save();
-
             }
             else
             {
-                System.Console.WriteLine("Trainer not found");
+                System.Console.WriteLine("Listing not found");
             }   
         }
     }
