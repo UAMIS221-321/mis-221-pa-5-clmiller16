@@ -1,0 +1,4 @@
+1#Trainer Carson#01-02-24#11:15 am#$25#true
+2#Trainer Zeb#01-03-24#8:00 am#$25#true
+3#Trainer Ellie#01-04-24#2:00 pm#$30#true
+4#Trainer Manav#01-05-24#5:15 pm#$50#false

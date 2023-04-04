@@ -7,7 +7,8 @@ namespace mis_221_pa_5_clmiller16
         private string date;
         private string time;
         private string cost;
-        private bool taken;
+        private string taken;
+        static private int count;
 
 
 
@@ -17,7 +18,7 @@ namespace mis_221_pa_5_clmiller16
 
         }
 
-        public Listing(int ID, string name, string date, string time, string cost, bool taken)
+        public Listing(int ID, string name, string date, string time, string cost, string taken)
         {
             this.ID = ID;
             this.name = name;
@@ -45,28 +46,51 @@ namespace mis_221_pa_5_clmiller16
         public string GetDate(){
             return date;
         }
+        public void SetTime(string time){
+            this.time = time;
+        }
+        public string GetTime(){
+            return time;
+        }
         public void SetCost(string cost){
             this.cost = cost;
         }
         public string GetCost(){
             return cost;
         }
-        public void SetTaken(bool taken){
+        public void SetTaken(string taken){
             this.taken = taken;
         }
-        public bool GetTaken(){
+        public string GetTaken(){
             return taken;
+        }
+
+        static public void SetCount(int count)
+        {
+            Listing.count = count;
+        }
+
+        static public int GetCount()
+        {
+            return Listing.count;
+        }
+
+        static public void IncCount()
+        {
+            Listing.count++;
         }
 
         public override string ToString(){
             return $"The listing ID is {ID}, the trainer's name is {name}, the date is {date} and the time is {time}, the cost is {cost}, and it is taken- {taken}";
         }
 
+        public string ToStringFormatted(){
+            return $"ID: {ID} \nName: {name} \nDate: {date} \nTime: {time} \nCost: {cost} \nStatus: {taken}";
+        }
+
         public string ToFile(){
             return $"{ID}#{name}#{date}#{time}#{cost}#{taken}";
         }
-
-
 
 
     }

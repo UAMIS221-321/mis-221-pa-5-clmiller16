@@ -13,7 +13,7 @@ namespace mis_221_pa_5_clmiller16
         public void GetAllTrainersFromFile()
         {
             //open
-            StreamReader inFile = new StreamReader("input.txt");
+            StreamReader inFile = new StreamReader("trainers.txt");
 
             //*** int wordCount = 0;
 
@@ -53,7 +53,7 @@ namespace mis_221_pa_5_clmiller16
 
         public void Save()
         {
-            StreamWriter outFile = new StreamWriter("input.txt");
+            StreamWriter outFile = new StreamWriter("trainers.txt");
 
             for(int i = 0; i < Trainer.GetCount(); i++)
             {
