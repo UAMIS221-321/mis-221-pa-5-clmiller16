@@ -25,7 +25,7 @@ namespace mis_221_pa_5_clmiller16
             {
                 string[] temp = line.Split('#');
                 //*** wordCount+=temp.Length();
-                trainers[Trainer.GetCount()] = new Trainer(int.Parse(temp[0]), temp[1], temp[2], temp[3]);
+                trainers[Trainer.GetCount()] = new Trainer(int.Parse(temp[0]), temp[1], temp[2], temp[3], bool.Parse(temp[4]));
                 Trainer.IncCount();
                 line = inFile.ReadLine();
             }
@@ -46,6 +46,8 @@ namespace mis_221_pa_5_clmiller16
             myTrainer.SetAddress(Console.ReadLine());
             System.Console.WriteLine("Please enter the email address");
             myTrainer.SetEmail(Console.ReadLine());
+
+            myTrainer.SetDeleted(false);
            
             trainers[Trainer.GetCount()] = myTrainer;
             Trainer.IncCount();
@@ -83,14 +85,16 @@ namespace mis_221_pa_5_clmiller16
             int foundIndex = Find(searchVal);
             if(foundIndex != -1)
             {
-                System.Console.WriteLine("Please enter the ID");
-                trainers[foundIndex].SetID(int.Parse(Console.ReadLine()));
+                // System.Console.WriteLine("Please enter the ID");
+                // trainers[foundIndex].SetID(int.Parse(Console.ReadLine()));
                 System.Console.WriteLine("Please enter the name");
                 trainers[foundIndex].SetName(Console.ReadLine());
                 System.Console.WriteLine("Please enter the address");
                 trainers[foundIndex].SetAddress(Console.ReadLine());
                 System.Console.WriteLine("Please enter the email");
                 trainers[foundIndex].SetEmail(Console.ReadLine());
+
+                trainers[foundIndex].SetDeleted(false);
 
                 Save();
 
@@ -100,6 +104,13 @@ namespace mis_221_pa_5_clmiller16
                 System.Console.WriteLine("Trainer not found");
             }
 
+        }
+
+        public void DeleteTrainer(){
+            System.Console.WriteLine("What is the ID of the trainer you want to delete?");
+            int deleteID = int.Parse(Console.ReadLine());
+
+            trainers[deleteID - 1].SetDeleted(true);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace mis_221_pa_5_clmiller16
             {
                 string[] temp = line.Split('#');
                 //*** wordCount+=temp.Length();
-                listings[Listing.GetCount()] = new Listing(int.Parse(temp[0]), temp[1], temp[2], temp[3], temp[4], temp[5]);
+                listings[Listing.GetCount()] = new Listing(int.Parse(temp[0]), temp[1], temp[2], temp[3], temp[4], temp[5], bool.Parse(temp[6]));
                 Listing.IncCount();
                 line = inFile.ReadLine();
             }
@@ -50,6 +50,8 @@ namespace mis_221_pa_5_clmiller16
             myListing.SetCost(Console.ReadLine());
             System.Console.WriteLine("Please enter if it has been taken");
             myListing.SetTaken(Console.ReadLine());
+
+            myListing.SetDeleted(false);
            
             listings[Listing.GetCount()] = myListing;
             Listing.IncCount();
@@ -106,6 +108,13 @@ namespace mis_221_pa_5_clmiller16
             {
                 System.Console.WriteLine("Listing not found");
             }   
+        }
+
+        public void DeleteListing(){
+            System.Console.WriteLine("What is the ID of the listing you want to delete?");
+            int deleteID = int.Parse(Console.ReadLine());
+
+            listings[deleteID - 1].SetDeleted(true);
         }
     }
 }

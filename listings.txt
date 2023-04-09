@@ -1,5 +1,5 @@
-1#Trainer CARSON#01-02-24#11:15 am#$25#taken
-2#Trainer Zeb#01-03-24#8:00 am#$25#taken
-3#Trainer Austin#01-02-24#2:00 pm#$30#open
-4#Trainer Manav#01-05-24#5:15 pm#$50#open
-5#Emily#02-20-23#1:00 pm#$35#taken
+1#CARSON#01-02-24#11:15 am#$25#taken#false
+2#Zeb#01-03-24#8:00 am#$25#taken#false
+3#Austin#01-02-24#2:00 pm#$30#open#false
+4#Manav#01-05-24#5:15 pm#$50#open#false
+5#Emily#02-20-23#1:00 pm#$35#taken#false

@@ -6,6 +6,8 @@ namespace mis_221_pa_5_clmiller16
         private string name;
         private string address;
         private string email;
+        private bool deleted;
+        // private bool deleted;
 
         static private int count;
 
@@ -14,12 +16,15 @@ namespace mis_221_pa_5_clmiller16
 
         }
 
-        public Trainer(int ID, string name, string address, string email)
+        public Trainer(int ID, string name, string address, string email, bool deleted)
         {
             this.ID = ID;
             this.name = name;
             this.address = address;
             this.email = email;
+            this.deleted = deleted;
+
+            // deleted = false;
         }
 
         public void SetID(int ID){
@@ -54,6 +59,16 @@ namespace mis_221_pa_5_clmiller16
             return email;
         }
 
+        public void SetDeleted(bool deleted){
+            this.deleted = deleted;
+        }
+        public bool GetDeleted(){
+            return deleted;
+        }
+
+
+
+
         static public void SetCount(int count)
         {
             Trainer.count = count;
@@ -74,11 +89,11 @@ namespace mis_221_pa_5_clmiller16
         }
 
         public string ToStringFormatted(){
-            return $"ID: {ID} \nName: {name} \nAddress: {address} \nEmail: {email}";
+            return $"{ID} \t{name} \t{address} \t{email}";
         }
 
         public string ToFile(){
-            return $"{ID}#{name}#{address}#{email}";
+            return $"{ID}#{name}#{address}#{email}#{deleted}";
         }
 
 

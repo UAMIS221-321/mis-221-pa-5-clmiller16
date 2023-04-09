@@ -1,4 +1,4 @@
-1#Carson Miller#6408 Creek Bed Ct#clmiller16@crimson.ua.edu
-2#Jeff Lucas#123 Dirt Rd#jefflucas@cba.ua.edu
-3#Chase SMITHHH#9810 Hewson Hall#chcallahan@crimson.ua.edu
-4#Gary Spurrier THE MAN#315 Innovation Ct#grspurrier@ua.edu
+1#Carson Miller#6408 Creek Bed Ct#clmiller16@crimson.ua.edu#False
+2#Jeff Lucas#123 Dirt Road#jefflucas@cba.ua.edu#False
+3#Chase SMITHHH#9810 Hewson Hall#chcallahan@crimson.ua.edu#False
+4#Gary Spurrier#315 Innovation Ct#grspurrier@ua.edu#False

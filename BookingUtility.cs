@@ -1,0 +1,124 @@
+namespace mis_221_pa_5_clmiller16
+{
+    public class BookingUtility
+    {
+        private Booking[] bookings;   
+
+        public BookingUtility(Booking[] bookings){
+            this.bookings = bookings;
+        }     
+
+
+
+        public void GetAllBookingsFromFile()
+        {
+            //open
+            StreamReader inFile = new StreamReader("transactions.txt");
+
+            //*** int wordCount = 0;
+
+
+            //process
+            Booking.SetCount(0);
+            string line = inFile.ReadLine();
+            while(line != null)
+            {
+                string[] temp = line.Split('#');
+                //*** wordCount+=temp.Length();
+                bookings[Booking.GetCount()] = new Booking(int.Parse(temp[0]), temp[1], temp[2], temp[3], int.Parse(temp[4]), temp[5]);
+                Booking.IncCount();
+                line = inFile.ReadLine();
+            }
+
+
+            //close
+            inFile.Close();
+        }
+
+        public void AddBooking()
+        {
+            System.Console.WriteLine("Please enter the session ID");
+            Booking myBooking = new Booking();
+            myBooking.SetSessionID(int.Parse(Console.ReadLine()));
+            System.Console.WriteLine("Please enter the customer name");
+            myBooking.SetCustomerName(Console.ReadLine());
+            System.Console.WriteLine("Please enter the customer email address");
+            myBooking.SetCustomerEmail(Console.ReadLine());
+            System.Console.WriteLine("Please enter training date");
+            myBooking.SetTrainingDate(Console.ReadLine());
+            System.Console.WriteLine("Please enter the trainer ID");
+            myBooking.SetTrainerID(int.Parse(Console.ReadLine()));
+            System.Console.WriteLine("Please enter the trainer name");
+            myBooking.SetTrainerName(Console.ReadLine());
+            System.Console.WriteLine("Please enter the status");
+            myBooking.SetStatus(Console.ReadLine());
+           
+            bookings[Booking.GetCount()] = myBooking;
+            Booking.IncCount();
+        }
+
+        public void Save()
+        {
+            StreamWriter outFile = new StreamWriter("bookings.txt");
+
+            for(int i = 0; i < Booking.GetCount(); i++)
+            {
+                outFile.WriteLine(bookings[i].ToFile());
+            }
+
+            outFile.Close();
+
+        }
+
+        private int Find(int searchVal)
+        {
+            for(int i = 0; i < Booking.GetCount(); i++)
+            {
+                if(bookings[i].GetSessionID() == searchVal)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public void UpdateBooking()
+        {
+            System.Console.WriteLine("What is the ID of the session you want to update");
+            int searchVal = int.Parse(Console.ReadLine());
+            int foundIndex = Find(searchVal);
+            if(foundIndex != -1)
+            {
+                // System.Console.WriteLine("Please enter the ID");
+                // bookings[foundIndex].SetID(int.Parse(Console.ReadLine()));
+                System.Console.WriteLine("Please enter the customer name");
+                bookings[foundIndex].SetCustomerName(Console.ReadLine());
+                System.Console.WriteLine("Please enter the customer email address");
+                bookings[foundIndex].SetCustomerEmail(Console.ReadLine());
+                System.Console.WriteLine("Please enter training date");
+                bookings[foundIndex].SetTrainingDate(Console.ReadLine());
+                System.Console.WriteLine("Please enter the trainer ID");
+                bookings[foundIndex].SetTrainerID(int.Parse(Console.ReadLine()));
+                System.Console.WriteLine("Please enter the trainer name");
+                bookings[foundIndex].SetTrainerName(Console.ReadLine());
+                System.Console.WriteLine("Please enter the status");
+                bookings[foundIndex].SetStatus(Console.ReadLine());
+
+                Save();
+
+            }
+            else
+            {
+                System.Console.WriteLine("Session not found");
+            }
+
+        }
+
+        // public void DeleteBooking(){
+        //     System.Console.WriteLine("What is the ID of the Booking you want to delete?");
+        //     int deleteID = int.Parse(Console.ReadLine());
+
+        //     bookings[deleteID - 1].SetDeleted(true);
+        // }
+    }
+}

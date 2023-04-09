@@ -30,7 +30,7 @@ static void DisplayMenu(){
     Console.WriteLine("2:   Manage Listings");
     Console.WriteLine("3:   Manage Bookings");
     Console.WriteLine("4:   Run Reports");
-    Console.WriteLine("5:   Exit Game");
+    Console.WriteLine("5:   Exit App");
 }
 
 static bool ValidMenuChoice(string userInput){
@@ -46,8 +46,7 @@ static void Route(string userInput){
     } else if (userInput == "2"){
         ManageListings();
     } else if (userInput == "3"){
-        System.Console.WriteLine("YOU ARE INSIDE 3");
-        Console.ReadKey();
+        ManageBookings();
     } else if (userInput == "4"){
         System.Console.WriteLine("YOU ARE INSIDE 4");
         Console.ReadKey();
@@ -91,6 +90,17 @@ static void DisplayTrainerMenu(){
     Console.WriteLine("2:   Edit Trainer");
     Console.WriteLine("3:   Delete Trainer");
     Console.WriteLine("4:   Exit");
+    System.Console.WriteLine();
+
+    Trainer[] trainers = new Trainer[50];
+    TrainerUtility utility = new TrainerUtility(trainers);
+    utility.GetAllTrainersFromFile();
+    int count = Trainer.GetCount();
+    System.Console.WriteLine("\nTrainers:");
+    for (int i = 0; i < count; i++){
+        System.Console.WriteLine(trainers[i].ToStringFormatted());
+    }
+
 }
 
 static bool ValidMenuChoiceTrainer(string userInput){
@@ -106,8 +116,9 @@ static void RouteTrainer(string userInput){
     } else if (userInput == "2"){
         EditTrainer();
     } else{
-        System.Console.WriteLine("delete trainer here");
-        Console.ReadKey();
+        DeleteTrainer();
+        // System.Console.WriteLine("delete trainer here");
+        // Console.ReadKey();
     }
 }
 
@@ -117,6 +128,7 @@ static void AddTrainer(){
     TrainerReport report = new TrainerReport(trainers);
 
     utility.GetAllTrainersFromFile();
+
     utility.AddTrainer();
     utility.Save();
 
@@ -134,6 +146,16 @@ static void EditTrainer(){
 
     System.Console.WriteLine("Press any key to continue");
     Console.ReadKey();
+}
+
+static void DeleteTrainer(){
+    Trainer[] trainers = new Trainer[50];
+    TrainerUtility utility = new TrainerUtility(trainers);
+    TrainerReport report = new TrainerReport(trainers);
+
+    utility.GetAllTrainersFromFile();
+    utility.DeleteTrainer();
+    utility.Save(); 
 }
 
 // _____________________________________________________________________
@@ -168,6 +190,16 @@ static void DisplayListingMenu(){
     Console.WriteLine("2:   Edit Listing");
     Console.WriteLine("3:   Delete Listing");
     Console.WriteLine("4:   Exit");
+
+    Listing[] listings = new Listing[50];
+    ListingUtility utility = new ListingUtility(listings);
+    utility.GetAllListingsFromFile();
+    int count = Listing.GetCount();
+
+    System.Console.WriteLine("\nListings:");
+    for (int i = 0; i < count; i++){
+        System.Console.WriteLine(listings[i].ToStringFormatted());
+    }
 }
 
 static void RouteListing(string userInput){
@@ -177,8 +209,7 @@ static void RouteListing(string userInput){
     } else if (userInput == "2"){
         EditListing();
     } else{
-        System.Console.WriteLine("delete listing here");
-        Console.ReadKey();
+        DeleteListing();
     }
 }
 
@@ -206,6 +237,145 @@ static void EditListing(){
     System.Console.WriteLine("Press any key to continue");
     Console.ReadKey();
 }
+
+static void DeleteListing(){
+    Listing[] listings = new Listing[50];
+    ListingUtility utility = new ListingUtility(listings);
+    ListingReport report = new ListingReport(listings);
+
+    utility.GetAllListingsFromFile();
+    utility.DeleteListing();
+    utility.Save(); 
+}
+
+
+// _______________________________________________________________________________
+
+static void ManageBookings(){
+    string userInput = GetBookingChoice();
+    while (userInput != "3"){
+        RouteBooking(userInput);
+        userInput = GetBookingChoice();
+    }    
+}
+
+static string GetBookingChoice(){
+    DisplayBookingMenu();
+    string userInput = Console.ReadLine();
+
+    while (!ValidMenuChoiceBooking(userInput)){
+        Console.WriteLine("Invalid menu choice.  Please Enter a Valid Menu Choice");
+        Console.WriteLine("Press any key to continue....");
+        Console.ReadKey();
+
+        DisplayBookingMenu();
+        userInput = Console.ReadLine();
+    }
+
+    return userInput;
+}
+
+static bool ValidMenuChoiceBooking(string userInput){
+    if (userInput == "1" || userInput == "2" || userInput == "3"){
+        return true;
+    } else return false;
+}
+
+static void DisplayBookingMenu(){
+    Console.Clear();
+    Console.WriteLine("1:   View Available Sessions");
+    Console.WriteLine("2:   Book a Session");
+    Console.WriteLine("3:   Exit");
+
+    Booking[] bookings = new Booking[50];
+    BookingUtility utility = new BookingUtility(bookings);
+    utility.GetAllBookingsFromFile();
+    int count = Booking.GetCount();
+
+    // System.Console.WriteLine("Sessions:");
+    // for (int i = 0; i < count; i++){
+    //     System.Console.WriteLine(bookings[i].ToStringFormatted());
+    // }
+}
+
+static void RouteBooking(string userInput){
+
+    if (userInput == "1"){
+        ViewAvailableSessions();
+    } else {
+        BookASession();
+    }
+}
+
+
+
+static void ViewAvailableSessions(){
+
+    Booking[] bookings = new Booking[50];
+    BookingUtility utility = new BookingUtility(bookings);
+
+    utility.GetAllBookingsFromFile();
+    int count = Booking.GetCount();
+    
+
+    System.Console.WriteLine("\nSessions:");
+    for (int i = 0; i < count; i++){
+        System.Console.WriteLine(bookings[i].ToStringFormatted());
+    }
+
+    System.Console.WriteLine("\n(Press any key to continue)");
+    Console.ReadKey();
+}
+
+
+static void BookASession(){
+
+}
+
+
+
+
+
+
+
+static void AddBooking(){
+    Booking[] bookings = new Booking[50];
+    BookingUtility utility = new BookingUtility(bookings);
+    // BookingReport report = new BookingReport(bookings);
+
+    utility.GetAllBookingsFromFile();
+    utility.AddBooking();
+    utility.Save();
+
+    System.Console.WriteLine("Press any key to continue");
+    Console.ReadKey();
+}
+
+static void EditBooking(){
+    Booking[] bookings = new Booking[50];
+    BookingUtility utility = new BookingUtility(bookings);
+    // BookingReport report = new BookingReport(bookings);
+
+    utility.GetAllBookingsFromFile();
+    utility.UpdateBooking();
+
+    System.Console.WriteLine("Press any key to continue");
+    Console.ReadKey();
+}
+
+// static void DeleteListing(){
+//     Listing[] listings = new Listing[50];
+//     ListingUtility utility = new ListingUtility(listings);
+//     ListingReport report = new ListingReport(listings);
+
+//     utility.GetAllListingsFromFile();
+//     utility.DeleteListing();
+//     utility.Save(); 
+// }
+
+
+
+
 
 
 
