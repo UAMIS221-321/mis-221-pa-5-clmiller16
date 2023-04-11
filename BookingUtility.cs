@@ -2,7 +2,8 @@ namespace mis_221_pa_5_clmiller16
 {
     public class BookingUtility
     {
-        private Booking[] bookings;   
+        private Booking[] bookings;
+        // private Listing[] listings;   
 
         public BookingUtility(Booking[] bookings){
             this.bookings = bookings;

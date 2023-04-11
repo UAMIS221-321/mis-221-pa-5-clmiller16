@@ -337,7 +337,7 @@ static void RouteBooking(string userInput){
 
 
 
-static void ViewAvailableSessions(){
+static void ViewCustomerData(){
 
     Booking[] bookings = new Booking[50];
     BookingUtility utility = new BookingUtility(bookings);
@@ -352,6 +352,24 @@ static void ViewAvailableSessions(){
     }
 
     System.Console.WriteLine("\n(Press any key to continue)");
+    Console.ReadKey();
+}
+
+static void ViewAvailableSessions(){
+    Listing[] listings = new Listing[50];
+    ListingUtility utility = new ListingUtility(listings);
+
+    utility.GetAllListingsFromFile();
+    int count = Listing.GetCount();
+
+    System.Console.WriteLine("\nAvailable Sessions:");
+    for (int i = 0; i < count; i++){
+        if (listings[i].GetTaken() == "available"){
+            System.Console.WriteLine(listings[i].ToStringFormatted());
+        }
+    }
+
+    System.Console.WriteLine("Press any key to continue");
     Console.ReadKey();
 }
 
