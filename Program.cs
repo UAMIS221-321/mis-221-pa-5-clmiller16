@@ -50,11 +50,8 @@ static void Route(string userInput){
     } else if (userInput == "4"){
         System.Console.WriteLine("YOU ARE INSIDE 4");
         Console.ReadKey();
-    } else if (userInput == "5"){
-        System.Console.WriteLine("YOU ARE INSIDE 5");
-        Console.ReadKey();
     } else{
-        System.Console.WriteLine("YOU ARE INSIDE 6");
+        System.Console.WriteLine("YOU ARE INSIDE 5");
         Console.ReadKey();
     }
 }
@@ -330,7 +327,12 @@ static void RouteBooking(string userInput){
 
     if (userInput == "1"){
         ViewAvailableSessions();
+        System.Console.WriteLine("Press any key to continue");
+        Console.ReadKey();
     } else {
+        // Listing[] listings = new Listing[50];
+        // ListingUtility utility = new ListingUtility(listings);
+        // utility.GetAllListingsFromFile();
         BookASession();
     }
 }
@@ -368,13 +370,45 @@ static void ViewAvailableSessions(){
             System.Console.WriteLine(listings[i].ToStringFormatted());
         }
     }
-
-    System.Console.WriteLine("Press any key to continue");
-    Console.ReadKey();
 }
 
 
 static void BookASession(){
+    ViewAvailableSessions();
+
+    // Listing[] listings = new Listing[50];
+    // ListingUtility utility1 = new ListingUtility(listings);
+    // utility1.GetAllListingsFromFile();
+
+    Booking[] bookings = new Booking[50];
+    BookingUtility utility = new BookingUtility(bookings);
+    utility.GetAllBookingsFromFile();
+    int count = Booking.GetCount();
+
+    System.Console.WriteLine("Which session ID would you like to book?");
+    int userInput = int.Parse(Console.ReadLine());
+
+    // Listing[] listings = new Listing[50];
+    // ListingUtility utility1 = new ListingUtility(listings);
+    // utility1.GetAllListingsFromFile();
+
+    // Trainer[] trainers = new Trainer[50];
+    // TrainerUtility utility2 = new TrainerUtility(trainers);
+    // utility2.GetAllTrainersFromFile();
+    
+    // int variable1 = listings[userInput].GetID();
+    // string variable2 = listings[userInput].GetDate();
+    // int variable3 = trainers[userInput].GetID();
+    // string variable4 = listings[userInput].GetName();
+
+    //status update needed
+
+    utility.BookSession(userInput);
+    utility.Save();
+
+    System.Console.WriteLine("Press any key to continue");
+    Console.ReadKey();
+
 
 }
 

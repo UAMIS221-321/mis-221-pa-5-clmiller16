@@ -15,8 +15,8 @@ namespace mis_221_pa_5_clmiller16
             status = "booked";
         }
 
-        public Booking(int sessionID, string customerName, string customerEmail, string trainingDate, int trainerID, string trainerName){
-            status = "booked";
+        public Booking(int sessionID, string customerName, string customerEmail, string trainingDate, int trainerID, string trainerName, string status){
+            this.status = status;
             this.sessionID = sessionID;
             this.customerName = customerName;
             this.customerEmail = customerEmail;

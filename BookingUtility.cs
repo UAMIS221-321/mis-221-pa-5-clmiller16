@@ -3,8 +3,12 @@ namespace mis_221_pa_5_clmiller16
     public class BookingUtility
     {
         private Booking[] bookings;
-        // private Listing[] listings;   
+        private Listing[] listings;   
 
+        // public BookingUtility(Booking[] bookings, Listing[] listings){
+        //     this.bookings = bookings;
+        //     this.listings = listings;
+        // }
         public BookingUtility(Booking[] bookings){
             this.bookings = bookings;
         }     
@@ -26,7 +30,7 @@ namespace mis_221_pa_5_clmiller16
             {
                 string[] temp = line.Split('#');
                 //*** wordCount+=temp.Length();
-                bookings[Booking.GetCount()] = new Booking(int.Parse(temp[0]), temp[1], temp[2], temp[3], int.Parse(temp[4]), temp[5]);
+                bookings[Booking.GetCount()] = new Booking(int.Parse(temp[0]), temp[1], temp[2], temp[3], int.Parse(temp[4]), temp[5], temp[6]);
                 Booking.IncCount();
                 line = inFile.ReadLine();
             }
@@ -58,9 +62,39 @@ namespace mis_221_pa_5_clmiller16
             Booking.IncCount();
         }
 
+        public void BookSession(int userInput){
+            // System.Console.WriteLine("Which session ID would you like to book?");
+            // int userInput = int.Parse(Console.ReadLine());
+
+            Booking myBooking = new Booking();
+
+            myBooking.SetSessionID(userInput);
+            System.Console.WriteLine("What is your name (customer)");
+            myBooking.SetCustomerName(Console.ReadLine());
+            System.Console.WriteLine("What is your email (customer)");
+            myBooking.SetCustomerEmail(Console.ReadLine());
+            
+
+
+            // myBooking.SetTrainingDate(myListing.GetDate());
+            // myBooking.SetTrainerID(myListing.GetID());
+            // myBooking.SetTrainerName(myListing.GetName());
+
+
+            Listing myListing = new Listing();
+
+            myBooking.SetTrainingDate(myListing.GetDate());
+            myBooking.SetTrainerID(myListing.GetID());
+            myBooking.SetTrainerName(myListing.GetName());
+
+            // Save();
+
+            //pull info from listing here
+        }
+
         public void Save()
         {
-            StreamWriter outFile = new StreamWriter("bookings.txt");
+            StreamWriter outFile = new StreamWriter("transactions.txt");
 
             for(int i = 0; i < Booking.GetCount(); i++)
             {
