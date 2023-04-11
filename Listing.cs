@@ -100,7 +100,7 @@ namespace mis_221_pa_5_clmiller16
         }
 
         public string ToFile(){
-            return $"{ID}#{name}#{date}#{time}#{cost}#{taken}";
+            return $"{ID}#{name}#{date}#{time}#{cost}#{taken}#{deleted}";
         }
 
 

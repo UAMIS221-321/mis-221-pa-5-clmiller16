@@ -35,11 +35,14 @@ namespace mis_221_pa_5_clmiller16
             inFile.Close();
         }
 
-        public void AddTrainer()
+        public void AddTrainer(int max)
         {
-            System.Console.WriteLine("Please enter the ID");
+            int count = Trainer.GetCount();
+            // FindMaxID(count);
+
+            // System.Console.WriteLine("Please enter the ID");
             Trainer myTrainer = new Trainer();
-            myTrainer.SetID(int.Parse(Console.ReadLine()));
+            myTrainer.SetID(max);
             System.Console.WriteLine("Please enter the name");
             myTrainer.SetName(Console.ReadLine());
             System.Console.WriteLine("Please enter the mailing address");
@@ -52,6 +55,19 @@ namespace mis_221_pa_5_clmiller16
             trainers[Trainer.GetCount()] = myTrainer;
             Trainer.IncCount();
         }
+
+        // public int FindMaxID(int count){
+        //     int max = 
+
+        //     for (int i = 0; i < count; i++){
+                
+        //     }
+
+
+
+        //     return max;
+        // }
+
 
         public void Save()
         {

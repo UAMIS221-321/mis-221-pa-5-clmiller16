@@ -35,11 +35,12 @@ namespace mis_221_pa_5_clmiller16
             inFile.Close();
         }
 
-        public void AddListing()
+        public void AddListing(int max)
         {
-            System.Console.WriteLine("Please enter the ID");
+            // System.Console.WriteLine("Please enter the ID");
             Listing myListing = new Listing();
-            myListing.SetID(int.Parse(Console.ReadLine()));
+
+            myListing.SetID(max);
             System.Console.WriteLine("Please enter the name");
             myListing.SetName(Console.ReadLine());
             System.Console.WriteLine("Please enter the date");

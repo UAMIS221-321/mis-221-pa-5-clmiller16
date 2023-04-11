@@ -98,7 +98,9 @@ static void DisplayTrainerMenu(){
     int count = Trainer.GetCount();
     System.Console.WriteLine("\nTrainers:");
     for (int i = 0; i < count; i++){
-        System.Console.WriteLine(trainers[i].ToStringFormatted());
+        if (trainers[i].GetDeleted() == false){
+            System.Console.WriteLine(trainers[i].ToStringFormatted());
+        }
     }
 
 }
@@ -129,7 +131,20 @@ static void AddTrainer(){
 
     utility.GetAllTrainersFromFile();
 
-    utility.AddTrainer();
+    int count = Trainer.GetCount();
+    
+    //Trainer.FindMaxID(trainers);
+
+    int max = trainers[0].GetID();
+    for (int i = 0; i < count; i++){
+        if (trainers[i].GetID() > max){
+            max = trainers[i].GetID();
+        }
+    }
+    max++;
+
+
+    utility.AddTrainer(max);
     utility.Save();
 
     System.Console.WriteLine("Press any key to continue");
@@ -198,7 +213,9 @@ static void DisplayListingMenu(){
 
     System.Console.WriteLine("\nListings:");
     for (int i = 0; i < count; i++){
-        System.Console.WriteLine(listings[i].ToStringFormatted());
+         if (listings[i].GetDeleted() == false){
+            System.Console.WriteLine(listings[i].ToStringFormatted());
+         }
     }
 }
 
@@ -219,7 +236,18 @@ static void AddListing(){
     ListingReport report = new ListingReport(listings);
 
     utility.GetAllListingsFromFile();
-    utility.AddListing();
+
+    int count = Listing.GetCount();
+
+    int max = listings[0].GetID();
+    for (int i = 0; i < count; i++){
+        if (listings[i].GetID() > max){
+            max = listings[i].GetID();
+        }
+    }
+    max++;
+
+    utility.AddListing(max);
     utility.Save();
 
     System.Console.WriteLine("Press any key to continue");
