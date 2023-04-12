@@ -385,8 +385,8 @@ static void BookASession(){
     utility.GetAllBookingsFromFile();
     int count = Booking.GetCount();
 
-    System.Console.WriteLine("Which session ID would you like to book?");
-    int userInput = int.Parse(Console.ReadLine());
+    // System.Console.WriteLine("Which session ID would you like to book?");
+    // int userInput = int.Parse(Console.ReadLine());
 
     // Listing[] listings = new Listing[50];
     // ListingUtility utility1 = new ListingUtility(listings);
@@ -403,7 +403,7 @@ static void BookASession(){
 
     //status update needed
 
-    utility.BookSession(userInput);
+    utility.BookSession();
     utility.Save();
 
     System.Console.WriteLine("Press any key to continue");

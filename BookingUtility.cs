@@ -62,9 +62,10 @@ namespace mis_221_pa_5_clmiller16
             Booking.IncCount();
         }
 
-        public void BookSession(int userInput){
-            // System.Console.WriteLine("Which session ID would you like to book?");
-            // int userInput = int.Parse(Console.ReadLine());
+        public void BookSession(){
+            System.Console.WriteLine("Which session ID would you like to book?");
+            string stringUserInput = Console.ReadLine(); 
+            int userInput = int.Parse(stringUserInput);
 
             Booking myBooking = new Booking();
 
@@ -73,7 +74,70 @@ namespace mis_221_pa_5_clmiller16
             myBooking.SetCustomerName(Console.ReadLine());
             System.Console.WriteLine("What is your email (customer)");
             myBooking.SetCustomerEmail(Console.ReadLine());
+
+            StreamReader inFile = new StreamReader("listings.txt");
+
+            int myCount = 0;
+            string line = inFile.ReadLine();
+            while(line != null)
+            {
+                string[] temp = line.Split('#');
+                // myCount++;
+
+                // for (int i = 0; i < temp.Length; i++){
+                //     System.Console.WriteLine(temp[i]);
+                // }
+
+                for (int i = 0; i < temp.Length; i++){
+                    if (stringUserInput == temp[i]){
+                        // string[] temp2 = temp;
+                        myBooking.SetTrainerName(temp[1]);
+                        myBooking.SetTrainingDate(temp[2]);
+                    }
+                }
+
+                line = inFile.ReadLine();
+            }
+
+            inFile.Close();
+
+
+
+
+            StreamReader inFile2 = new StreamReader("trainers.txt");
+
+            //int myCount = 0;
+            string line2 = inFile2.ReadLine();
+            while(line2 != null)
+            {
+                string[] temp = line2.Split('#');
+                //myCount++;
+
+                for (int i = 0; i < temp.Length; i++){
+                    if (stringUserInput == temp[i]){
+                        // string[] temp2 = temp;
+                        myBooking.SetTrainerID(int.Parse(temp[0]));
+                    }
+                }
+
+                line2 = inFile2.ReadLine();
+            }
+
+            inFile2.Close();
+
+            bookings[Booking.GetCount()] = myBooking; // AHHHHHHHHH
+
+            // for (int x = 0; x < bookings.Length; x++){
+            //     System.Console.WriteLine(bookings[x].ToStringFormatted());
+            // }
             
+
+
+
+
+
+
+            // Listing myListing = new Listing();
 
 
             // myBooking.SetTrainingDate(myListing.GetDate());
@@ -81,11 +145,10 @@ namespace mis_221_pa_5_clmiller16
             // myBooking.SetTrainerName(myListing.GetName());
 
 
-            Listing myListing = new Listing();
 
-            myBooking.SetTrainingDate(myListing.GetDate());
-            myBooking.SetTrainerID(myListing.GetID());
-            myBooking.SetTrainerName(myListing.GetName());
+            // myBooking.SetTrainingDate(myListing.GetDate());
+            // myBooking.SetTrainerID(myListing.GetID());
+            // myBooking.SetTrainerName(myListing.GetName());
 
             // Save();
 
@@ -96,10 +159,17 @@ namespace mis_221_pa_5_clmiller16
         {
             StreamWriter outFile = new StreamWriter("transactions.txt");
 
-            for(int i = 0; i < Booking.GetCount(); i++)
+            System.Console.WriteLine(Booking.GetCount());
+
+            // outFile.WriteLine("BEFORE THE LOOP");
+
+            for(int i = 0; i < Booking.GetCount() + 1; i++)
             {
                 outFile.WriteLine(bookings[i].ToFile());
             }
+
+
+            // outFile.WriteLine("AFTER THE LOOP");
 
             outFile.Close();
 

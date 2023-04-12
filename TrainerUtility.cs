@@ -52,7 +52,7 @@ namespace mis_221_pa_5_clmiller16
 
             myTrainer.SetDeleted(false);
            
-            trainers[Trainer.GetCount()] = myTrainer;
+            trainers[Trainer.GetCount()] = myTrainer; // adds myTrainer to last slot in trainers
             Trainer.IncCount();
         }
 
