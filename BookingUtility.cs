@@ -219,11 +219,34 @@ namespace mis_221_pa_5_clmiller16
 
         }
 
+
+
         // public void DeleteBooking(){
         //     System.Console.WriteLine("What is the ID of the Booking you want to delete?");
         //     int deleteID = int.Parse(Console.ReadLine());
 
         //     bookings[deleteID - 1].SetDeleted(true);
         // }
+
+        public void Sort(){
+            for (int i = 0; i < Booking.GetCount() - 1; i++){
+                int min = i;
+
+                for (int j = i + 1; j < Booking.GetCount(); j++){
+                    if (bookings[j].GetCustomerEmail().CompareTo(bookings[min].GetCustomerEmail()) < 0 ){
+                        min = j;
+                    }
+                }
+                if (min != i){
+                    Swap(min, i);
+                }
+            }
+        }
+
+        private void Swap(int x, int y){
+            Booking temp = bookings[x];
+            bookings[x] = bookings[y];
+            bookings[y] = temp;
+        }
     }
 }

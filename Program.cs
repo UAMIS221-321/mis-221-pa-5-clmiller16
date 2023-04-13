@@ -48,8 +48,7 @@ static void Route(string userInput){
     } else if (userInput == "3"){
         ManageBookings();
     } else if (userInput == "4"){
-        System.Console.WriteLine("YOU ARE INSIDE 4");
-        Console.ReadKey();
+        RunReports();
     } else{
         System.Console.WriteLine("YOU ARE INSIDE 5");
         Console.ReadKey();
@@ -454,20 +453,6 @@ static void EditBooking(){
 // }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Trainer jeff = new Trainer(7, "jeff", "123 dirt road", "jefflucas@ua.edu");
 // System.Console.WriteLine(jeff.GetTrainerAddress());
 
@@ -501,3 +486,69 @@ static void EditBooking(){
 
 // System.Console.WriteLine("sorted:");
 // report.IDByEmail();
+
+//_________________________________________________________________________________________________________________________
+static void RunReports(){
+    string userInput = GetReportChoice();
+    while (userInput != "4"){
+        RouteReports(userInput);
+        userInput = GetReportChoice();
+    }
+}
+
+static string GetReportChoice(){
+    DisplayReportMenu();
+    string userInput = Console.ReadLine();
+
+    while (!ValidMenuChoiceReport(userInput)){
+        Console.WriteLine("Invalid menu choice.  Please Enter a Valid Menu Choice");
+        Console.WriteLine("Press any key to continue....");
+        Console.ReadKey();
+
+        DisplayReportMenu();
+        userInput = Console.ReadLine();
+    }
+
+    return userInput;
+}
+
+static void DisplayReportMenu(){
+    Console.Clear();
+    Console.WriteLine("1:   First Report");
+    Console.WriteLine("2:   Second Report");
+    Console.WriteLine("3:   Third Report");
+    Console.WriteLine("4:   Exit");
+}
+
+static bool ValidMenuChoiceReport(string userInput){
+    if (userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4"){
+        return true;
+    } else return false;
+}
+
+static void RouteReports(string userInput){
+
+    if (userInput == "1"){
+        IndividualCustomerSessions();
+    } else if (userInput == "2"){
+        System.Console.WriteLine("2nd option");
+        Console.ReadKey();
+    } else{
+        System.Console.WriteLine("3rd option");
+        Console.ReadKey();
+    }
+}
+
+static void IndividualCustomerSessions(){
+    Booking[] bookings = new Booking[50];
+    BookingUtility utility = new BookingUtility(bookings);
+    BookingReport report = new BookingReport(bookings);
+
+    utility.GetAllBookingsFromFile();
+    utility.Sort();
+    
+    report.PrintAllBookings();
+
+    System.Console.WriteLine("\npress any key to continue");
+    Console.ReadKey();
+}
