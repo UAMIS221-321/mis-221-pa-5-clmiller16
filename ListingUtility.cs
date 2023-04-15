@@ -49,8 +49,8 @@ namespace mis_221_pa_5_clmiller16
             myListing.SetTime(Console.ReadLine());
             System.Console.WriteLine("Please enter the cost");
             myListing.SetCost(Console.ReadLine());
-            System.Console.WriteLine("Please enter if it has been taken");
-            myListing.SetTaken(Console.ReadLine());
+            // System.Console.WriteLine("Please enter if it has been taken");
+            myListing.SetTaken("available");
 
             myListing.SetDeleted(false);
            
@@ -116,6 +116,21 @@ namespace mis_221_pa_5_clmiller16
             int deleteID = int.Parse(Console.ReadLine());
 
             listings[deleteID - 1].SetDeleted(true);
+        }
+
+        public void SetListingTaken(string stringUserInput){
+            int userInput = int.Parse(stringUserInput);
+
+            // StreamWriter outFile = new StreamWriter("listings.txt");
+
+
+            // outFile.Close();
+            int foundIndex = Find(userInput);
+            if (foundIndex != -1){
+                listings[foundIndex].SetTaken("taken");
+                Save();
+            } else System.Console.WriteLine("Listing unable to be updated");
+
         }
     }
 }

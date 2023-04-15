@@ -384,6 +384,10 @@ static void BookASession(){
     utility.GetAllBookingsFromFile();
     int count = Booking.GetCount();
 
+    Listing[] listings = new Listing[50];
+    ListingUtility utility1 = new ListingUtility(listings);
+    utility1.GetAllListingsFromFile();
+
     // System.Console.WriteLine("Which session ID would you like to book?");
     // int userInput = int.Parse(Console.ReadLine());
 
@@ -402,8 +406,13 @@ static void BookASession(){
 
     //status update needed
 
-    utility.BookSession();
+    System.Console.WriteLine("Which session ID would you like to book?");
+    string stringUserInput = Console.ReadLine(); 
+
+    utility.BookSession(stringUserInput);
+    utility1.SetListingTaken(stringUserInput);
     utility.Save();
+    // utility1.Save();
 
     System.Console.WriteLine("Press any key to continue");
     Console.ReadKey();
@@ -514,9 +523,9 @@ static string GetReportChoice(){
 
 static void DisplayReportMenu(){
     Console.Clear();
-    Console.WriteLine("1:   First Report");
-    Console.WriteLine("2:   Second Report");
-    Console.WriteLine("3:   Third Report");
+    Console.WriteLine("1:   Individual Customer Sessions");
+    Console.WriteLine("2:   Historical Customer Sessions");
+    Console.WriteLine("3:   Historical Revenue Report");
     Console.WriteLine("4:   Exit");
 }
 
@@ -545,9 +554,10 @@ static void IndividualCustomerSessions(){
     BookingReport report = new BookingReport(bookings);
 
     utility.GetAllBookingsFromFile();
-    utility.Sort();
+    utility.SortByEmail();
     
-    report.PrintAllBookings();
+    // report.PrintAllBookings();
+    report.SessionsForCustomer();
 
     System.Console.WriteLine("\npress any key to continue");
     Console.ReadKey();

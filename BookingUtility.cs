@@ -62,9 +62,9 @@ namespace mis_221_pa_5_clmiller16
             Booking.IncCount();
         }
 
-        public void BookSession(){
-            System.Console.WriteLine("Which session ID would you like to book?");
-            string stringUserInput = Console.ReadLine(); 
+        public void BookSession(string stringUserInput){
+            // System.Console.WriteLine("Which session ID would you like to book?");
+            // string stringUserInput = Console.ReadLine(); 
             int userInput = int.Parse(stringUserInput);
 
             Booking myBooking = new Booking();
@@ -228,7 +228,7 @@ namespace mis_221_pa_5_clmiller16
         //     bookings[deleteID - 1].SetDeleted(true);
         // }
 
-        public void Sort(){
+        public void SortByEmail(){
             for (int i = 0; i < Booking.GetCount() - 1; i++){
                 int min = i;
 
