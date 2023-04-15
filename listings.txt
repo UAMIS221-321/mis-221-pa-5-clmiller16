@@ -1,7 +1,7 @@
 1#CARSON#01-02-24#11:15 am#$25#available#False
-2#Zeb#01-03-24#8:00 am#$25#available#False
+2#Zeb#01-03-24#8:00 am#$25#taken#False
 3#Austin#01-02-24#2:00 pm#$30#available#False
 4#Manav#01-05-24#5:15 pm#$50#available#False
-5#Emily#02-20-23#1:00 pm#$35#taken#False
+5#Emily#02-20-23#1:00 pm#$35#available#False
 6#please#work#cmon#now#available#False
-7#name#date#time#cost#taken#False
+7#name#date#time#cost#available#False

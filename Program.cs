@@ -1,10 +1,36 @@
 ﻿using mis_221_pa_5_clmiller16;
 
-string userInput = GetMenuChoice();
-while (userInput != "5"){
-    Route(userInput);
-    userInput = GetMenuChoice();
+System.Console.WriteLine("Welcome! \n\nAre you a customer or a trainer?");
+string currentUser = Console.ReadLine();
+while (currentUser.ToUpper() != "TRAINER" && currentUser.ToUpper() != "CUSTOMER"){
+    System.Console.WriteLine("**Please enter either customer or trainer**");
+    currentUser = Console.ReadLine();
 }
+
+// ATTEMPT AT USING OOP FOR THE USER TYPE
+// User currentUser = new User();
+// currentUser.SetUserType(user);
+
+// System.Console.WriteLine(currentUser.GetUserType());
+
+// Console.ReadKey();
+
+
+
+if (currentUser.ToUpper() == "TRAINER" || currentUser.ToUpper() == "CUSTOMER"){
+    string userInput = GetMenuChoice();
+    while (userInput != "5"){
+        Route(userInput, currentUser);
+        userInput = GetMenuChoice();
+    }
+}
+// } else{
+//     string userInput = GetCustomerMenuChoice();
+//     while (userInput != "5"){
+//         Route(userInput);
+//         userInput = GetCustomerMenuChoice();
+//     }
+// }
 
 
 // methods
@@ -24,6 +50,7 @@ static string GetMenuChoice(){
     return userInput;
 }
 
+
 static void DisplayMenu(){
     Console.Clear();
     Console.WriteLine("1:   Manage Trainers");
@@ -39,12 +66,12 @@ static bool ValidMenuChoice(string userInput){
     } else return false;
 }
 
-static void Route(string userInput){
+static void Route(string userInput, string currentUser){
 
     if (userInput == "1"){
-        ManageTrainers();
+        ManageTrainers(currentUser);
     } else if (userInput == "2"){
-        ManageListings();
+        ManageListings(currentUser);
     } else if (userInput == "3"){
         ManageBookings();
     } else if (userInput == "4"){
@@ -56,12 +83,20 @@ static void Route(string userInput){
 }
 
 // MANAGE TRAINERS
-static void ManageTrainers(){
-    string userInput = GetTrainerChoice();
-    while (userInput != "4"){
-        RouteTrainer(userInput);
-        userInput = GetTrainerChoice();
+static void ManageTrainers(string currentUser){
+
+    if (currentUser.ToUpper() == "TRAINER"){
+        string userInput = GetTrainerChoice();
+        while (userInput != "4"){
+            RouteTrainer(userInput);
+            userInput = GetTrainerChoice();
+        }
+    } else{
+        System.Console.WriteLine("\nYou do not have access to this\n");
+        System.Console.WriteLine("(Press any key to continue)");
+        Console.ReadKey();
     }
+
 }
 
 static string GetTrainerChoice(){
@@ -171,12 +206,18 @@ static void DeleteTrainer(){
 
 // _____________________________________________________________________
 
-static void ManageListings(){
-    string userInput = GetListingChoice();
-    while (userInput != "4"){
-        RouteListing(userInput);
-        userInput = GetListingChoice();
-    }    
+static void ManageListings(string currentUser){
+    if (currentUser.ToUpper() == "TRAINER"){
+        string userInput = GetListingChoice();
+        while (userInput != "4"){
+            RouteListing(userInput);
+            userInput = GetListingChoice();
+        }    
+    } else{
+        System.Console.WriteLine("\nYou do not have access to this\n");
+        System.Console.WriteLine("(Press any key to continue)");
+        Console.ReadKey();
+    }
 }
 
 static string GetListingChoice(){
