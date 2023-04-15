@@ -1,5 +1,7 @@
 ﻿using mis_221_pa_5_clmiller16;
 
+Console.Clear();
+
 System.Console.WriteLine("Welcome! \n\nAre you a customer or a trainer?");
 string currentUser = Console.ReadLine();
 while (currentUser.ToUpper() != "TRAINER" && currentUser.ToUpper() != "CUSTOMER"){
@@ -327,7 +329,7 @@ static void DeleteListing(){
 
 static void ManageBookings(){
     string userInput = GetBookingChoice();
-    while (userInput != "3"){
+    while (userInput != "5"){
         RouteBooking(userInput);
         userInput = GetBookingChoice();
     }    
@@ -350,16 +352,18 @@ static string GetBookingChoice(){
 }
 
 static bool ValidMenuChoiceBooking(string userInput){
-    if (userInput == "1" || userInput == "2" || userInput == "3"){
+    if (userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4" || userInput == "5"){
         return true;
     } else return false;
 }
 
 static void DisplayBookingMenu(){
     Console.Clear();
-    Console.WriteLine("1:   View Available Sessions");
-    Console.WriteLine("2:   Book a Session");
-    Console.WriteLine("3:   Exit");
+    Console.WriteLine("1:   View All Available Sessions");
+    Console.WriteLine("2:   View Sessions By Trainer");
+    Console.WriteLine("3:   Book a Session");
+    Console.WriteLine("4:   View All Customer Data");
+    Console.WriteLine("5:   Exit");
 
     Booking[] bookings = new Booking[50];
     BookingUtility utility = new BookingUtility(bookings);
@@ -376,14 +380,11 @@ static void RouteBooking(string userInput){
 
     if (userInput == "1"){
         ViewAvailableSessions();
-        System.Console.WriteLine("Press any key to continue");
-        Console.ReadKey();
-    } else {
-        // Listing[] listings = new Listing[50];
-        // ListingUtility utility = new ListingUtility(listings);
-        // utility.GetAllListingsFromFile();
+    } else if (userInput == "2"){
+        ViewAvailableSessionsByTrainer();
+    } else if (userInput == "3"){
         BookASession();
-    }
+    } else ViewCustomerData();
 }
 
 
@@ -397,7 +398,7 @@ static void ViewCustomerData(){
     int count = Booking.GetCount();
     
 
-    System.Console.WriteLine("\nSessions:");
+    System.Console.WriteLine("\nCustomer Sessions Data:");
     for (int i = 0; i < count; i++){
         System.Console.WriteLine(bookings[i].ToStringFormatted());
     }
@@ -419,6 +420,31 @@ static void ViewAvailableSessions(){
             System.Console.WriteLine(listings[i].ToStringFormatted());
         }
     }
+
+    System.Console.WriteLine("Press any key to continue");
+    Console.ReadKey();
+}
+
+static void ViewAvailableSessionsByTrainer(){
+    System.Console.WriteLine("Which trainer would you like to see the listings for?");
+    string trainerName = Console.ReadLine();
+
+
+    Listing[] listings = new Listing[50];
+    ListingUtility utility = new ListingUtility(listings);
+
+    utility.GetAllListingsFromFile();
+    int count = Listing.GetCount();
+
+    System.Console.WriteLine("\nAvailable Sessions:");
+    for (int i = 0; i < count; i++){
+        if (listings[i].GetTaken() == "available" && listings[i].GetName() == trainerName){
+            System.Console.WriteLine(listings[i].ToStringFormatted());
+        }
+    }
+
+    System.Console.WriteLine("Press any key to continue");
+    Console.ReadKey();
 }
 
 

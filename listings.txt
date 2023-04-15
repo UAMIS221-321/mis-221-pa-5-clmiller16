@@ -1,7 +1,7 @@
 1#Carson Miller#01-02-2024#11:15 am#$25#available#False
-2#Jeff Lucas#01-03-2024#8:00 am#$25#taken#False
+2#Jeff Lucas#01-03-2024#8:00 am#$25#available#False
 3#Michael Jordan#01-02-2024#2:00 pm#$30#available#False
-4#Gary Spurrier#01-05-2024#5:15 pm#$50#available#False
+4#Gary Spurrier#01-05-2024#5:15 pm#$50#taken#False
 5#Emily Fischer#02-20-2023#1:00 pm#$35#available#False
 6#Chase Callahan#03-13-2023#2:00 pm#$20#available#False
 7#Joe Mama#03-13-2023#2:30 pm#$25#available#False
