@@ -15,15 +15,12 @@ while (currentUser.ToUpper() != "TRAINER" && currentUser.ToUpper() != "CUSTOMER"
 
 // Console.ReadKey();
 
-
-
-if (currentUser.ToUpper() == "TRAINER" || currentUser.ToUpper() == "CUSTOMER"){
     string userInput = GetMenuChoice();
     while (userInput != "5"){
         Route(userInput, currentUser);
         userInput = GetMenuChoice();
     }
-}
+
 // } else{
 //     string userInput = GetCustomerMenuChoice();
 //     while (userInput != "5"){
@@ -198,9 +195,21 @@ static void DeleteTrainer(){
     Trainer[] trainers = new Trainer[50];
     TrainerUtility utility = new TrainerUtility(trainers);
     TrainerReport report = new TrainerReport(trainers);
-
     utility.GetAllTrainersFromFile();
-    utility.DeleteTrainer();
+
+    Listing[] listings = new Listing[50];
+    ListingUtility utility1 = new ListingUtility(listings);
+    utility1.GetAllListingsFromFile();
+
+    string trainerName = utility.DeleteTrainer();
+
+    System.Console.WriteLine(trainerName);
+    Console.ReadKey();
+
+
+    utility1.DeleteListingsForTrainer(trainerName);
+
+    utility1.Save();
     utility.Save(); 
 }
 

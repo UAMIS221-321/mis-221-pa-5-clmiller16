@@ -118,6 +118,17 @@ namespace mis_221_pa_5_clmiller16
             listings[deleteID - 1].SetDeleted(true);
         }
 
+        public void DeleteListingsForTrainer(string trainerName){
+            for (int i = 0; i < Listing.GetCount(); i++){
+                if (listings[i].GetName() == trainerName){
+                    listings[i].SetDeleted(true);
+                }
+            }
+            
+        }
+
+        
+
         public void SetListingTaken(string stringUserInput){
             int userInput = int.Parse(stringUserInput);
 

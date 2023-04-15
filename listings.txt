@@ -1,7 +1,10 @@
-1#CARSON#01-02-24#11:15 am#$25#available#False
-2#Zeb#01-03-24#8:00 am#$25#taken#False
-3#Austin#01-02-24#2:00 pm#$30#available#False
-4#Manav#01-05-24#5:15 pm#$50#available#False
-5#Emily#02-20-23#1:00 pm#$35#available#False
-6#please#work#cmon#now#available#False
-7#name#date#time#cost#available#False
+1#Carson Miller#01-02-2024#11:15 am#$25#available#False
+2#Jeff Lucas#01-03-2024#8:00 am#$25#taken#False
+3#Michael Jordan#01-02-2024#2:00 pm#$30#available#False
+4#Gary Spurrier#01-05-2024#5:15 pm#$50#available#False
+5#Emily Fischer#02-20-2023#1:00 pm#$35#available#False
+6#Chase Callahan#03-13-2023#2:00 pm#$20#available#False
+7#Joe Mama#03-13-2023#2:30 pm#$25#available#False
+8#Carson Miller#02-03-2023#1:00 pm#$50#available#False
+9#Michael Jordan#12-12-2023#2:00 pm#$50#available#False
+10#Michael Jordan#11-23-2023#2:15 pm#$50#available#False

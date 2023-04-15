@@ -122,11 +122,19 @@ namespace mis_221_pa_5_clmiller16
 
         }
 
-        public void DeleteTrainer(){
+        public string DeleteTrainer(){
             System.Console.WriteLine("What is the ID of the trainer you want to delete?");
-            int deleteID = int.Parse(Console.ReadLine());
+            string userInput = Console.ReadLine();
+            while (int.TryParse(userInput, out int output) == false){
+                System.Console.WriteLine("Please enter in a number");
+                userInput = Console.ReadLine();
+            }
+
+            int deleteID = int.Parse(userInput);
 
             trainers[deleteID - 1].SetDeleted(true);
+
+            return trainers[deleteID - 1].GetName();
         }
     }
 }
