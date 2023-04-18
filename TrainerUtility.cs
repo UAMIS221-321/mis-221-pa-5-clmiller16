@@ -94,11 +94,47 @@ namespace mis_221_pa_5_clmiller16
             return -1;
         }
 
+        private int FindBinary(int searchVal){
+            int last = Trainer.GetCount();
+            int first = 0;
+            int foundIndex = -1;
+            bool found = false;
+            while (!found && last >= first)
+            {
+                int middle = (last + first) / 2;
+                if (trainers[middle].GetID() == searchVal)
+                {
+                    found = true;
+                    foundIndex = middle;
+                }
+                else
+                {
+                    if (trainers[middle].GetID() < searchVal)
+                    {
+                        first = middle + 1;
+                    }
+                    else 
+                    {
+                        last = middle - 1;
+                    }
+                }
+            }
+            return foundIndex;
+
+        }
+
         public void UpdateTrainer()
         {
             System.Console.WriteLine("What is the ID of the trainer you want to update");
             int searchVal = int.Parse(Console.ReadLine());
-            int foundIndex = Find(searchVal);
+            int foundIndex = FindBinary(searchVal);
+            System.Console.WriteLine();
+            if (foundIndex != -1){
+                System.Console.WriteLine(trainers[foundIndex].GetName());
+            } else System.Console.WriteLine("Nothing found");
+    
+            System.Console.WriteLine();
+            Console.ReadKey();
             if(foundIndex != -1)
             {
                 // System.Console.WriteLine("Please enter the ID");

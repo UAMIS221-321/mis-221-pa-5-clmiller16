@@ -52,9 +52,9 @@ static string GetMenuChoice(){
 
 static void DisplayMenu(){
     Console.Clear();
-    Console.WriteLine("1:   Manage Trainers");
-    Console.WriteLine("2:   Manage Listings");
-    Console.WriteLine("3:   Manage Bookings");
+    Console.WriteLine("1:   Trainer Info");
+    Console.WriteLine("2:   Session Listings");
+    Console.WriteLine("3:   View/Book Session");
     Console.WriteLine("4:   Run Reports");
     Console.WriteLine("5:   Exit App");
 }
@@ -352,7 +352,7 @@ static string GetBookingChoice(){
 }
 
 static bool ValidMenuChoiceBooking(string userInput){
-    if (userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4" || userInput == "5"){
+    if (userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4"){
         return true;
     } else return false;
 }
@@ -362,8 +362,7 @@ static void DisplayBookingMenu(){
     Console.WriteLine("1:   View All Available Sessions");
     Console.WriteLine("2:   View Sessions By Trainer");
     Console.WriteLine("3:   Book a Session");
-    Console.WriteLine("4:   View All Customer Data");
-    Console.WriteLine("5:   Exit");
+    Console.WriteLine("4:   Exit");
 
     Booking[] bookings = new Booking[50];
     BookingUtility utility = new BookingUtility(bookings);
@@ -382,29 +381,9 @@ static void RouteBooking(string userInput){
         ViewAvailableSessions();
     } else if (userInput == "2"){
         ViewAvailableSessionsByTrainer();
-    } else if (userInput == "3"){
+    } else{
         BookASession();
-    } else ViewCustomerData();
-}
-
-
-
-static void ViewCustomerData(){
-
-    Booking[] bookings = new Booking[50];
-    BookingUtility utility = new BookingUtility(bookings);
-
-    utility.GetAllBookingsFromFile();
-    int count = Booking.GetCount();
-    
-
-    System.Console.WriteLine("\nCustomer Sessions Data:");
-    for (int i = 0; i < count; i++){
-        System.Console.WriteLine(bookings[i].ToStringFormatted());
     }
-
-    System.Console.WriteLine("\n(Press any key to continue)");
-    Console.ReadKey();
 }
 
 static void ViewAvailableSessions(){
@@ -575,7 +554,7 @@ static void EditBooking(){
 //_________________________________________________________________________________________________________________________
 static void RunReports(){
     string userInput = GetReportChoice();
-    while (userInput != "4"){
+    while (userInput != "5"){
         RouteReports(userInput);
         userInput = GetReportChoice();
     }
@@ -602,11 +581,12 @@ static void DisplayReportMenu(){
     Console.WriteLine("1:   Individual Customer Sessions");
     Console.WriteLine("2:   Historical Customer Sessions");
     Console.WriteLine("3:   Historical Revenue Report");
-    Console.WriteLine("4:   Exit");
+    Console.WriteLine("4:   View All Customer Data");
+    Console.WriteLine("5:   Exit");
 }
 
 static bool ValidMenuChoiceReport(string userInput){
-    if (userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4"){
+    if (userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4" || userInput == "5"){
         return true;
     } else return false;
 }
@@ -618,10 +598,10 @@ static void RouteReports(string userInput){
     } else if (userInput == "2"){
         System.Console.WriteLine("2nd option");
         Console.ReadKey();
-    } else{
+    } else if (userInput == "3"){
         System.Console.WriteLine("3rd option");
         Console.ReadKey();
-    }
+    } else ViewCustomerData();
 }
 
 static void IndividualCustomerSessions(){
@@ -636,5 +616,23 @@ static void IndividualCustomerSessions(){
     report.SessionsForCustomer();
 
     System.Console.WriteLine("\npress any key to continue");
+    Console.ReadKey();
+}
+
+static void ViewCustomerData(){
+
+    Booking[] bookings = new Booking[50];
+    BookingUtility utility = new BookingUtility(bookings);
+
+    utility.GetAllBookingsFromFile();
+    int count = Booking.GetCount();
+    
+
+    System.Console.WriteLine("\nCustomer Sessions Data:");
+    for (int i = 0; i < count; i++){
+        System.Console.WriteLine(bookings[i].ToStringFormatted());
+    }
+
+    System.Console.WriteLine("\n(Press any key to continue)");
     Console.ReadKey();
 }
