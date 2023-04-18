@@ -188,6 +188,9 @@ static void EditTrainer(){
 
     utility.GetAllTrainersFromFile();
     utility.UpdateTrainer();
+    
+    //int index = utility.UpdateTrainer();
+    // string name = utility.GetEditedTrainerName(index);
 
     System.Console.WriteLine("Press any key to continue");
     Console.ReadKey();
@@ -329,7 +332,7 @@ static void DeleteListing(){
 
 static void ManageBookings(){
     string userInput = GetBookingChoice();
-    while (userInput != "5"){
+    while (userInput != "4"){
         RouteBooking(userInput);
         userInput = GetBookingChoice();
     }    
@@ -596,8 +599,7 @@ static void RouteReports(string userInput){
     if (userInput == "1"){
         IndividualCustomerSessions();
     } else if (userInput == "2"){
-        System.Console.WriteLine("2nd option");
-        Console.ReadKey();
+        HistoricalCustomerSessions();
     } else if (userInput == "3"){
         System.Console.WriteLine("3rd option");
         Console.ReadKey();
@@ -627,10 +629,27 @@ static void ViewCustomerData(){
     utility.GetAllBookingsFromFile();
     int count = Booking.GetCount();
     
-
     System.Console.WriteLine("\nCustomer Sessions Data:");
     for (int i = 0; i < count; i++){
         System.Console.WriteLine(bookings[i].ToStringFormatted());
+    }
+
+    System.Console.WriteLine("\n(Press any key to continue)");
+    Console.ReadKey();
+}
+
+static void HistoricalCustomerSessions(){
+    Booking[] bookings = new Booking[50];
+    BookingUtility utility = new BookingUtility(bookings);
+
+    utility.GetAllBookingsFromFile();
+    int count = Booking.GetCount();
+
+    utility.GetAllBookingsFromFile();
+    utility.SortByCustomerName();
+
+    for (int i = 0; i < Booking.GetCount(); i++){
+        System.Console.WriteLine(bookings[i].GetCustomerName());
     }
 
     System.Console.WriteLine("\n(Press any key to continue)");

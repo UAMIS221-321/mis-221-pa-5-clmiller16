@@ -128,13 +128,13 @@ namespace mis_221_pa_5_clmiller16
             System.Console.WriteLine("What is the ID of the trainer you want to update");
             int searchVal = int.Parse(Console.ReadLine());
             int foundIndex = FindBinary(searchVal);
-            System.Console.WriteLine();
-            if (foundIndex != -1){
-                System.Console.WriteLine(trainers[foundIndex].GetName());
-            } else System.Console.WriteLine("Nothing found");
-    
-            System.Console.WriteLine();
-            Console.ReadKey();
+            // System.Console.WriteLine();
+            // if (foundIndex != -1){
+            //     System.Console.WriteLine(trainers[foundIndex].GetName());
+            // } else System.Console.WriteLine("Nothing found");
+            // System.Console.WriteLine();
+            // Console.ReadKey();
+
             if(foundIndex != -1)
             {
                 // System.Console.WriteLine("Please enter the ID");
@@ -157,6 +157,10 @@ namespace mis_221_pa_5_clmiller16
             }
 
         }
+
+        // public string GetEditedTrainerName(){
+
+        // }
 
         public string DeleteTrainer(){
             System.Console.WriteLine("What is the ID of the trainer you want to delete?");

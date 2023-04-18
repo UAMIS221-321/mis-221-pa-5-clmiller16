@@ -243,6 +243,21 @@ namespace mis_221_pa_5_clmiller16
             }
         }
 
+        public void SortByCustomerName(){
+            for (int i = 0; i < Booking.GetCount() - 1; i++){
+                int min  = i;
+
+                for (int j = i + 1; j < Booking.GetCount(); j++){
+                    if (bookings[j].GetCustomerName().CompareTo(bookings[min].GetCustomerEmail()) < 0 ){
+                        min = j;
+                    }
+                }
+                if (min != i){
+                    Swap(min, i);
+                }
+            }
+        }
+
         private void Swap(int x, int y){
             Booking temp = bookings[x];
             bookings[x] = bookings[y];
