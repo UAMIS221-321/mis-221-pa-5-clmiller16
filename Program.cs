@@ -219,6 +219,12 @@ static void DeleteTrainer(){
 }
 
 // _____________________________________________________________________
+// _____________________________________________________________________
+// _____________________________________________________________________
+// _____________________________________________________________________
+// _____________________________________________________________________
+// _____________________________________________________________________
+
 
 static void ManageListings(string currentUser){
     if (currentUser.ToUpper() == "TRAINER"){
@@ -646,10 +652,10 @@ static void HistoricalCustomerSessions(){
     int count = Booking.GetCount();
 
     utility.GetAllBookingsFromFile();
-    utility.SortByCustomerName();
+    utility.SortByCustomerNameThenByDate();
 
     for (int i = 0; i < Booking.GetCount(); i++){
-        System.Console.WriteLine(bookings[i].GetCustomerName());
+        System.Console.WriteLine(bookings[i].ToStringFormatted());
     }
 
     System.Console.WriteLine("\n(Press any key to continue)");

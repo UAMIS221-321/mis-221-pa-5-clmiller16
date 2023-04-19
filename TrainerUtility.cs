@@ -139,11 +139,11 @@ namespace mis_221_pa_5_clmiller16
             {
                 // System.Console.WriteLine("Please enter the ID");
                 // trainers[foundIndex].SetID(int.Parse(Console.ReadLine()));
-                System.Console.WriteLine("Please enter the name");
+                System.Console.WriteLine("Please enter the new name");
                 trainers[foundIndex].SetName(Console.ReadLine());
-                System.Console.WriteLine("Please enter the address");
+                System.Console.WriteLine("Please enter the new address");
                 trainers[foundIndex].SetAddress(Console.ReadLine());
-                System.Console.WriteLine("Please enter the email");
+                System.Console.WriteLine("Please enter the new email");
                 trainers[foundIndex].SetEmail(Console.ReadLine());
 
                 trainers[foundIndex].SetDeleted(false);

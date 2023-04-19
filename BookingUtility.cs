@@ -30,7 +30,7 @@ namespace mis_221_pa_5_clmiller16
             {
                 string[] temp = line.Split('#');
                 //*** wordCount+=temp.Length();
-                bookings[Booking.GetCount()] = new Booking(int.Parse(temp[0]), temp[1], temp[2], temp[3], int.Parse(temp[4]), temp[5], temp[6]);
+                bookings[Booking.GetCount()] = new Booking(int.Parse(temp[0]), temp[1], temp[2], DateOnly.Parse(temp[3]), int.Parse(temp[4]), temp[5], temp[6]);
                 Booking.IncCount();
                 line = inFile.ReadLine();
             }
@@ -50,7 +50,7 @@ namespace mis_221_pa_5_clmiller16
             System.Console.WriteLine("Please enter the customer email address");
             myBooking.SetCustomerEmail(Console.ReadLine());
             System.Console.WriteLine("Please enter training date");
-            myBooking.SetTrainingDate(Console.ReadLine());
+            myBooking.SetTrainingDate(DateOnly.Parse(Console.ReadLine()));
             System.Console.WriteLine("Please enter the trainer ID");
             myBooking.SetTrainerID(int.Parse(Console.ReadLine()));
             System.Console.WriteLine("Please enter the trainer name");
@@ -92,7 +92,7 @@ namespace mis_221_pa_5_clmiller16
                     if (stringUserInput == temp[i]){
                         // string[] temp2 = temp;
                         myBooking.SetTrainerName(temp[1]);
-                        myBooking.SetTrainingDate(temp[2]);
+                        myBooking.SetTrainingDate(DateOnly.Parse(temp[2]));
                     }
                 }
 
@@ -201,7 +201,7 @@ namespace mis_221_pa_5_clmiller16
                 System.Console.WriteLine("Please enter the customer email address");
                 bookings[foundIndex].SetCustomerEmail(Console.ReadLine());
                 System.Console.WriteLine("Please enter training date");
-                bookings[foundIndex].SetTrainingDate(Console.ReadLine());
+                bookings[foundIndex].SetTrainingDate(DateOnly.Parse(Console.ReadLine()));
                 System.Console.WriteLine("Please enter the trainer ID");
                 bookings[foundIndex].SetTrainerID(int.Parse(Console.ReadLine()));
                 System.Console.WriteLine("Please enter the trainer name");
@@ -243,12 +243,14 @@ namespace mis_221_pa_5_clmiller16
             }
         }
 
-        public void SortByCustomerName(){
+        public void SortByCustomerNameThenByDate(){
             for (int i = 0; i < Booking.GetCount() - 1; i++){
                 int min  = i;
 
                 for (int j = i + 1; j < Booking.GetCount(); j++){
-                    if (bookings[j].GetCustomerName().CompareTo(bookings[min].GetCustomerEmail()) < 0 ){
+                    if (bookings[j].GetCustomerName().CompareTo(bookings[min].GetCustomerName()) < 0 ||
+                    (bookings[j].GetCustomerName() == bookings[min].GetCustomerName() && bookings[j].GetTrainingDate() < bookings[min].GetTrainingDate())
+                    ){
                         min = j;
                     }
                 }

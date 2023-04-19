@@ -5,7 +5,7 @@ namespace mis_221_pa_5_clmiller16
         int sessionID;
         string customerName;
         string customerEmail;
-        string trainingDate;
+        DateOnly trainingDate;
         int trainerID;
         string trainerName;
         string status;
@@ -15,7 +15,7 @@ namespace mis_221_pa_5_clmiller16
             status = "booked";
         }
 
-        public Booking(int sessionID, string customerName, string customerEmail, string trainingDate, int trainerID, string trainerName, string status){
+        public Booking(int sessionID, string customerName, string customerEmail, DateOnly trainingDate, int trainerID, string trainerName, string status){
             this.status = status;
             this.sessionID = sessionID;
             this.customerName = customerName;
@@ -43,10 +43,10 @@ namespace mis_221_pa_5_clmiller16
         public string GetCustomerEmail(){
             return customerEmail;
         }
-        public void SetTrainingDate(string trainingDate){
+        public void SetTrainingDate(DateOnly trainingDate){
             this.trainingDate = trainingDate;
         }
-        public string GetTrainingDate(){
+        public DateOnly GetTrainingDate(){
             return trainingDate;
         }
         public void SetTrainerID(int trainerID){

@@ -25,7 +25,7 @@ namespace mis_221_pa_5_clmiller16
             {
                 string[] temp = line.Split('#');
                 //*** wordCount+=temp.Length();
-                listings[Listing.GetCount()] = new Listing(int.Parse(temp[0]), temp[1], temp[2], temp[3], temp[4], temp[5], bool.Parse(temp[6]));
+                listings[Listing.GetCount()] = new Listing(int.Parse(temp[0]), temp[1], DateOnly.Parse(temp[2]), temp[3], temp[4], temp[5], bool.Parse(temp[6]));
                 Listing.IncCount();
                 line = inFile.ReadLine();
             }
@@ -44,7 +44,7 @@ namespace mis_221_pa_5_clmiller16
             System.Console.WriteLine("Please enter the name");
             myListing.SetName(Console.ReadLine());
             System.Console.WriteLine("Please enter the date");
-            myListing.SetDate(Console.ReadLine());
+            myListing.SetDate(DateOnly.Parse(Console.ReadLine()));
             System.Console.WriteLine("Please enter the time");
             myListing.SetTime(Console.ReadLine());
             System.Console.WriteLine("Please enter the cost");
@@ -90,18 +90,20 @@ namespace mis_221_pa_5_clmiller16
             int foundIndex = Find(searchVal);
             if(foundIndex != -1)
             {
-                System.Console.WriteLine("Please enter the ID");
-                listings[foundIndex].SetID(int.Parse(Console.ReadLine()));
-                System.Console.WriteLine("Please enter the name");
+                // System.Console.WriteLine("Please enter the ID");
+                // listings[foundIndex].SetID(searchVal);
+                System.Console.WriteLine("Please enter the new name");
                 listings[foundIndex].SetName(Console.ReadLine());
-                System.Console.WriteLine("Please enter the date");
-                listings[foundIndex].SetDate(Console.ReadLine());
-                System.Console.WriteLine("Please enter the time");
+                System.Console.WriteLine("Please enter the new date");
+                listings[foundIndex].SetDate(DateOnly.Parse(Console.ReadLine()));
+                System.Console.WriteLine("Please enter the new time");
                 listings[foundIndex].SetTime(Console.ReadLine());
-                System.Console.WriteLine("Please enter the cost");
+                System.Console.WriteLine("Please enter the new cost");
                 listings[foundIndex].SetCost(Console.ReadLine());
                 System.Console.WriteLine("Please enter whether the listing has been taken");
-                listings[foundIndex].SetTaken(Console.ReadLine());
+                string userInput = Console.ReadLine();
+                string correctInput = ValidInputTaken(userInput);
+                listings[foundIndex].SetTaken(correctInput);
 
                 Save();
             }
@@ -109,6 +111,15 @@ namespace mis_221_pa_5_clmiller16
             {
                 System.Console.WriteLine("Listing not found");
             }   
+        }
+
+        static string ValidInputTaken(string userInput){
+            while (userInput != "available" && userInput != "taken"){
+                System.Console.WriteLine("(Please enter available or taken)");
+                userInput = Console.ReadLine();
+            }
+
+            return userInput;
         }
 
         public void DeleteListing(){

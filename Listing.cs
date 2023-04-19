@@ -4,7 +4,7 @@ namespace mis_221_pa_5_clmiller16
     {
         private int ID;
         private string name; // supposed to reference the trainer name (maybe make it "public" to do so)
-        private string date;
+        private DateOnly date;
         private string time;
         private string cost;
         private string taken;
@@ -19,7 +19,7 @@ namespace mis_221_pa_5_clmiller16
 
         }
 
-        public Listing(int ID, string name, string date, string time, string cost, string taken, bool deleted)
+        public Listing(int ID, string name, DateOnly date, string time, string cost, string taken, bool deleted)
         {
             this.ID = ID;
             this.name = name;
@@ -42,10 +42,10 @@ namespace mis_221_pa_5_clmiller16
         public string GetName(){
             return name;
         }
-        public void SetDate(string date){
+        public void SetDate(DateOnly date){
             this.date = date;
         }
-        public string GetDate(){
+        public DateOnly GetDate(){
             return date;
         }
         public void SetTime(string time){
