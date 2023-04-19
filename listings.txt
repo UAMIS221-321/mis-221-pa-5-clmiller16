@@ -5,7 +5,8 @@
 5#Emily Fischer#2/20/2024#1:00 pm#$35#available#False
 6#Chase Callahan#3/13/2024#2:00 pm#$20#taken#False
 7#Joe Mama#3/13/2023#2:30 pm#$25#taken#False
-8#Carson Miller#2/3/2023#1:00 pm#$50#available#False
+8#Carson Miller#2/3/2023#1:00 pm#$50#taken#False
 9#Michael Jordan#12/12/2023#2:00 pm#$50#taken#False
 10#Michael Jordan#11/23/2023#2:15 pm#$50#available#False
 11#Joe Mama#4/23/2023#1:00 pm#$50#taken#False
+12#Peter Oduro#1/2/2024#2:00 pm#$25#taken#False

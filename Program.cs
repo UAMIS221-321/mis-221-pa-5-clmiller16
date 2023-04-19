@@ -654,6 +654,7 @@ static void HistoricalCustomerSessions(){
     utility.GetAllBookingsFromFile();
     utility.SortByCustomerNameThenByDate();
 
+    System.Console.WriteLine();
     for (int i = 0; i < Booking.GetCount(); i++){
         System.Console.WriteLine(bookings[i].ToStringFormatted());
     }
