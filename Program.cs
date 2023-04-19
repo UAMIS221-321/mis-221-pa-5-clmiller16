@@ -647,6 +647,7 @@ static void ViewCustomerData(){
 static void HistoricalCustomerSessions(){
     Booking[] bookings = new Booking[50];
     BookingUtility utility = new BookingUtility(bookings);
+    BookingReport report = new BookingReport(bookings);
 
     utility.GetAllBookingsFromFile();
     int count = Booking.GetCount();
@@ -654,10 +655,13 @@ static void HistoricalCustomerSessions(){
     utility.GetAllBookingsFromFile();
     utility.SortByCustomerNameThenByDate();
 
-    System.Console.WriteLine();
+    System.Console.WriteLine("\nSessions by Customer then by Date:");
     for (int i = 0; i < Booking.GetCount(); i++){
         System.Console.WriteLine(bookings[i].ToStringFormatted());
     }
+
+    System.Console.WriteLine("\n# of Sessions Booked Per Customer:");
+    report.SessionsPerCustomer();
 
     System.Console.WriteLine("\n(Press any key to continue)");
     Console.ReadKey();

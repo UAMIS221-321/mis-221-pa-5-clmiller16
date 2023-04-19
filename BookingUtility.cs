@@ -110,14 +110,25 @@ namespace mis_221_pa_5_clmiller16
             string line2 = inFile2.ReadLine();
             while(line2 != null)
             {
-                string[] temp = line2.Split('#');
+                string[] temperory = line2.Split('#');
                 //myCount++;
 
-                for (int i = 0; i < temp.Length; i++){
-                    if (stringUserInput == temp[i]){
-                        // string[] temp2 = temp;
-                        myBooking.SetTrainerID(int.Parse(temp[0]));
-                    }
+                // for (int i = 0; i < temperory.Length; i++){
+                //     if (stringUserInput == temperory[i]){
+                //         // string[] temp2 = temp;
+
+                //         //NONE OF THIS IS EXECUTING!!
+                //         System.Console.WriteLine(temperory[i]);
+                //         System.Console.WriteLine(temperory[0]);
+                //         System.Console.WriteLine(temperory[1]);
+                //         System.Console.WriteLine(temperory[2]);
+                //         Console.ReadKey();
+                //         myBooking.SetTrainerID(int.Parse(temperory[0]));
+                //     }
+                // }
+
+                if (stringUserInput == temperory[0]){
+                    myBooking.SetTrainerID(int.Parse(temperory[0]));
                 }
 
                 line2 = inFile2.ReadLine();
