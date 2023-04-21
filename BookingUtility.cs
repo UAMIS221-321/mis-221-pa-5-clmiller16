@@ -166,6 +166,26 @@ namespace mis_221_pa_5_clmiller16
             //pull info from listing here
         }
 
+        public void Save2()
+        {
+            StreamWriter outFile = new StreamWriter("transactions.txt");
+
+            System.Console.WriteLine(Booking.GetCount());
+
+            // outFile.WriteLine("BEFORE THE LOOP");
+
+            for(int i = 0; i < Booking.GetCount(); i++)
+            {
+                outFile.WriteLine(bookings[i].ToFile());
+            }
+
+
+            // outFile.WriteLine("AFTER THE LOOP");
+
+            outFile.Close();
+
+        }
+
         public void Save()
         {
             StreamWriter outFile = new StreamWriter("transactions.txt");
@@ -276,5 +296,89 @@ namespace mis_221_pa_5_clmiller16
             bookings[x] = bookings[y];
             bookings[y] = temp;
         }
+
+        public void CompleteOrCancel(){
+
+            string userInput = GetSubMenuChoice();
+            while (userInput != "4"){
+                RouteSubMenu(userInput);
+                userInput = GetSubMenuChoice();
+            }
+
+        }
+
+        private string GetSubMenuChoice(){
+            DisplaySubMenu();
+            string userInput = Console.ReadLine();
+
+            while (!ValidSubMenuChoice(userInput)){
+                Console.WriteLine("Invalid menu choice.  Please Enter a Valid Menu Choice");
+                Console.WriteLine("Press any key to continue....");
+                Console.ReadKey();
+
+                DisplaySubMenu();
+                userInput = Console.ReadLine(); // change to get submenuchoice!!!
+            }
+
+            return userInput;
+
+        }
+
+        private void DisplaySubMenu(){
+            Console.Clear();
+            System.Console.WriteLine("1:    Complete an Appointment");
+            System.Console.WriteLine("2:    Cancel an Appointment");
+            System.Console.WriteLine("3:    No-Show an Appointment");
+            System.Console.WriteLine("4:    Exit");
+        }
+        
+        private bool ValidSubMenuChoice(string userInput){
+            if (userInput == "1" || userInput == "2"|| userInput == "3"|| userInput == "4"){
+                return true;
+            } else return false;
+        }
+
+        private void RouteSubMenu(string userInput){
+            if (userInput == "1"){
+                CompleteAppointment();
+            } else if (userInput == "2"){
+                CancelAppointment();
+            } else NoShowAppointment();
+        }
+
+        private void CompleteAppointment(){
+            System.Console.WriteLine("What is the ID of the session you want to complete?");
+            int searchVal = int.Parse(Console.ReadLine());
+            int foundIndex = Find(searchVal);
+
+            if (foundIndex != -1){
+                bookings[foundIndex].SetStatus("completed");
+                Save2();
+            } else System.Console.WriteLine("Session not found");
+        }
+
+        private void CancelAppointment(){
+            System.Console.WriteLine("What is the ID of the session you want to cancel?");
+            int searchVal = int.Parse(Console.ReadLine());
+            int foundIndex = Find(searchVal);
+
+            if (foundIndex != -1){
+                bookings[foundIndex].SetStatus("cancelled");
+                Save2();
+            } else System.Console.WriteLine("Session not found");     
+        }
+
+        private void NoShowAppointment(){
+            System.Console.WriteLine("What is the ID of the session you've decided not to show up to?");
+            int searchVal = int.Parse(Console.ReadLine());
+            int foundIndex = Find(searchVal);
+
+            if (foundIndex != -1){
+                bookings[foundIndex].SetStatus("no-show");
+                Save2();
+            } else System.Console.WriteLine("Session not found");
+        }
+
+
     }
 }

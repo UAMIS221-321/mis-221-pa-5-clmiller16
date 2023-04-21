@@ -1,6 +1,7 @@
 6#Bobby Finger#five@tuscaloosa.org#3/13/2024#6#Chase Callahan#booked
 9#Bobby Portis#cportis1@yahoo.com#12/12/2023#0#Michael Jordan#booked
-7#Cam Cole#camcole1@ua.edu#3/13/2023#7#Joe Mama#booked
+7#Cam Cole#camcole1@ua.edu#3/13/2023#7#Joe Mama#completed
 4#Logan Dwyer#lgdwyer@ua.edu#1/5/2024#4#Gary Spurrier#booked
-11#Bobby Portis#cportis1@yahoo.com#4/23/2023#0#Joe Mama#booked
-8#Cam Cole#camcole1@ua.edu#2/3/2023#0#Carson Miller#booked
+11#Bobby Portis#cportis1@yahoo.com#4/23/2023#0#Joe Mama#cancelled
+8#Cam Cole#camcole1@ua.edu#2/3/2023#0#Carson Miller#cancelled
+12#CLIENT#CLIENT.COM#1/2/2024#0#Peter Oduro#booked

@@ -1,9 +1,21 @@
 ﻿using mis_221_pa_5_clmiller16;
-
 Console.Clear();
 
-System.Console.WriteLine("Welcome! \n\nAre you a customer or a trainer?");
+
+StreamReader inFile = new StreamReader("bulls.txt");
+string line = inFile.ReadLine();
+while (line != null){
+    System.Console.WriteLine(line);
+    line = inFile.ReadLine();
+}
+
+inFile.Close();
+
+System.Console.WriteLine("\nWelcome to Train Like a Champion- The Exclusive Trainers for the Chicago Bulls! \n\nAre you a customer or a trainer?");
 string currentUser = Console.ReadLine();
+if(currentUser == "t"){
+    currentUser = "trainer";
+}
 while (currentUser.ToUpper() != "TRAINER" && currentUser.ToUpper() != "CUSTOMER"){
     System.Console.WriteLine("**Please enter either customer or trainer**");
     currentUser = Console.ReadLine();
@@ -17,12 +29,24 @@ while (currentUser.ToUpper() != "TRAINER" && currentUser.ToUpper() != "CUSTOMER"
 
 // Console.ReadKey();
 
-    string userInput = GetMenuChoice();
-    while (userInput != "5"){
-        Route(userInput, currentUser);
-        userInput = GetMenuChoice();
-    }
+string userInput = GetMenuChoice();
+while (userInput != "5"){
+    Route(userInput, currentUser);
+    userInput = GetMenuChoice();
+}
 
+StreamReader inFile2 = new StreamReader("lifter.txt");
+string line2 = inFile2.ReadLine();
+while (line2 != null){
+    System.Console.WriteLine(line2);
+    line2 = inFile2.ReadLine();
+}
+
+inFile2.Close();
+
+System.Console.WriteLine("___________________________________________________________________");
+System.Console.WriteLine("       Maybe you will be as strong as Arnold one day");
+System.Console.WriteLine("___________________________________________________________________\n");
 // } else{
 //     string userInput = GetCustomerMenuChoice();
 //     while (userInput != "5"){
@@ -54,7 +78,7 @@ static void DisplayMenu(){
     Console.Clear();
     Console.WriteLine("1:   Trainer Info");
     Console.WriteLine("2:   Session Listings");
-    Console.WriteLine("3:   View/Book Session");
+    Console.WriteLine("3:   Bookings");
     Console.WriteLine("4:   Run Reports");
     Console.WriteLine("5:   Exit App");
 }
@@ -73,11 +97,8 @@ static void Route(string userInput, string currentUser){
         ManageListings(currentUser);
     } else if (userInput == "3"){
         ManageBookings();
-    } else if (userInput == "4"){
+    } else {
         RunReports();
-    } else{
-        System.Console.WriteLine("YOU ARE INSIDE 5");
-        Console.ReadKey();
     }
 }
 
@@ -122,7 +143,7 @@ static void DisplayTrainerMenu(){
     Console.WriteLine("4:   Exit");
     System.Console.WriteLine();
 
-    Trainer[] trainers = new Trainer[50];
+    Trainer[] trainers = new Trainer[100];
     TrainerUtility utility = new TrainerUtility(trainers);
     utility.GetAllTrainersFromFile();
     int count = Trainer.GetCount();
@@ -155,7 +176,7 @@ static void RouteTrainer(string userInput){
 }
 
 static void AddTrainer(){
-    Trainer[] trainers = new Trainer[50];
+    Trainer[] trainers = new Trainer[100];
     TrainerUtility utility = new TrainerUtility(trainers);
     TrainerReport report = new TrainerReport(trainers);
 
@@ -182,7 +203,7 @@ static void AddTrainer(){
 }
 
 static void EditTrainer(){
-    Trainer[] trainers = new Trainer[50];
+    Trainer[] trainers = new Trainer[100];
     TrainerUtility utility = new TrainerUtility(trainers);
     TrainerReport report = new TrainerReport(trainers);
 
@@ -197,12 +218,12 @@ static void EditTrainer(){
 }
 
 static void DeleteTrainer(){
-    Trainer[] trainers = new Trainer[50];
+    Trainer[] trainers = new Trainer[100];
     TrainerUtility utility = new TrainerUtility(trainers);
     TrainerReport report = new TrainerReport(trainers);
     utility.GetAllTrainersFromFile();
 
-    Listing[] listings = new Listing[50];
+    Listing[] listings = new Listing[100];
     ListingUtility utility1 = new ListingUtility(listings);
     utility1.GetAllListingsFromFile();
 
@@ -263,7 +284,7 @@ static void DisplayListingMenu(){
     Console.WriteLine("3:   Delete Listing");
     Console.WriteLine("4:   Exit");
 
-    Listing[] listings = new Listing[50];
+    Listing[] listings = new Listing[100];
     ListingUtility utility = new ListingUtility(listings);
     utility.GetAllListingsFromFile();
     int count = Listing.GetCount();
@@ -288,7 +309,7 @@ static void RouteListing(string userInput){
 }
 
 static void AddListing(){
-    Listing[] listings = new Listing[50];
+    Listing[] listings = new Listing[100];
     ListingUtility utility = new ListingUtility(listings);
     ListingReport report = new ListingReport(listings);
 
@@ -312,7 +333,7 @@ static void AddListing(){
 }
 
 static void EditListing(){
-    Listing[] listings = new Listing[50];
+    Listing[] listings = new Listing[100];
     ListingUtility utility = new ListingUtility(listings);
     ListingReport report = new ListingReport(listings);
 
@@ -324,7 +345,7 @@ static void EditListing(){
 }
 
 static void DeleteListing(){
-    Listing[] listings = new Listing[50];
+    Listing[] listings = new Listing[100];
     ListingUtility utility = new ListingUtility(listings);
     ListingReport report = new ListingReport(listings);
 
@@ -338,7 +359,7 @@ static void DeleteListing(){
 
 static void ManageBookings(){
     string userInput = GetBookingChoice();
-    while (userInput != "4"){
+    while (userInput != "5"){
         RouteBooking(userInput);
         userInput = GetBookingChoice();
     }    
@@ -361,7 +382,7 @@ static string GetBookingChoice(){
 }
 
 static bool ValidMenuChoiceBooking(string userInput){
-    if (userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4"){
+    if (userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4" || userInput == "5"){
         return true;
     } else return false;
 }
@@ -371,9 +392,10 @@ static void DisplayBookingMenu(){
     Console.WriteLine("1:   View All Available Sessions");
     Console.WriteLine("2:   View Sessions By Trainer");
     Console.WriteLine("3:   Book a Session");
-    Console.WriteLine("4:   Exit");
+    Console.WriteLine("4:   Complete/Cancel a Session");
+    Console.WriteLine("5:   Exit");
 
-    Booking[] bookings = new Booking[50];
+    Booking[] bookings = new Booking[100];
     BookingUtility utility = new BookingUtility(bookings);
     utility.GetAllBookingsFromFile();
     int count = Booking.GetCount();
@@ -390,13 +412,13 @@ static void RouteBooking(string userInput){
         ViewAvailableSessions();
     } else if (userInput == "2"){
         ViewAvailableSessionsByTrainer();
-    } else{
+    } else if (userInput == "3"){
         BookASession();
-    }
+    } else DoASession();
 }
 
 static void ViewAvailableSessions(){
-    Listing[] listings = new Listing[50];
+    Listing[] listings = new Listing[100];
     ListingUtility utility = new ListingUtility(listings);
 
     utility.GetAllListingsFromFile();
@@ -418,7 +440,7 @@ static void ViewAvailableSessionsByTrainer(){
     string trainerName = Console.ReadLine();
 
 
-    Listing[] listings = new Listing[50];
+    Listing[] listings = new Listing[100];
     ListingUtility utility = new ListingUtility(listings);
 
     utility.GetAllListingsFromFile();
@@ -439,27 +461,27 @@ static void ViewAvailableSessionsByTrainer(){
 static void BookASession(){
     ViewAvailableSessions();
 
-    // Listing[] listings = new Listing[50];
+    // Listing[] listings = new Listing[100];
     // ListingUtility utility1 = new ListingUtility(listings);
     // utility1.GetAllListingsFromFile();
 
-    Booking[] bookings = new Booking[50];
+    Booking[] bookings = new Booking[100];
     BookingUtility utility = new BookingUtility(bookings);
     utility.GetAllBookingsFromFile();
     int count = Booking.GetCount();
 
-    Listing[] listings = new Listing[50];
+    Listing[] listings = new Listing[100];
     ListingUtility utility1 = new ListingUtility(listings);
     utility1.GetAllListingsFromFile();
 
     // System.Console.WriteLine("Which session ID would you like to book?");
     // int userInput = int.Parse(Console.ReadLine());
 
-    // Listing[] listings = new Listing[50];
+    // Listing[] listings = new Listing[100];
     // ListingUtility utility1 = new ListingUtility(listings);
     // utility1.GetAllListingsFromFile();
 
-    // Trainer[] trainers = new Trainer[50];
+    // Trainer[] trainers = new Trainer[100];
     // TrainerUtility utility2 = new TrainerUtility(trainers);
     // utility2.GetAllTrainersFromFile();
     
@@ -484,14 +506,8 @@ static void BookASession(){
 
 }
 
-
-
-
-
-
-
 static void AddBooking(){
-    Booking[] bookings = new Booking[50];
+    Booking[] bookings = new Booking[100];
     BookingUtility utility = new BookingUtility(bookings);
     // BookingReport report = new BookingReport(bookings);
 
@@ -504,7 +520,7 @@ static void AddBooking(){
 }
 
 static void EditBooking(){
-    Booking[] bookings = new Booking[50];
+    Booking[] bookings = new Booking[100];
     BookingUtility utility = new BookingUtility(bookings);
     // BookingReport report = new BookingReport(bookings);
 
@@ -515,8 +531,40 @@ static void EditBooking(){
     Console.ReadKey();
 }
 
+static void DoASession(){
+    Booking[] bookings = new Booking[100];
+    BookingUtility utility = new BookingUtility(bookings);
+
+    utility.GetAllBookingsFromFile();
+    utility.CompleteOrCancel();
+
+    utility.Save2();
+    
+
+    System.Console.WriteLine("Press any key to continue");
+    Console.ReadKey();
+}
+
+static void ViewBookedSessions(){
+    Booking[] bookings = new Booking[100];
+    BookingUtility utility = new BookingUtility(bookings);
+
+    utility.GetAllBookingsFromFile();
+    int count = Booking.GetCount();
+
+    System.Console.WriteLine("\nBooked Sessions:");
+    for (int i = 0; i < count; i++){
+        if (bookings[i].GetStatus() == "booked"){
+            System.Console.WriteLine(bookings[i].ToStringFormatted());
+        }
+    }
+
+    System.Console.WriteLine("Press any key to continue");
+    Console.ReadKey();
+}
+
 // static void DeleteListing(){
-//     Listing[] listings = new Listing[50];
+//     Listing[] listings = new Listing[100];
 //     ListingUtility utility = new ListingUtility(listings);
 //     ListingReport report = new ListingReport(listings);
 
@@ -532,7 +580,7 @@ static void EditBooking(){
 
 // Console.Clear();
 
-// Trainer[] trainers = new Trainer[50];
+// Trainer[] trainers = new Trainer[100];
 // TrainerUtility utility = new TrainerUtility(trainers);
 // TrainerReport report = new TrainerReport(trainers);
 
@@ -547,7 +595,7 @@ static void EditBooking(){
 
 // System.Console.WriteLine("\n\n");
 
-// Listing[] listings = new Listing[50];
+// Listing[] listings = new Listing[100];
 // ListingUtility utility1 = new ListingUtility(listings);
 // ListingReport report1 = new ListingReport(listings);
 
@@ -613,7 +661,7 @@ static void RouteReports(string userInput){
 }
 
 static void IndividualCustomerSessions(){
-    Booking[] bookings = new Booking[50];
+    Booking[] bookings = new Booking[100];
     BookingUtility utility = new BookingUtility(bookings);
     BookingReport report = new BookingReport(bookings);
 
@@ -629,7 +677,7 @@ static void IndividualCustomerSessions(){
 
 static void ViewCustomerData(){
 
-    Booking[] bookings = new Booking[50];
+    Booking[] bookings = new Booking[100];
     BookingUtility utility = new BookingUtility(bookings);
 
     utility.GetAllBookingsFromFile();
@@ -645,7 +693,7 @@ static void ViewCustomerData(){
 }
 
 static void HistoricalCustomerSessions(){
-    Booking[] bookings = new Booking[50];
+    Booking[] bookings = new Booking[100];
     BookingUtility utility = new BookingUtility(bookings);
     BookingReport report = new BookingReport(bookings);
 
