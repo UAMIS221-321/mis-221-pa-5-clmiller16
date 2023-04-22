@@ -8,6 +8,7 @@ namespace mis_221_pa_5_clmiller16
         private string time;
         private string cost;
         private string taken;
+        private int trainerID;
         private bool deleted;
         static private int count;
 
@@ -19,7 +20,7 @@ namespace mis_221_pa_5_clmiller16
 
         }
 
-        public Listing(int ID, string name, DateOnly date, string time, string cost, string taken, bool deleted)
+        public Listing(int ID, string name, DateOnly date, string time, string cost, string taken, bool deleted, int trainerID)
         {
             this.ID = ID;
             this.name = name;
@@ -28,6 +29,7 @@ namespace mis_221_pa_5_clmiller16
             this.cost = cost;
             this.taken = taken;
             this.deleted = deleted;
+            this.trainerID = trainerID;
         }
 
         public void SetID(int ID){
@@ -73,6 +75,12 @@ namespace mis_221_pa_5_clmiller16
         public bool GetDeleted(){
             return deleted;
         }
+        public void SetTrainerID(int trainer){
+            this.trainerID = trainerID;
+        }
+        public int GetTrainerID(){
+            return trainerID;
+        }
 
 
 
@@ -96,11 +104,11 @@ namespace mis_221_pa_5_clmiller16
         }
 
         public string ToStringFormatted(){
-            return $"{ID} \t{name} \t{date} \t{time} \t{cost} \t{taken}";
+            return $"{ID} \t{name} \t{date} \t{time} \t{cost} \t{taken} \t{trainerID}";
         }
 
         public string ToFile(){
-            return $"{ID}#{name}#{date}#{time}#{cost}#{taken}#{deleted}";
+            return $"{ID}#{name}#{date}#{time}#{cost}#{taken}#{deleted}#{trainerID}";
         }
 
 

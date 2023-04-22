@@ -79,6 +79,7 @@ namespace mis_221_pa_5_clmiller16
 
             int myCount = 0;
             string line = inFile.ReadLine();
+            int HEREWEGO = -1;
             while(line != null)
             {
                 string[] temp = line.Split('#');
@@ -93,6 +94,8 @@ namespace mis_221_pa_5_clmiller16
                         // string[] temp2 = temp;
                         myBooking.SetTrainerName(temp[1]);
                         myBooking.SetTrainingDate(DateOnly.Parse(temp[2]));
+                        myBooking.SetTrainerID(int.Parse(temp[7]));
+                        //HEREWEGO = myBooking.GetTrainerID();
                     }
                 }
 
@@ -104,37 +107,37 @@ namespace mis_221_pa_5_clmiller16
 
 
 
-            StreamReader inFile2 = new StreamReader("trainers.txt");
+            // StreamReader inFile2 = new StreamReader("trainers.txt");
 
-            //int myCount = 0;
-            string line2 = inFile2.ReadLine();
-            while(line2 != null)
-            {
-                string[] temperory = line2.Split('#');
-                //myCount++;
+            // //int myCount = 0;
+            // string line2 = inFile2.ReadLine();
+            // while(line2 != null)
+            // {
+            //     string[] temperory = line2.Split('#');
+            //     //myCount++;
 
-                // for (int i = 0; i < temperory.Length; i++){
-                //     if (stringUserInput == temperory[i]){
-                //         // string[] temp2 = temp;
+            //     // for (int i = 0; i < temperory.Length; i++){
+            //     //     if (stringUserInput == temperory[i]){
+            //     //         // string[] temp2 = temp;
 
-                //         //NONE OF THIS IS EXECUTING!!
-                //         System.Console.WriteLine(temperory[i]);
-                //         System.Console.WriteLine(temperory[0]);
-                //         System.Console.WriteLine(temperory[1]);
-                //         System.Console.WriteLine(temperory[2]);
-                //         Console.ReadKey();
-                //         myBooking.SetTrainerID(int.Parse(temperory[0]));
-                //     }
-                // }
+            //     //         //NONE OF THIS IS EXECUTING!!
+            //     //         System.Console.WriteLine(temperory[i]);
+            //     //         System.Console.WriteLine(temperory[0]);
+            //     //         System.Console.WriteLine(temperory[1]);
+            //     //         System.Console.WriteLine(temperory[2]);
+            //     //         Console.ReadKey();
+            //     //         myBooking.SetTrainerID(int.Parse(temperory[0]));
+            //     //     }
+            //     // }
 
-                if (stringUserInput == temperory[0]){
-                    myBooking.SetTrainerID(int.Parse(temperory[0]));
-                }
+            //     if (HEREWEGO == int.Parse(temperory[0])){
+            //         myBooking.SetTrainerID(int.Parse(temperory[0]));
+            //     }
 
-                line2 = inFile2.ReadLine();
-            }
+            //     line2 = inFile2.ReadLine();
+            // }
 
-            inFile2.Close();
+            // inFile2.Close();
 
             bookings[Booking.GetCount()] = myBooking; // AHHHHHHHHH
 
@@ -170,7 +173,7 @@ namespace mis_221_pa_5_clmiller16
         {
             StreamWriter outFile = new StreamWriter("transactions.txt");
 
-            System.Console.WriteLine(Booking.GetCount());
+            // System.Console.WriteLine(Booking.GetCount());
 
             // outFile.WriteLine("BEFORE THE LOOP");
 
@@ -190,7 +193,7 @@ namespace mis_221_pa_5_clmiller16
         {
             StreamWriter outFile = new StreamWriter("transactions.txt");
 
-            System.Console.WriteLine(Booking.GetCount());
+            // System.Console.WriteLine(Booking.GetCount());
 
             // outFile.WriteLine("BEFORE THE LOOP");
 

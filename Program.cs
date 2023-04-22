@@ -409,7 +409,7 @@ static void DisplayBookingMenu(){
 static void RouteBooking(string userInput){
 
     if (userInput == "1"){
-        ViewAvailableSessions();
+        ViewAvailableSessionsCursorPosition();
     } else if (userInput == "2"){
         ViewAvailableSessionsByTrainer();
     } else if (userInput == "3"){
@@ -425,6 +425,11 @@ static void ViewAvailableSessions(){
     int count = Listing.GetCount();
 
     System.Console.WriteLine("\nAvailable Sessions:");
+    (int left, int top) = Console.GetCursorPosition();
+    Console.SetCursorPosition(0,top + 1);
+    System.Console.WriteLine("Session ID");
+    Console.SetCursorPosition(12, top + 1);
+    System.Console.WriteLine("Trainer Name");
     for (int i = 0; i < count; i++){
         if (listings[i].GetTaken() == "available"){
             System.Console.WriteLine(listings[i].ToStringFormatted());
@@ -432,6 +437,57 @@ static void ViewAvailableSessions(){
     }
 
     System.Console.WriteLine("Press any key to continue");
+    Console.ReadKey();
+}
+
+static void ViewAvailableSessionsCursorPosition(){
+    Listing[] listings = new Listing[100];
+    ListingUtility utility = new ListingUtility(listings);
+
+    utility.GetAllListingsFromFile();
+    int count = Listing.GetCount();
+
+    System.Console.WriteLine("\nAvailable Sessions:");
+    (int left, int top) = Console.GetCursorPosition();
+    Console.SetCursorPosition(0,top + 1);
+    System.Console.WriteLine("Session ID");
+    Console.SetCursorPosition(15, top + 1);
+    System.Console.WriteLine("Trainer Name");
+    Console.SetCursorPosition(35, top + 1);
+    System.Console.WriteLine("Date");
+    Console.SetCursorPosition(55, top + 1);
+    System.Console.WriteLine("Time");
+    Console.SetCursorPosition(75, top + 1);
+    System.Console.WriteLine("Cost");
+    Console.SetCursorPosition(85, top + 1);
+    System.Console.WriteLine("Status");
+    Console.SetCursorPosition(105, top + 1);
+    System.Console.WriteLine("Trainer ID");
+
+    (left, top) = Console.GetCursorPosition();
+    int numSessionsPrinted = 0;
+    for (int i = 0; i < count; i++){
+        if (listings[i].GetTaken() == "available"){
+            Console.SetCursorPosition(0, top + numSessionsPrinted);
+            System.Console.Write(listings[i].GetID());
+            Console.SetCursorPosition(15, top + numSessionsPrinted);
+            System.Console.Write(listings[i].GetName());
+            Console.SetCursorPosition(35, top + numSessionsPrinted);
+            System.Console.Write(listings[i].GetDate());
+            Console.SetCursorPosition(55, top + numSessionsPrinted);
+            System.Console.Write(listings[i].GetTime());
+            Console.SetCursorPosition(75, top + numSessionsPrinted);
+            System.Console.Write(listings[i].GetCost());
+            Console.SetCursorPosition(85, top + numSessionsPrinted);
+            System.Console.Write(listings[i].GetTaken());
+            Console.SetCursorPosition(105, top + numSessionsPrinted);
+            System.Console.Write(listings[i].GetTrainerID());
+            
+            numSessionsPrinted++;
+        }
+    }
+
+    System.Console.WriteLine("\n\nPress any key to continue");
     Console.ReadKey();
 }
 
@@ -447,19 +503,54 @@ static void ViewAvailableSessionsByTrainer(){
     int count = Listing.GetCount();
 
     System.Console.WriteLine("\nAvailable Sessions:");
+    (int left, int top) = Console.GetCursorPosition();
+    Console.SetCursorPosition(0,top + 1);
+    System.Console.WriteLine("Session ID");
+    Console.SetCursorPosition(15, top + 1);
+    System.Console.WriteLine("Trainer Name");
+    Console.SetCursorPosition(35, top + 1);
+    System.Console.WriteLine("Date");
+    Console.SetCursorPosition(55, top + 1);
+    System.Console.WriteLine("Time");
+    Console.SetCursorPosition(75, top + 1);
+    System.Console.WriteLine("Cost");
+    Console.SetCursorPosition(85, top + 1);
+    System.Console.WriteLine("Status");
+    Console.SetCursorPosition(105, top + 1);
+    System.Console.WriteLine("Trainer ID");
+
+    (left, top) = Console.GetCursorPosition();
+    int numSessionsPrinted = 0;
     for (int i = 0; i < count; i++){
         if (listings[i].GetTaken() == "available" && listings[i].GetName() == trainerName){
-            System.Console.WriteLine(listings[i].ToStringFormatted());
+            // System.Console.WriteLine(listings[i].ToStringFormatted());
+            Console.SetCursorPosition(0, numSessionsPrinted + top);
+            System.Console.Write(listings[i].GetID());
+            Console.SetCursorPosition(15, numSessionsPrinted + top);
+            System.Console.Write(listings[i].GetName());
+            Console.SetCursorPosition(35, numSessionsPrinted + top);
+            System.Console.Write(listings[i].GetDate());
+            Console.SetCursorPosition(55, numSessionsPrinted + top);
+            System.Console.Write(listings[i].GetTime());
+            Console.SetCursorPosition(75, numSessionsPrinted + top);
+            System.Console.Write(listings[i].GetCost());
+            Console.SetCursorPosition(85, numSessionsPrinted + top);
+            System.Console.Write(listings[i].GetTaken());
+            Console.SetCursorPosition(105, numSessionsPrinted + top);
+            System.Console.Write(listings[i].GetTrainerID());
+
+            numSessionsPrinted++;
+
         }
     }
 
-    System.Console.WriteLine("Press any key to continue");
+    System.Console.WriteLine("\n\nPress any key to continue");
     Console.ReadKey();
 }
 
 
 static void BookASession(){
-    ViewAvailableSessions();
+    ViewAvailableSessionsCursorPosition();
 
     // Listing[] listings = new Listing[100];
     // ListingUtility utility1 = new ListingUtility(listings);
