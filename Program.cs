@@ -113,6 +113,8 @@ static void DisplayOptions(ref int selectedIndex, string[] options){
 StreamReader inFile2 = new StreamReader("lifter.txt");
 string line2 = inFile2.ReadLine();
 while (line2 != null){
+    Console.ForegroundColor = ConsoleColor.DarkRed;
+    Console.BackgroundColor = ConsoleColor.White;
     System.Console.WriteLine(line2);
     line2 = inFile2.ReadLine();
 }
