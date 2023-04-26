@@ -5,9 +5,13 @@ Console.Clear();
 StreamReader inFile = new StreamReader("bulls.txt");
 string line = inFile.ReadLine();
 while (line != null){
+    Console.ForegroundColor = ConsoleColor.DarkRed;
+    Console.BackgroundColor = ConsoleColor.Black;
     System.Console.WriteLine(line);
     line = inFile.ReadLine();
 }
+
+Console.ResetColor();
 
 inFile.Close();
 
@@ -29,10 +33,81 @@ while (currentUser.ToUpper() != "TRAINER" && currentUser.ToUpper() != "CUSTOMER"
 
 // Console.ReadKey();
 
-string userInput = GetMenuChoice();
-while (userInput != "5"){
-    Route(userInput, currentUser);
-    userInput = GetMenuChoice();
+int selectedIndex = 0;
+string[] options = {"1:   Trainer Info    ", "2:   Session Listings", "3:   Bookings        ", "4:   Run Reports     ", "5:   Exit App        "};
+
+int length = options.Length;
+
+
+
+// selectedIndex = Run(ref selectedIndex, options, length);
+
+
+// string userInput = GetMenuChoice();
+// while (userInput != "5"){
+//     Route(userInput, currentUser);
+//     userInput = GetMenuChoice();
+// }
+
+selectedIndex = Run(ref selectedIndex, options, length);
+while (selectedIndex != 4){
+    Route(selectedIndex, currentUser);
+    selectedIndex = Run(ref selectedIndex, options, length);
+}
+
+
+static int Run(ref int selectedIndex, string[] options, int length){
+    ConsoleKey keyPressed;
+    do{
+        Console.Clear();
+        DisplayOptions(ref selectedIndex, options);
+        ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+        keyPressed = keyInfo.Key;
+
+        if (keyPressed == ConsoleKey.UpArrow){
+            selectedIndex--;
+
+            if (selectedIndex == -1){
+                selectedIndex = length - 1;
+            }
+
+        } else if (keyPressed == ConsoleKey.DownArrow){
+            selectedIndex++;
+
+            if (selectedIndex == length){
+                selectedIndex = 0; 
+            }
+        }
+
+
+    } while (keyPressed != ConsoleKey.Enter);
+
+
+
+    return selectedIndex;
+}
+
+
+static void DisplayOptions(ref int selectedIndex, string[] options){
+
+    System.Console.WriteLine("Title\n");
+    for (int i = 0; i < options.Length; i++){
+        string currentOption = options[i];
+        string prefix;
+
+        if (i == selectedIndex){
+            prefix = " ";
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.BackgroundColor = ConsoleColor.Black;
+        } else {
+            prefix =  " ";
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.BackgroundColor = ConsoleColor.White;
+        }
+
+        System.Console.WriteLine($"{prefix} << {currentOption} >>");
+    }
+    Console.ResetColor();
 }
 
 StreamReader inFile2 = new StreamReader("lifter.txt");
@@ -89,13 +164,13 @@ static bool ValidMenuChoice(string userInput){
     } else return false;
 }
 
-static void Route(string userInput, string currentUser){
+static void Route(int userInput, string currentUser){
 
-    if (userInput == "1"){
+    if (userInput == 0){
         ManageTrainers(currentUser);
-    } else if (userInput == "2"){
+    } else if (userInput == 1){
         ManageListings(currentUser);
-    } else if (userInput == "3"){
+    } else if (userInput == 2){
         ManageBookings();
     } else {
         RunReports();
@@ -147,12 +222,36 @@ static void DisplayTrainerMenu(){
     TrainerUtility utility = new TrainerUtility(trainers);
     utility.GetAllTrainersFromFile();
     int count = Trainer.GetCount();
+
     System.Console.WriteLine("\nTrainers:");
+    (int left, int top) = Console.GetCursorPosition();
+    Console.SetCursorPosition(0,top + 1);
+    System.Console.WriteLine("Trainer ID");
+    Console.SetCursorPosition(15, top + 1);
+    System.Console.WriteLine("Trainer Name");
+    Console.SetCursorPosition(35, top + 1);
+    System.Console.WriteLine("Mailing Address");
+    Console.SetCursorPosition(55, top + 1);
+    System.Console.WriteLine("Trainer Email Address");
+
+    (left, top) = Console.GetCursorPosition();
+    int numSessionsPrinted = 0;
     for (int i = 0; i < count; i++){
         if (trainers[i].GetDeleted() == false){
-            System.Console.WriteLine(trainers[i].ToStringFormatted());
+            //System.Console.WriteLine(trainers[i].ToStringFormatted());
+            Console.SetCursorPosition(0, top + numSessionsPrinted);
+            System.Console.Write(trainers[i].GetID());
+            Console.SetCursorPosition(15, top + numSessionsPrinted);
+            System.Console.Write(trainers[i].GetName());
+            Console.SetCursorPosition(35, top + numSessionsPrinted);
+            System.Console.Write(trainers[i].GetAddress());
+            Console.SetCursorPosition(55, top + numSessionsPrinted);
+            System.Console.Write(trainers[i].GetEmail());
+            
+            numSessionsPrinted++;
         }
     }
+    System.Console.WriteLine();
 
 }
 
@@ -290,11 +389,46 @@ static void DisplayListingMenu(){
     int count = Listing.GetCount();
 
     System.Console.WriteLine("\nListings:");
+    (int left, int top) = Console.GetCursorPosition();
+    Console.SetCursorPosition(0,top + 1);
+    System.Console.WriteLine("Listing ID");
+    Console.SetCursorPosition(15, top + 1);
+    System.Console.WriteLine("Trainer Name");
+    Console.SetCursorPosition(35, top + 1);
+    System.Console.WriteLine("Date");
+    Console.SetCursorPosition(55, top + 1);
+    System.Console.WriteLine("Time");
+    Console.SetCursorPosition(75, top + 1);
+    System.Console.WriteLine("Cost");
+    Console.SetCursorPosition(85, top + 1);
+    System.Console.WriteLine("Status");
+    Console.SetCursorPosition(105, top + 1);
+    System.Console.WriteLine("Trainer ID");
+
+    (left, top) = Console.GetCursorPosition();
+    int numSessionsPrinted = 0;
     for (int i = 0; i < count; i++){
          if (listings[i].GetDeleted() == false){
-            System.Console.WriteLine(listings[i].ToStringFormatted());
+            // System.Console.WriteLine(listings[i].ToStringFormatted());
+            Console.SetCursorPosition(0, top + numSessionsPrinted);
+            System.Console.Write(listings[i].GetID());
+            Console.SetCursorPosition(15, top + numSessionsPrinted);
+            System.Console.Write(listings[i].GetName());
+            Console.SetCursorPosition(35, top + numSessionsPrinted);
+            System.Console.Write(listings[i].GetDate());
+            Console.SetCursorPosition(55, top + numSessionsPrinted);
+            System.Console.Write(listings[i].GetTime());
+            Console.SetCursorPosition(75, top + numSessionsPrinted);
+            System.Console.Write(listings[i].GetCost());
+            Console.SetCursorPosition(85, top + numSessionsPrinted);
+            System.Console.Write(listings[i].GetTaken());
+            Console.SetCursorPosition(105, top + numSessionsPrinted);
+            System.Console.Write(listings[i].GetTrainerID());
+            
+            numSessionsPrinted++;
          }
     }
+    System.Console.WriteLine();
 }
 
 static void RouteListing(string userInput){
@@ -775,8 +909,43 @@ static void ViewCustomerData(){
     int count = Booking.GetCount();
     
     System.Console.WriteLine("\nCustomer Sessions Data:");
+    (int left, int top) = Console.GetCursorPosition();
+    Console.SetCursorPosition(0,top + 1);
+    System.Console.WriteLine("Session ID");
+    Console.SetCursorPosition(15, top + 1);
+    System.Console.WriteLine("Customer Name");
+    Console.SetCursorPosition(35, top + 1);
+    System.Console.WriteLine("Customer Email");
+    Console.SetCursorPosition(55, top + 1);
+    System.Console.WriteLine("Date");
+    Console.SetCursorPosition(75, top + 1);
+    System.Console.WriteLine("Trainer ID");
+    Console.SetCursorPosition(90, top + 1);
+    System.Console.WriteLine("Trainer Name");
+    Console.SetCursorPosition(110, top + 1);
+    System.Console.WriteLine("Status");
+
+    (left, top) = Console.GetCursorPosition();
+    int numSessionsPrinted = 0;
     for (int i = 0; i < count; i++){
-        System.Console.WriteLine(bookings[i].ToStringFormatted());
+        // System.Console.WriteLine(bookings[i].ToStringFormatted());
+
+            Console.SetCursorPosition(0, numSessionsPrinted + top);
+            System.Console.Write(bookings[i].GetSessionID());
+            Console.SetCursorPosition(15, numSessionsPrinted + top);
+            System.Console.Write(bookings[i].GetCustomerName());
+            Console.SetCursorPosition(35, numSessionsPrinted + top);
+            System.Console.Write(bookings[i].GetCustomerEmail());
+            Console.SetCursorPosition(55, numSessionsPrinted + top);
+            System.Console.Write(bookings[i].GetTrainingDate());
+            Console.SetCursorPosition(75, numSessionsPrinted + top);
+            System.Console.Write(bookings[i].GetTrainerID());
+            Console.SetCursorPosition(90, numSessionsPrinted + top);
+            System.Console.Write(bookings[i].GetTrainerName());
+            Console.SetCursorPosition(110, numSessionsPrinted + top);
+            System.Console.Write(bookings[i].GetStatus());
+
+            numSessionsPrinted++;
     }
 
     System.Console.WriteLine("\n(Press any key to continue)");
@@ -795,11 +964,46 @@ static void HistoricalCustomerSessions(){
     utility.SortByCustomerNameThenByDate();
 
     System.Console.WriteLine("\nSessions by Customer then by Date:");
+    (int left, int top) = Console.GetCursorPosition();
+    Console.SetCursorPosition(0,top + 1);
+    System.Console.WriteLine("Session ID");
+    Console.SetCursorPosition(15, top + 1);
+    System.Console.WriteLine("Customer Name");
+    Console.SetCursorPosition(35, top + 1);
+    System.Console.WriteLine("Customer Email");
+    Console.SetCursorPosition(55, top + 1);
+    System.Console.WriteLine("Date");
+    Console.SetCursorPosition(75, top + 1);
+    System.Console.WriteLine("Trainer ID");
+    Console.SetCursorPosition(90, top + 1);
+    System.Console.WriteLine("Trainer Name");
+    Console.SetCursorPosition(110, top + 1);
+    System.Console.WriteLine("Status");
+
+    (left, top) = Console.GetCursorPosition();
+    int numSessionsPrinted = 0;
     for (int i = 0; i < Booking.GetCount(); i++){
-        System.Console.WriteLine(bookings[i].ToStringFormatted());
+        //System.Console.WriteLine(bookings[i].ToStringFormatted());
+
+        Console.SetCursorPosition(0, numSessionsPrinted + top);
+        System.Console.Write(bookings[i].GetSessionID());
+        Console.SetCursorPosition(15, numSessionsPrinted + top);
+        System.Console.Write(bookings[i].GetCustomerName());
+        Console.SetCursorPosition(35, numSessionsPrinted + top);
+        System.Console.Write(bookings[i].GetCustomerEmail());
+        Console.SetCursorPosition(55, numSessionsPrinted + top);
+        System.Console.Write(bookings[i].GetTrainingDate());
+        Console.SetCursorPosition(75, numSessionsPrinted + top);
+        System.Console.Write(bookings[i].GetTrainerID());
+        Console.SetCursorPosition(90, numSessionsPrinted + top);
+        System.Console.Write(bookings[i].GetTrainerName());
+        Console.SetCursorPosition(110, numSessionsPrinted + top);
+        System.Console.Write(bookings[i].GetStatus());
+
+        numSessionsPrinted++;
     }
 
-    System.Console.WriteLine("\n# of Sessions Booked Per Customer:");
+    System.Console.WriteLine("\n\n# of Sessions Booked Per Customer:");
     report.SessionsPerCustomer();
 
     System.Console.WriteLine("\n(Press any key to continue)");
