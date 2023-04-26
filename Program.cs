@@ -33,10 +33,10 @@ while (currentUser.ToUpper() != "TRAINER" && currentUser.ToUpper() != "CUSTOMER"
 
 // Console.ReadKey();
 
-int selectedIndex = 0;
-string[] options = {"1:   Trainer Info    ", "2:   Session Listings", "3:   Bookings        ", "4:   Run Reports     ", "5:   Exit App        "};
+// int selectedIndex = 0;
+// string[] options = {"1:   Trainer Info    ", "2:   Session Listings", "3:   Bookings        ", "4:   Run Reports     ", "5:   Exit App        "};
 
-int length = options.Length;
+// int length = options.Length;
 
 
 
@@ -49,14 +49,20 @@ int length = options.Length;
 //     userInput = GetMenuChoice();
 // }
 
-selectedIndex = Run(ref selectedIndex, options, length);
+int selectedIndex = Run("main");
 while (selectedIndex != 4){
     Route(selectedIndex, currentUser);
-    selectedIndex = Run(ref selectedIndex, options, length);
+    selectedIndex = Run("main");
 }
 
 
-static int Run(ref int selectedIndex, string[] options, int length){
+static int Run(string menuVersion){
+
+    int selectedIndex = 0;
+
+    string[] options = GetMenuVersion(menuVersion);
+
+    int length = options.Length;
     ConsoleKey keyPressed;
     do{
         Console.Clear();
@@ -87,10 +93,31 @@ static int Run(ref int selectedIndex, string[] options, int length){
     return selectedIndex;
 }
 
+static string[] GetMenuVersion(string menuVersion){
+    if (menuVersion == "main"){
+        string[] options = {"1:   Trainer Info    ", "2:   Session Listings", "3:   Bookings        ", "4:   Run Reports     ", "5:   Exit App        "};
+        return options;
+    } else if (menuVersion == "trainer"){
+        string[] options = {"1:   Add Trainer", "2:   Edit Trainer", "3:   Delete Trainer", "4:   Exit" };
+        return options;
+    } else if (menuVersion == "listing"){
+        string[] options = {"1:   Add Listing", "2:   Edit Listing", "3:   Delete Listing", "4:   Exit"};
+        return options;
+    } else if (menuVersion == "booking"){
+        string[] options = {"1:   View All Available Sessions", "2:   View Sessions By Trainer", "3:   Book a Session", "4:   Complete/Cancel a Session", "5:   Exit"};
+        return options;
+    } else if (menuVersion == "report"){
+        string[] options = {"1:   Individual Customer Sessions", "2:   Historical Customer Sessions", "3:   Historical Revenue Report", "4:   View All Customer Data", "5:   Exit"};
+        return options;
+    } else {
+        string[] options = {"string"};
+        return options;
+    }
+}
+
 
 static void DisplayOptions(ref int selectedIndex, string[] options){
 
-    System.Console.WriteLine("Title\n");
     for (int i = 0; i < options.Length; i++){
         string currentOption = options[i];
         string prefix;
@@ -183,10 +210,10 @@ static void Route(int userInput, string currentUser){
 static void ManageTrainers(string currentUser){
 
     if (currentUser.ToUpper() == "TRAINER"){
-        string userInput = GetTrainerChoice();
-        while (userInput != "4"){
-            RouteTrainer(userInput);
-            userInput = GetTrainerChoice();
+        int selectedIndex = Run("trainer");
+        while (selectedIndex != 3){
+            RouteTrainer(selectedIndex);
+            selectedIndex = Run("trainer");
         }
     } else{
         System.Console.WriteLine("\nYou do not have access to this\n");
@@ -263,11 +290,11 @@ static bool ValidMenuChoiceTrainer(string userInput){
     } else return false;
 }
 
-static void RouteTrainer(string userInput){
+static void RouteTrainer(int userInput){
 
-    if (userInput == "1"){
+    if (userInput == 0){
         AddTrainer();
-    } else if (userInput == "2"){
+    } else if (userInput == 1){
         EditTrainer();
     } else{
         DeleteTrainer();
@@ -350,10 +377,10 @@ static void DeleteTrainer(){
 
 static void ManageListings(string currentUser){
     if (currentUser.ToUpper() == "TRAINER"){
-        string userInput = GetListingChoice();
-        while (userInput != "4"){
-            RouteListing(userInput);
-            userInput = GetListingChoice();
+        int selectedIndex = Run("listing");
+        while (selectedIndex != 3){
+            RouteListing(selectedIndex);
+            selectedIndex = Run("listing");
         }    
     } else{
         System.Console.WriteLine("\nYou do not have access to this\n");
@@ -433,11 +460,11 @@ static void DisplayListingMenu(){
     System.Console.WriteLine();
 }
 
-static void RouteListing(string userInput){
+static void RouteListing(int userInput){
 
-    if (userInput == "1"){
+    if (userInput == 0){
         AddListing();
-    } else if (userInput == "2"){
+    } else if (userInput == 1){
         EditListing();
     } else{
         DeleteListing();
@@ -494,10 +521,10 @@ static void DeleteListing(){
 // _______________________________________________________________________________
 
 static void ManageBookings(){
-    string userInput = GetBookingChoice();
-    while (userInput != "5"){
-        RouteBooking(userInput);
-        userInput = GetBookingChoice();
+    int selectedIndex = Run("booking");
+    while (selectedIndex != 4){
+        RouteBooking(selectedIndex);
+        selectedIndex = Run("booking");
     }    
 }
 
@@ -542,13 +569,13 @@ static void DisplayBookingMenu(){
     // }
 }
 
-static void RouteBooking(string userInput){
+static void RouteBooking(int userInput){
 
-    if (userInput == "1"){
+    if (userInput == 0){
         ViewAvailableSessionsCursorPosition();
-    } else if (userInput == "2"){
+    } else if (userInput == 1){
         ViewAvailableSessionsByTrainer();
-    } else if (userInput == "3"){
+    } else if (userInput == 2){
         BookASession();
     } else DoASession();
 }
@@ -837,10 +864,10 @@ static void ViewBookedSessions(){
 
 //_________________________________________________________________________________________________________________________
 static void RunReports(){
-    string userInput = GetReportChoice();
-    while (userInput != "5"){
-        RouteReports(userInput);
-        userInput = GetReportChoice();
+    int selectedIndex = Run("report");
+    while (selectedIndex != 4){
+        RouteReports(selectedIndex);
+        selectedIndex = Run("report");
     }
 }
 
@@ -875,13 +902,13 @@ static bool ValidMenuChoiceReport(string userInput){
     } else return false;
 }
 
-static void RouteReports(string userInput){
+static void RouteReports(int userInput){
 
-    if (userInput == "1"){
+    if (userInput == 0){
         IndividualCustomerSessions();
-    } else if (userInput == "2"){
+    } else if (userInput == 1){
         HistoricalCustomerSessions();
-    } else if (userInput == "3"){
+    } else if (userInput == 2){
         System.Console.WriteLine("3rd option");
         Console.ReadKey();
     } else ViewCustomerData();
