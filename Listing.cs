@@ -6,7 +6,7 @@ namespace mis_221_pa_5_clmiller16
         private string name; // supposed to reference the trainer name (maybe make it "public" to do so)
         private DateOnly date;
         private string time;
-        private string cost;
+        private int cost;
         private string taken;
         private int trainerID;
         private bool deleted;
@@ -20,7 +20,7 @@ namespace mis_221_pa_5_clmiller16
 
         }
 
-        public Listing(int ID, string name, DateOnly date, string time, string cost, string taken, bool deleted, int trainerID)
+        public Listing(int ID, string name, DateOnly date, string time, int cost, string taken, bool deleted, int trainerID)
         {
             this.ID = ID;
             this.name = name;
@@ -56,10 +56,10 @@ namespace mis_221_pa_5_clmiller16
         public string GetTime(){
             return time;
         }
-        public void SetCost(string cost){
+        public void SetCost(int cost){
             this.cost = cost;
         }
-        public string GetCost(){
+        public int GetCost(){
             return cost;
         }
         public void SetTaken(string taken){

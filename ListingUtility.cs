@@ -25,7 +25,7 @@ namespace mis_221_pa_5_clmiller16
             {
                 string[] temp = line.Split('#');
                 //*** wordCount+=temp.Length();
-                listings[Listing.GetCount()] = new Listing(int.Parse(temp[0]), temp[1], DateOnly.Parse(temp[2]), temp[3], temp[4], temp[5], bool.Parse(temp[6]), int.Parse(temp[7]));
+                listings[Listing.GetCount()] = new Listing(int.Parse(temp[0]), temp[1], DateOnly.Parse(temp[2]), temp[3], int.Parse(temp[4]), temp[5], bool.Parse(temp[6]), int.Parse(temp[7]));
                 Listing.IncCount();
                 line = inFile.ReadLine();
             }
@@ -48,7 +48,7 @@ namespace mis_221_pa_5_clmiller16
             System.Console.WriteLine("Please enter the time");
             myListing.SetTime(Console.ReadLine());
             System.Console.WriteLine("Please enter the cost");
-            myListing.SetCost(Console.ReadLine());
+            myListing.SetCost(int.Parse(Console.ReadLine()));
             // System.Console.WriteLine("Please enter if it has been taken");
             myListing.SetTaken("available");
             System.Console.WriteLine("Please enter the ID of the trainer");
@@ -101,7 +101,7 @@ namespace mis_221_pa_5_clmiller16
                 System.Console.WriteLine("Please enter the new time");
                 listings[foundIndex].SetTime(Console.ReadLine());
                 System.Console.WriteLine("Please enter the new cost");
-                listings[foundIndex].SetCost(Console.ReadLine());
+                listings[foundIndex].SetCost(int.Parse(Console.ReadLine()));
                 System.Console.WriteLine("Please enter whether the listing has been taken");
                 string userInput = Console.ReadLine();
                 string correctInput = ValidInputTaken(userInput);

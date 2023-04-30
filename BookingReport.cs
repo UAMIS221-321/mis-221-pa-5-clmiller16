@@ -87,6 +87,74 @@ namespace mis_221_pa_5_clmiller16
             System.Console.WriteLine($"{curr}: \t {count}");
         }
 
+        public void RevenueByMonthAndYear(){
+            int currMonth = bookings[0].GetMonth();
+            int currYear = bookings[0].GetYear();
+            int count = 1;
+            int revTotal = 0;
+
+            System.Console.WriteLine();
+            System.Console.WriteLine(currMonth);
+
+            for (int i = 0; i < Booking.GetCount(); i++){
+                if (currYear == bookings[i].GetYear()){
+                    count++; //placeholder
+                    if (currMonth == bookings[i].GetMonth()){
+                        count++; //placeholder
+                        if (bookings[i].GetStatus() == "completed"){
+                            System.Console.WriteLine(bookings[i].ToStringFormatted());
+                            System.Console.WriteLine(bookings[i].GetCost());
+                            revTotal += bookings[i].GetCost();
+                        }
+                    } else ProcessMonthBreak(ref revTotal, bookings[i], ref currMonth);
+                } //else ProcessYearBreak();
+
+            }
+
+        }
+
+        public void RevenueByYear(){
+            int currMonth = bookings[0].GetMonth();
+            int currYear = bookings[0].GetYear();
+            int count = 1;
+            int revYearTotal = 0;
+
+            System.Console.WriteLine();
+            System.Console.WriteLine(currYear.ToString());
+
+            for (int i = 0; i < Booking.GetCount(); i++){
+                if (currYear == bookings[i].GetYear()){
+                    count++; //placeholder
+                    if (bookings[i].GetStatus() == "completed"){
+                        System.Console.WriteLine(bookings[i].ToStringFormatted());
+                        System.Console.WriteLine($"${bookings[i].GetCost()} \n");
+                        revYearTotal += bookings[i].GetCost();
+                    }
+
+                } else ProcessYearBreak(ref revYearTotal, bookings[i], ref currYear);
+
+            }
+        }
+
+        public void ProcessMonthBreak(ref int revTotal, Booking newBooking, ref int currMonth){
+            //System.Console.WriteLine(newBooking.ToStringFormatted());
+
+            currMonth = newBooking.GetMonth();
+            revTotal = 0;
+
+            System.Console.WriteLine(currMonth);
+        }
+        public void ProcessYearBreak(ref int revYearTotal, Booking newBooking, ref int currYear){
+            //System.Console.WriteLine(newBooking.ToStringFormatted());
+            System.Console.WriteLine($"Yearly Revenue: ${revYearTotal}\n");
+            revYearTotal = 0;
+
+
+            currYear = newBooking.GetYear();
+
+            System.Console.WriteLine(currYear.ToString());
+        }
+
 
     }
 }

@@ -1,6 +1,8 @@
 ﻿using mis_221_pa_5_clmiller16;
 Console.Clear();
 
+Console.CursorVisible = true;
+
 
 StreamReader inFile = new StreamReader("bulls.txt");
 string line = inFile.ReadLine();
@@ -56,9 +58,12 @@ while (selectedIndex != 4){
 }
 
 
+
 static int Run(string menuVersion){
 
     int selectedIndex = 0;
+
+    Console.CursorVisible = false;
 
     string[] options = GetMenuVersion(menuVersion);
 
@@ -66,7 +71,7 @@ static int Run(string menuVersion){
     ConsoleKey keyPressed;
     do{
         Console.Clear();
-        DisplayOptions(ref selectedIndex, options);
+        DisplayOptions(ref selectedIndex, options, menuVersion);
         ConsoleKeyInfo keyInfo = Console.ReadKey(true);
         keyPressed = keyInfo.Key;
 
@@ -102,6 +107,9 @@ static string[] GetMenuVersion(string menuVersion){
         return options;
     } else if (menuVersion == "listing"){
         string[] options = {"1:   Add Listing", "2:   Edit Listing", "3:   Delete Listing", "4:   Exit"};
+        // DisplayListingMenu();
+
+
         return options;
     } else if (menuVersion == "booking"){
         string[] options = {"1:   View All Available Sessions", "2:   View Sessions By Trainer", "3:   Book a Session", "4:   Complete/Cancel a Session", "5:   Exit"};
@@ -116,7 +124,7 @@ static string[] GetMenuVersion(string menuVersion){
 }
 
 
-static void DisplayOptions(ref int selectedIndex, string[] options){
+static void DisplayOptions(ref int selectedIndex, string[] options, string menuVersion){
 
     for (int i = 0; i < options.Length; i++){
         string currentOption = options[i];
@@ -135,6 +143,14 @@ static void DisplayOptions(ref int selectedIndex, string[] options){
         System.Console.WriteLine($"{prefix} << {currentOption} >>");
     }
     Console.ResetColor();
+
+    if (menuVersion == "listing"){
+        DisplayListingMenu();
+    } else if (menuVersion == "trainer"){
+        DisplayTrainerMenu();
+    }
+
+
 }
 
 StreamReader inFile2 = new StreamReader("lifter.txt");
@@ -151,13 +167,8 @@ inFile2.Close();
 System.Console.WriteLine("___________________________________________________________________");
 System.Console.WriteLine("       Maybe you will be as strong as Arnold one day");
 System.Console.WriteLine("___________________________________________________________________\n");
-// } else{
-//     string userInput = GetCustomerMenuChoice();
-//     while (userInput != "5"){
-//         Route(userInput);
-//         userInput = GetCustomerMenuChoice();
-//     }
-// }
+
+Console.CursorVisible = true;
 
 
 // methods
@@ -240,12 +251,12 @@ static string GetTrainerChoice(){
 }
 
 static void DisplayTrainerMenu(){
-    Console.Clear();
-    Console.WriteLine("1:   Add Trainer");
-    Console.WriteLine("2:   Edit Trainer");
-    Console.WriteLine("3:   Delete Trainer");
-    Console.WriteLine("4:   Exit");
-    System.Console.WriteLine();
+    // Console.Clear();
+    // Console.WriteLine("1:   Add Trainer");
+    // Console.WriteLine("2:   Edit Trainer");
+    // Console.WriteLine("3:   Delete Trainer");
+    // Console.WriteLine("4:   Exit");
+    // System.Console.WriteLine();
 
     Trainer[] trainers = new Trainer[100];
     TrainerUtility utility = new TrainerUtility(trainers);
@@ -291,6 +302,8 @@ static bool ValidMenuChoiceTrainer(string userInput){
 }
 
 static void RouteTrainer(int userInput){
+
+    Console.CursorVisible = true;
 
     if (userInput == 0){
         AddTrainer();
@@ -406,11 +419,11 @@ static string GetListingChoice(){
 }
 
 static void DisplayListingMenu(){
-    Console.Clear();
-    Console.WriteLine("1:   Add Listing");
-    Console.WriteLine("2:   Edit Listing");
-    Console.WriteLine("3:   Delete Listing");
-    Console.WriteLine("4:   Exit");
+    // Console.Clear();
+    // Console.WriteLine("1:   Add Listing");
+    // Console.WriteLine("2:   Edit Listing");
+    // Console.WriteLine("3:   Delete Listing");
+    // Console.WriteLine("4:   Exit");
 
     Listing[] listings = new Listing[100];
     ListingUtility utility = new ListingUtility(listings);
@@ -428,7 +441,7 @@ static void DisplayListingMenu(){
     Console.SetCursorPosition(55, top + 1);
     System.Console.WriteLine("Time");
     Console.SetCursorPosition(75, top + 1);
-    System.Console.WriteLine("Cost");
+    System.Console.WriteLine("Cost ($)");
     Console.SetCursorPosition(85, top + 1);
     System.Console.WriteLine("Status");
     Console.SetCursorPosition(105, top + 1);
@@ -461,6 +474,8 @@ static void DisplayListingMenu(){
 }
 
 static void RouteListing(int userInput){
+
+    Console.CursorVisible = true;
 
     if (userInput == 0){
         AddListing();
@@ -570,6 +585,8 @@ static void DisplayBookingMenu(){
 }
 
 static void RouteBooking(int userInput){
+
+    Console.CursorVisible = true;
 
     if (userInput == 0){
         ViewAvailableSessionsCursorPosition();
@@ -904,13 +921,14 @@ static bool ValidMenuChoiceReport(string userInput){
 
 static void RouteReports(int userInput){
 
+    Console.CursorVisible = true;
+
     if (userInput == 0){
         IndividualCustomerSessions();
     } else if (userInput == 1){
         HistoricalCustomerSessions();
     } else if (userInput == 2){
-        System.Console.WriteLine("3rd option");
-        Console.ReadKey();
+        HistoricalRevenueReport();
     } else ViewCustomerData();
 }
 
@@ -1036,5 +1054,22 @@ static void HistoricalCustomerSessions(){
     report.SessionsPerCustomer();
 
     System.Console.WriteLine("\n(Press any key to continue)");
+    Console.ReadKey();
+}
+
+static void HistoricalRevenueReport(){
+    Booking[] bookings = new Booking[100];
+    BookingUtility utility = new BookingUtility(bookings);
+    BookingReport report = new BookingReport(bookings);
+
+    utility.GetAllBookingsFromFile();
+    int count = Booking.GetCount();
+
+    utility.SortByDate();
+
+    //report.RevenueByMonthAndYear();
+    report.RevenueByYear();
+
+    System.Console.WriteLine("Press any key to continue");
     Console.ReadKey();
 }

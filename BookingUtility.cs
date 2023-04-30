@@ -30,7 +30,7 @@ namespace mis_221_pa_5_clmiller16
             {
                 string[] temp = line.Split('#');
                 //*** wordCount+=temp.Length();
-                bookings[Booking.GetCount()] = new Booking(int.Parse(temp[0]), temp[1], temp[2], DateOnly.Parse(temp[3]), int.Parse(temp[4]), temp[5], temp[6]);
+                bookings[Booking.GetCount()] = new Booking(int.Parse(temp[0]), temp[1], temp[2], DateOnly.Parse(temp[3]), int.Parse(temp[4]), temp[5], temp[6], int.Parse(temp[7]));
                 Booking.IncCount();
                 line = inFile.ReadLine();
             }
@@ -57,6 +57,8 @@ namespace mis_221_pa_5_clmiller16
             myBooking.SetTrainerName(Console.ReadLine());
             System.Console.WriteLine("Please enter the status");
             myBooking.SetStatus(Console.ReadLine());
+            System.Console.WriteLine("Please enter the cost");
+            myBooking.SetCost(int.Parse(Console.ReadLine()));
            
             bookings[Booking.GetCount()] = myBooking;
             Booking.IncCount();
@@ -95,6 +97,7 @@ namespace mis_221_pa_5_clmiller16
                         myBooking.SetTrainerName(temp[1]);
                         myBooking.SetTrainingDate(DateOnly.Parse(temp[2]));
                         myBooking.SetTrainerID(int.Parse(temp[7]));
+                        myBooking.SetCost(int.Parse(temp[4]));
                         //HEREWEGO = myBooking.GetTrainerID();
                     }
                 }
@@ -242,6 +245,8 @@ namespace mis_221_pa_5_clmiller16
                 bookings[foundIndex].SetTrainerName(Console.ReadLine());
                 System.Console.WriteLine("Please enter the status");
                 bookings[foundIndex].SetStatus(Console.ReadLine());
+                System.Console.WriteLine("Please enter the cost");
+                bookings[foundIndex].SetCost(int.Parse(Console.ReadLine()));
 
                 Save();
 
@@ -292,6 +297,22 @@ namespace mis_221_pa_5_clmiller16
                     Swap(min, i);
                 }
             }
+        }
+
+        public void SortByDate(){
+            for (int i = 0; i < Booking.GetCount() - 1; i++){
+                int min  = i;
+
+                for (int j = i + 1; j < Booking.GetCount(); j++){
+                    if (bookings[j].GetTrainingDate() < bookings[min].GetTrainingDate())
+                    {
+                        min = j;
+                    }
+                }
+                if (min != i){
+                    Swap(min, i);
+                }
+            }    
         }
 
         private void Swap(int x, int y){

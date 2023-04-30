@@ -9,13 +9,14 @@ namespace mis_221_pa_5_clmiller16
         int trainerID;
         string trainerName;
         string status;
+        int cost;
         static private int count;
 
         public Booking(){
             status = "booked";
         }
 
-        public Booking(int sessionID, string customerName, string customerEmail, DateOnly trainingDate, int trainerID, string trainerName, string status){
+        public Booking(int sessionID, string customerName, string customerEmail, DateOnly trainingDate, int trainerID, string trainerName, string status, int cost){
             this.status = status;
             this.sessionID = sessionID;
             this.customerName = customerName;
@@ -23,6 +24,7 @@ namespace mis_221_pa_5_clmiller16
             this.trainingDate = trainingDate;
             this.trainerID = trainerID;
             this.trainerName = trainerName;
+            this.cost = cost;
         }
 
         public void SetSessionID(int sessionID){
@@ -49,6 +51,15 @@ namespace mis_221_pa_5_clmiller16
         public DateOnly GetTrainingDate(){
             return trainingDate;
         }
+
+        public int GetMonth(){
+            return trainingDate.Month;
+        }
+        public int GetYear(){
+            return trainingDate.Year;
+        }
+
+
         public void SetTrainerID(int trainerID){
             this.trainerID = trainerID;
         }
@@ -66,6 +77,12 @@ namespace mis_221_pa_5_clmiller16
         }
         public string GetStatus(){
             return status;
+        }
+        public void SetCost(int cost){
+            this.cost = cost;
+        }
+        public int GetCost(){
+            return cost;
         }
         static public void SetCount(int count)
         {
@@ -91,7 +108,7 @@ namespace mis_221_pa_5_clmiller16
         }
 
         public string ToFile(){
-            return $"{sessionID}#{customerName}#{customerEmail}#{trainingDate}#{trainerID}#{trainerName}#{status}";
+            return $"{sessionID}#{customerName}#{customerEmail}#{trainingDate}#{trainerID}#{trainerName}#{status}#{cost}";
         }
 
 
