@@ -321,13 +321,17 @@ namespace mis_221_pa_5_clmiller16
             bookings[y] = temp;
         }
 
-        public void CompleteOrCancel(){
+        public void CompleteOrCancel(int selectedIndex){
 
-            string userInput = GetSubMenuChoice();
-            while (userInput != "4"){
-                RouteSubMenu(userInput);
-                userInput = GetSubMenuChoice();
-            }
+            // string userInput = GetSubMenuChoice();
+            // while (userInput != "4"){
+            //     RouteSubMenu(userInput);
+            //     userInput = GetSubMenuChoice();
+            // }
+
+            RouteSubMenu(selectedIndex);
+
+            //here will take a string and feed it to RouteSubMenu
 
         }
 
@@ -362,10 +366,11 @@ namespace mis_221_pa_5_clmiller16
             } else return false;
         }
 
-        private void RouteSubMenu(string userInput){
-            if (userInput == "1"){
+        private void RouteSubMenu(int selectedIndex){
+            Console.CursorVisible = true;
+            if (selectedIndex == 0){
                 CompleteAppointment();
-            } else if (userInput == "2"){
+            } else if (selectedIndex == 1){
                 CancelAppointment();
             } else NoShowAppointment();
         }
@@ -379,6 +384,89 @@ namespace mis_221_pa_5_clmiller16
                 bookings[foundIndex].SetStatus("completed");
                 Save2();
             } else System.Console.WriteLine("Session not found");
+
+            System.Console.WriteLine("\nWhat type of workout would you like to complete?\n");
+            System.Console.WriteLine("Options Include:");
+            System.Console.WriteLine("1. Dunk Contest\n2. Weight Training\n3. 1v1");
+            string workoutType = Console.ReadLine();
+
+            if (workoutType == "DUNK CONTEST" || workoutType == "1"){
+                DunkContest();
+            }
+            
+        }
+
+        private void DunkContest(){
+            Console.Clear();
+
+            System.Console.WriteLine("Please select a difficulty level for this workout");
+            System.Console.WriteLine("1:    Rookie\n2:    Advanced\n3:    Pro");
+            int difficulty = int.Parse(Console.ReadLine());
+            Console.Clear();
+
+            System.Console.WriteLine("Welcome to the Chicago Bulls Official Dunk Contest- It is your job to impress the judges!\n");
+            System.Console.WriteLine("Pick a number between 1 and 7 to decide which dunk you want to attempt tonight.\n");
+            string dunkStyle = Console.ReadLine();
+
+            Random rnd = new Random();
+            int failedAttempts = -1;
+            if(difficulty == 1){
+                failedAttempts = rnd.Next(1,2);
+            } else if (difficulty == 2){
+                failedAttempts = rnd.Next(1,4);
+            } else if (difficulty == 3){
+                failedAttempts = rnd.Next(1,8);
+            } else {
+                failedAttempts = 0;
+            }
+            //System.Console.WriteLine(failedAttempts);
+            
+            int maxAttempts = 3;
+            for (int i = 0; i < failedAttempts; i++){
+                
+                if (i < maxAttempts){
+                    System.Console.WriteLine("Press any key to attempt a dunk");
+                    Console.ReadKey();
+                    System.Console.WriteLine("FAILED ATTEMPT");
+                }
+            }
+
+            if (failedAttempts >= 3){
+                System.Console.WriteLine("You failed 3 attempts\n\nScore: 0");
+            } else{
+                System.Console.WriteLine("Press any key to attempt a dunk");
+                Console.ReadKey();
+                DunkTheBall(dunkStyle);
+                if (dunkStyle == "1"){
+                    System.Console.WriteLine("Score: 1");
+                } else if (dunkStyle == "2"){
+                    System.Console.WriteLine("Score: 2");
+                } else if (dunkStyle == "3"){
+                    System.Console.WriteLine("Score: 3");
+                } else if (dunkStyle == "4"){
+                    System.Console.WriteLine("Score: 4");
+                } else if (dunkStyle == "5"){
+                    System.Console.WriteLine("Score: 5");
+                } else if (dunkStyle == "6"){
+                    System.Console.WriteLine("Score: 6");
+                } else if (dunkStyle == "7"){
+                    System.Console.WriteLine("Score: 7");
+                } else System.Console.WriteLine("Something went wrong");
+            }
+
+            Console.ReadKey();
+            
+        }
+
+        private void DunkTheBall(string dunkStyle){
+            StreamReader inFile = new StreamReader("dunkcontest" + dunkStyle + ".txt");
+            string line = inFile.ReadLine();
+            while(line != null){
+                System.Console.WriteLine(line);
+                line = inFile.ReadLine();
+            }
+
+            inFile.Close();
         }
 
         private void CancelAppointment(){

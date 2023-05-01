@@ -22,10 +22,29 @@ string currentUser = Console.ReadLine();
 if(currentUser == "t"){
     currentUser = "trainer";
 }
+if(currentUser == "c"){
+    currentUser = "customer";
+}
 while (currentUser.ToUpper() != "TRAINER" && currentUser.ToUpper() != "CUSTOMER"){
     System.Console.WriteLine("**Please enter either customer or trainer**");
     currentUser = Console.ReadLine();
 }
+
+if (currentUser.ToUpper() == "TRAINER"){
+    System.Console.WriteLine("What is your password?");
+    string password = Console.ReadLine();
+    string contents = File.ReadAllText("passwords.txt");
+    while (!contents.Contains(password))
+    {
+        System.Console.WriteLine("Incorrect Password- Please try again");
+        password = Console.ReadLine();
+    }
+
+    System.Console.WriteLine("\nACCESS GRANTED");
+    Console.ReadKey();
+}
+
+
 
 // ATTEMPT AT USING OOP FOR THE USER TYPE
 // User currentUser = new User();
@@ -117,6 +136,9 @@ static string[] GetMenuVersion(string menuVersion){
     } else if (menuVersion == "report"){
         string[] options = {"1:   Individual Customer Sessions", "2:   Historical Customer Sessions", "3:   Historical Revenue Report", "4:   Monthly Revenue Report", "5:   Yearly Revenue Report", "6:   View All Customer Data", "7:   Exit"};
         return options;
+    } else if (menuVersion == "bookingsubmenu"){
+        string[] options = {"1:    Complete an Appointment", "2:    Cancel an Appointment", "3:    No-Show an Appointment", "4:    Exit"};
+        return options;
     } else {
         string[] options = {"string"};
         return options;
@@ -153,22 +175,56 @@ static void DisplayOptions(ref int selectedIndex, string[] options, string menuV
 
 }
 
-StreamReader inFile2 = new StreamReader("lifter.txt");
-string line2 = inFile2.ReadLine();
-while (line2 != null){
-    Console.ForegroundColor = ConsoleColor.DarkRed;
-    Console.BackgroundColor = ConsoleColor.White;
-    System.Console.WriteLine(line2);
-    line2 = inFile2.ReadLine();
+if (currentUser.ToUpper() != "TRAINER"){
+    StreamReader inFile2 = new StreamReader("lifter.txt");
+    string line2 = inFile2.ReadLine();
+    while (line2 != null){
+        Console.ForegroundColor = ConsoleColor.DarkRed;
+        Console.BackgroundColor = ConsoleColor.White;
+        System.Console.WriteLine(line2);
+        line2 = inFile2.ReadLine();
+    }
+
+    inFile2.Close();
+
+    Console.ResetColor();
+
+    //System.Console.WriteLine("___________________________________________________________________");
+    Console.Write("                               ");
+    Console.BackgroundColor = ConsoleColor.DarkRed;
+    Console.ForegroundColor = ConsoleColor.Black;
+    System.Console.WriteLine("                     Maybe you will be as strong as Arnold one day                     ");
+    Console.ResetColor();
+    //System.Console.WriteLine("___________________________________________________________________\n");
+
+    Console.CursorVisible = true;
+} else {
+    StreamReader inFile2 = new StreamReader("basketball.txt");
+        string line2 = inFile2.ReadLine();
+        while (line2 != null){
+            Console.ResetColor();
+            // Console.ForegroundColor = ConsoleColor.Black;
+            // Console.BackgroundColor = ConsoleColor.White;
+            System.Console.WriteLine(line2);
+            line2 = inFile2.ReadLine();
+        }
+
+        inFile2.Close();
+
+        Console.ResetColor();
+
+        //System.Console.WriteLine("___________________________________________________________________");
+        Console.Write("                               ");
+        Console.BackgroundColor = ConsoleColor.DarkRed;
+        Console.ForegroundColor = ConsoleColor.Black;
+        System.Console.WriteLine("\n                     Tell All Your Trainer Friends To Join The App!                     ");
+        Console.ResetColor();
+        //System.Console.WriteLine("___________________________________________________________________\n");
+
+        Console.CursorVisible = true;    
 }
 
-inFile2.Close();
 
-System.Console.WriteLine("___________________________________________________________________");
-System.Console.WriteLine("       Maybe you will be as strong as Arnold one day");
-System.Console.WriteLine("___________________________________________________________________\n");
-
-Console.CursorVisible = true;
 
 
 // methods
@@ -814,13 +870,18 @@ static void DoASession(){
     BookingUtility utility = new BookingUtility(bookings);
 
     utility.GetAllBookingsFromFile();
-    utility.CompleteOrCancel();
-
+    
+    int selectedIndex = Run("bookingsubmenu");
+    while (selectedIndex!= 3){
+        utility.CompleteOrCancel(selectedIndex);
+        selectedIndex = Run("bookingsubmenu");
+    }
+    
     utility.Save2();
     
 
-    System.Console.WriteLine("Press any key to continue");
-    Console.ReadKey();
+    // System.Console.WriteLine("Press any key to continue");
+    // Console.ReadKey();
 }
 
 static void ViewBookedSessions(){
