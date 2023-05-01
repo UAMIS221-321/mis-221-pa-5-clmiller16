@@ -1,5 +1,5 @@
 10#CLIENT#CLIENT.COM#11/23/2023#3#Michael Jordan#completed#50
 1#Lucas Landry#lslandry@crimson.ua.edu#2/3/2023#1#Carson Miller#completed#50
 2#Sammy Tomasello#stsello@crimson.ua.edu#1/25/2024#2#Jeff Lucas#completed#25
-3#Jack#jshard@crimson.ua.edu#11/23/2023#3#Michael Jordan#no-show#50
+3#Jack#jshard@crimson.ua.edu#11/23/2023#3#Michael Jordan#cancelled#50
 4#Sandy Cheeks#scheeks@crimson.ua.edu#1/5/2024#4#Gary Spurrier#completed#50

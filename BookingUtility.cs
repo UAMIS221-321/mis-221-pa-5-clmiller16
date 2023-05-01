@@ -427,7 +427,7 @@ namespace mis_221_pa_5_clmiller16
                 if (i < maxAttempts){
                     System.Console.WriteLine("Press any key to attempt a dunk");
                     Console.ReadKey();
-                    System.Console.WriteLine("FAILED ATTEMPT");
+                    System.Console.WriteLine("FAILED ATTEMPT\n");
                 }
             }
 
@@ -438,20 +438,34 @@ namespace mis_221_pa_5_clmiller16
                 Console.ReadKey();
                 DunkTheBall(dunkStyle);
                 if (dunkStyle == "1"){
+                    System.Console.WriteLine("\nSlam Dunk!\nPress any key to see what score the judges awarded you\n");
+                    Console.ReadKey();
                     System.Console.WriteLine("Score: 1");
                 } else if (dunkStyle == "2"){
+                    System.Console.WriteLine("\nSlam Dunk!\nPress any key to see what score the judges awarded you\n");
+                    Console.ReadKey();
                     System.Console.WriteLine("Score: 2");
                 } else if (dunkStyle == "3"){
+                    System.Console.WriteLine("\nSlam Dunk!\nPress any key to see what score the judges awarded you\n");
+                    Console.ReadKey();
                     System.Console.WriteLine("Score: 3");
                 } else if (dunkStyle == "4"){
+                    System.Console.WriteLine("\nSlam Dunk!\nPress any key to see what score the judges awarded you\n");
+                    Console.ReadKey();
                     System.Console.WriteLine("Score: 4");
                 } else if (dunkStyle == "5"){
+                    System.Console.WriteLine("\nSlam Dunk!\nPress any key to see what score the judges awarded you\n");
+                    Console.ReadKey();
                     System.Console.WriteLine("Score: 5");
                 } else if (dunkStyle == "6"){
+                    System.Console.WriteLine("\nSlam Dunk!\nPress any key to see what score the judges awarded you\n");
+                    Console.ReadKey();
                     System.Console.WriteLine("Score: 6");
                 } else if (dunkStyle == "7"){
+                    System.Console.WriteLine("\nSlam Dunk!\nPress any key to see what score the judges awarded you\n");
+                    Console.ReadKey();
                     System.Console.WriteLine("Score: 7");
-                } else System.Console.WriteLine("Something went wrong");
+                } else System.Console.WriteLine("\nSomething went wrong");
             }
 
             Console.ReadKey();
