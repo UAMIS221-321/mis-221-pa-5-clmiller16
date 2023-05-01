@@ -387,11 +387,15 @@ namespace mis_221_pa_5_clmiller16
 
             System.Console.WriteLine("\nWhat type of workout would you like to complete?\n");
             System.Console.WriteLine("Options Include:");
-            System.Console.WriteLine("1. Dunk Contest\n2. Weight Training\n3. 1v1");
+            System.Console.WriteLine("1. Dunk Contest\n2. Excercise\n3. 1v1");
             string workoutType = Console.ReadLine();
 
-            if (workoutType == "DUNK CONTEST" || workoutType == "1"){
+            if (workoutType.ToUpper() == "DUNK CONTEST" || workoutType == "1"){
                 DunkContest();
+            } else if (workoutType.ToUpper() == "EXCERCISE" || workoutType == "2"){
+                Excercise();
+            } else if (workoutType.ToUpper() == "1V1" || workoutType == "3"){
+
             }
             
         }
@@ -481,6 +485,42 @@ namespace mis_221_pa_5_clmiller16
             }
 
             inFile.Close();
+        }
+
+        private void Excercise(){
+            Console.Clear();
+
+            System.Console.WriteLine("What type of workout would you like to complete?");
+            System.Console.WriteLine("1. Weight Lifing\n2. Cardio");
+
+            string response = Console.ReadLine();
+
+            if (response.ToUpper() == "1" || response.ToUpper() == "WEIGHT LIFTING"){
+                StreamReader inFile = new StreamReader("deadlift.txt");
+                string line = inFile.ReadLine();
+                while(line!=null){
+                    System.Console.WriteLine(line);
+                    line = inFile.ReadLine();
+                }
+
+                inFile.Close();
+
+                System.Console.WriteLine("Nice workout! You're looking strong!");
+
+            } else if (response.ToUpper() == "2" || response.ToUpper() == "CARDIO"){
+                StreamReader inFile = new StreamReader("cycling.txt");
+                string line = inFile.ReadLine();
+                while(line!=null){
+                    System.Console.WriteLine(line);
+                    line = inFile.ReadLine();
+                }
+
+                inFile.Close();
+
+                System.Console.WriteLine("Nice workout! Cardiovascular endurance is key!");
+            }
+
+            Console.ReadKey();
         }
 
         private void CancelAppointment(){
