@@ -1,7 +1,7 @@
 1#Carson Miller#1/2/2024#11:15 am#25#taken#False#1
 2#Jeff Lucas#1/25/2024#8:00 am#25#taken#False#2
 3#Michael Jordan#1/2/2024#2:00 pm#30#taken#False#3
-4#Gary Spurrier#1/5/2024#5:15 pm#50#available#False#4
+4#Gary Spurrier#1/5/2024#5:15 pm#50#taken#False#4
 5#Emily Fischer#2/20/2024#1:00 pm#35#available#False#5
 6#Chase Callahan#3/13/2024#2:00 pm#20#available#False#6
 7#Joe Mama#3/13/2023#2:30 pm#25#available#False#7

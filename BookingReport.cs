@@ -114,26 +114,22 @@ namespace mis_221_pa_5_clmiller16
         }
 
         public void RevenueByYear(){
-            int currMonth = bookings[0].GetMonth();
             int currYear = bookings[0].GetYear();
-            int count = 1;
             int revYearTotal = 0;
 
             System.Console.WriteLine();
             System.Console.WriteLine(currYear.ToString());
 
             for (int i = 0; i < Booking.GetCount(); i++){
-                if (currYear == bookings[i].GetYear()){
-                    count++; //placeholder
-                    if (bookings[i].GetStatus() == "completed"){
-                        System.Console.WriteLine(bookings[i].ToStringFormatted());
-                        System.Console.WriteLine($"${bookings[i].GetCost()} \n");
-                        revYearTotal += bookings[i].GetCost();
-                    }
+                if (currYear == bookings[i].GetYear() && bookings[i].GetStatus() == "completed"){
+                    System.Console.WriteLine(bookings[i].ToStringFormatted());
+                    System.Console.WriteLine($"${bookings[i].GetCost()} \n");
+                    revYearTotal += bookings[i].GetCost();
 
                 } else ProcessYearBreak(ref revYearTotal, bookings[i], ref currYear);
 
             }
+            ProcessYearBreak(currYear, revYearTotal);
         }
 
         public void ProcessMonthBreak(ref int revTotal, Booking newBooking, ref int currMonth){
@@ -153,6 +149,10 @@ namespace mis_221_pa_5_clmiller16
             currYear = newBooking.GetYear();
 
             System.Console.WriteLine(currYear.ToString());
+        }
+
+        public void ProcessYearBreak(int currYear,int revYearTotal){
+            System.Console.WriteLine($"Yearly Revenue: ${revYearTotal}\n");
         }
 
 
