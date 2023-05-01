@@ -1,0 +1,8 @@
+Session ID
+Customer Name
+Customer Email
+Date
+Trainer ID
+Trainer Name
+Status
+1Lucas Landrylslandry@crimson.ua.edu2/3/20231Carson Millercompleted

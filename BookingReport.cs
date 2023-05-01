@@ -17,7 +17,7 @@ namespace mis_221_pa_5_clmiller16
 
         public void SessionsForCustomer(){
 
-            System.Console.WriteLine("What was your email?");
+            System.Console.WriteLine("What was the customer email?");
             string email = Console.ReadLine();
 
             // string curr = bookings[0].GetCustomerEmail();
@@ -62,11 +62,61 @@ namespace mis_221_pa_5_clmiller16
                     numSessionsPrinted++;
                 }
             }
+            System.Console.WriteLine("\nWould you like to save this report to a file?");
+            string response = Console.ReadLine();
+            if (response.ToUpper() == "YES"){
+                System.Console.WriteLine("What is the name of the file you want to save it to?");
+                string fileName = Console.ReadLine();
+                StreamWriter outFile = new StreamWriter(fileName);
+
+                (left, top) = Console.GetCursorPosition();
+                Console.SetCursorPosition(0,top + 1);
+                outFile.WriteLine("Session ID");
+                Console.SetCursorPosition(15, top + 1);
+                outFile.WriteLine("Customer Name");
+                Console.SetCursorPosition(35, top + 1);
+                outFile.WriteLine("Customer Email");
+                Console.SetCursorPosition(55, top + 1);
+                outFile.WriteLine("Date");
+                Console.SetCursorPosition(75, top + 1);
+                outFile.WriteLine("Trainer ID");
+                Console.SetCursorPosition(90, top + 1);
+                outFile.WriteLine("Trainer Name");
+                Console.SetCursorPosition(110, top + 1);
+                outFile.WriteLine("Status");
+
+                (left, top) = Console.GetCursorPosition();
+                numSessionsPrinted = 0;
+                for (int i = 0; i < Booking.GetCount(); i++){
+                    if (bookings[i].GetCustomerEmail() == email){
+                        //outFile.WriteLine(bookings[i].ToStringFormatted());
+
+                        Console.SetCursorPosition(0, numSessionsPrinted + top);
+                        outFile.Write(bookings[i].GetSessionID());
+                        Console.SetCursorPosition(15, numSessionsPrinted + top);
+                        outFile.Write(bookings[i].GetCustomerName());
+                        Console.SetCursorPosition(35, numSessionsPrinted + top);
+                        outFile.Write(bookings[i].GetCustomerEmail());
+                        Console.SetCursorPosition(55, numSessionsPrinted + top);
+                        outFile.Write(bookings[i].GetTrainingDate());
+                        Console.SetCursorPosition(75, numSessionsPrinted + top);
+                        outFile.Write(bookings[i].GetTrainerID());
+                        Console.SetCursorPosition(90, numSessionsPrinted + top);
+                        outFile.Write(bookings[i].GetTrainerName());
+                        Console.SetCursorPosition(110, numSessionsPrinted + top);
+                        outFile.Write(bookings[i].GetStatus());
+
+                        numSessionsPrinted++;
+                    }
+                }
+
+                outFile.Close();
+            }
         }
 
         public void SessionsPerCustomer(){
             string curr = bookings[0].GetCustomerName();
-            int count = 1;
+            int count = 0;
             for (int i = 0; i < Booking.GetCount(); i++){
                 if (bookings[i].GetCustomerName() == curr){
                     count ++;
@@ -75,6 +125,75 @@ namespace mis_221_pa_5_clmiller16
                 }
             }
             ProcessBreak(curr, count);
+
+            System.Console.WriteLine("\nWould you like to save this report to a file?");
+            string response = Console.ReadLine();
+            if (response.ToUpper() == "YES"){
+                System.Console.WriteLine("What is the name of the file you want to save it to?");
+                string fileName = Console.ReadLine();
+
+                StreamWriter outFile = new StreamWriter(fileName);
+
+                outFile.WriteLine("\nSessions by Customer then by Date:");
+                (int left, int top) = Console.GetCursorPosition();
+                //Console.SetCursorPosition(0,top + 1);
+                outFile.Write("Session ID\t");
+                //Console.SetCursorPosition(15, top + 1);
+                outFile.Write("Customer Name\t");
+                //Console.SetCursorPosition(35, top + 1);
+                outFile.Write("Customer Email\t");
+                //Console.SetCursorPosition(55, top + 1);
+                outFile.Write("Date\t");
+                //Console.SetCursorPosition(75, top + 1);
+                outFile.Write("Trainer ID\t");
+                //Console.SetCursorPosition(90, top + 1);
+                outFile.Write("Trainer Name\t");
+                //Console.SetCursorPosition(110, top + 1);
+                outFile.Write("Status\t");
+
+                (left, top) = Console.GetCursorPosition();
+                int numSessionsPrinted = 0;
+                for (int i = 0; i < Booking.GetCount(); i++){
+                    //outFile.WriteLine(bookings[i].ToStringFormatted());
+
+                    //Console.SetCursorPosition(0, numSessionsPrinted + top);
+                    outFile.WriteLine(bookings[i].GetSessionID());
+                    //Console.SetCursorPosition(15, numSessionsPrinted + top);
+                    outFile.WriteLine(bookings[i].GetCustomerName());
+                    //Console.SetCursorPosition(35, numSessionsPrinted + top);
+                    outFile.WriteLine(bookings[i].GetCustomerEmail());
+                    //Console.SetCursorPosition(55, numSessionsPrinted + top);
+                    outFile.WriteLine(bookings[i].GetTrainingDate());
+                    //Console.SetCursorPosition(75, numSessionsPrinted + top);
+                    outFile.WriteLine(bookings[i].GetTrainerID());
+                    //Console.SetCursorPosition(90, numSessionsPrinted + top);
+                    outFile.WriteLine(bookings[i].GetTrainerName());
+                    //Console.SetCursorPosition(110, numSessionsPrinted + top);
+                    outFile.WriteLine(bookings[i].GetStatus());
+
+                    numSessionsPrinted++;
+                }
+                
+                outFile.WriteLine();
+                outFile.WriteLine("# of Sessions Booked Per Customer:");
+
+                curr = bookings[0].GetCustomerName();
+                count = 0;
+                for (int i = 0; i < Booking.GetCount(); i++){
+                    if (bookings[i].GetCustomerName() == curr){
+                        count ++;
+                    } else {
+                        //ProcessBreakFile(ref curr, ref count, bookings[i]);
+                        outFile.WriteLine($"{curr}: \t {count}");
+                        curr = bookings[i].GetCustomerName();
+                        count = 1;
+                    }
+                }
+                //ProcessBreakFile(curr, count);
+                outFile.WriteLine($"{curr}: \t {count}");
+
+                outFile.Close();
+            }
         }
 
         public void ProcessBreak(ref string curr, ref int count, Booking newBooking){
@@ -84,6 +203,16 @@ namespace mis_221_pa_5_clmiller16
         }
 
         public void ProcessBreak(string curr, int count){
+            System.Console.WriteLine($"{curr}: \t {count}");
+        }
+
+        public void ProcessBreakFile(ref string curr, ref int count, Booking newBooking){
+            System.Console.WriteLine($"{curr}: \t {count}");
+            curr = newBooking.GetCustomerName();
+            count = 1;
+        }
+
+        public void ProcessBreakFile(string curr, int count){
             System.Console.WriteLine($"{curr}: \t {count}");
         }
 
