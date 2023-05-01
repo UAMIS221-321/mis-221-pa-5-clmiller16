@@ -115,7 +115,7 @@ static string[] GetMenuVersion(string menuVersion){
         string[] options = {"1:   View All Available Sessions", "2:   View Sessions By Trainer", "3:   Book a Session", "4:   Complete/Cancel a Session", "5:   Exit"};
         return options;
     } else if (menuVersion == "report"){
-        string[] options = {"1:   Individual Customer Sessions", "2:   Historical Customer Sessions", "3:   Historical Revenue Report", "4:   View All Customer Data", "5:   Exit"};
+        string[] options = {"1:   Individual Customer Sessions", "2:   Historical Customer Sessions", "3:   Historical Revenue Report", "4:   Monthly Revenue Report", "5:   Yearly Revenue Report", "6:   View All Customer Data", "7:   Exit"};
         return options;
     } else {
         string[] options = {"string"};
@@ -882,7 +882,7 @@ static void ViewBookedSessions(){
 //_________________________________________________________________________________________________________________________
 static void RunReports(){
     int selectedIndex = Run("report");
-    while (selectedIndex != 4){
+    while (selectedIndex != 6){
         RouteReports(selectedIndex);
         selectedIndex = Run("report");
     }
@@ -909,12 +909,14 @@ static void DisplayReportMenu(){
     Console.WriteLine("1:   Individual Customer Sessions");
     Console.WriteLine("2:   Historical Customer Sessions");
     Console.WriteLine("3:   Historical Revenue Report");
-    Console.WriteLine("4:   View All Customer Data");
-    Console.WriteLine("5:   Exit");
+    Console.WriteLine("4:   Monthly Revenue Report");
+    Console.WriteLine("5:   Yearly Revenue Report");
+    Console.WriteLine("6:   View All Customer Data");
+    Console.WriteLine("7:   Exit");
 }
 
 static bool ValidMenuChoiceReport(string userInput){
-    if (userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4" || userInput == "5"){
+    if (userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4" || userInput == "5" || userInput == "6" || userInput == "7"){
         return true;
     } else return false;
 }
@@ -929,6 +931,10 @@ static void RouteReports(int userInput){
         HistoricalCustomerSessions();
     } else if (userInput == 2){
         HistoricalRevenueReport();
+    } else if (userInput == 3){
+        MonthlyRevenueReport();
+    } else if (userInput == 4){
+        YearlyRevenueReport();
     } else ViewCustomerData();
 }
 
@@ -1067,9 +1073,59 @@ static void HistoricalRevenueReport(){
 
     utility.SortByDate();
 
+    System.Console.WriteLine("MONTHLY REPORT");
+    report.RevenueByMonth();
+
+    System.Console.WriteLine("\n\nMONTH AND YEAR REPORT");
+    report.RevenueByMonthAndYear();
+    //report.RevenueByYear();
+    //report.RevenueByMonth();
+
+    System.Console.WriteLine("\nPress any key to continue");
+    Console.ReadKey();
+}
+
+
+static void MonthlyRevenueReport(){
+    Booking[] bookings = new Booking[100];
+    BookingUtility utility = new BookingUtility(bookings);
+    BookingReport report = new BookingReport(bookings);
+
+    utility.GetAllBookingsFromFile();
+    int count = Booking.GetCount();
+
+    utility.SortByDate();
+
+    //System.Console.WriteLine("MONTHLY REPORT");
+    report.RevenueByMonth();
+
+    //System.Console.WriteLine("\n\nMONTH AND YEAR REPORT");
+    //report.RevenueByMonthAndYear();
+    //report.RevenueByYear();
+    //report.RevenueByMonth();
+
+    System.Console.WriteLine("\nPress any key to continue");
+    Console.ReadKey();
+}
+
+static void YearlyRevenueReport(){
+    Booking[] bookings = new Booking[100];
+    BookingUtility utility = new BookingUtility(bookings);
+    BookingReport report = new BookingReport(bookings);
+
+    utility.GetAllBookingsFromFile();
+    int count = Booking.GetCount();
+
+    utility.SortByDate();
+
+    //System.Console.WriteLine("MONTHLY REPORT");
+    //report.RevenueByMonth();
+
+    //System.Console.WriteLine("\n\nMONTH AND YEAR REPORT");
     //report.RevenueByMonthAndYear();
     report.RevenueByYear();
+    //report.RevenueByMonth();
 
-    System.Console.WriteLine("Press any key to continue");
+    System.Console.WriteLine("\nPress any key to continue");
     Console.ReadKey();
 }

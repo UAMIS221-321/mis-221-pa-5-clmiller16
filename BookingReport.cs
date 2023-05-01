@@ -133,35 +133,86 @@ namespace mis_221_pa_5_clmiller16
             }
             ProcessYearBreak(currYear, revYearTotal);
         }
-        public void RevenueByMonthAndYear(){
-            int currYear = bookings[0].GetYear();
-            int revYearTotal = bookings[0].GetCost();
+        public void RevenueByMonth(){
+            //int currYear = bookings[0].GetYear();
+            int currMonth = bookings[0].GetMonth();
+            //int revYearTotal = bookings[0].GetCost();
+            int revMonthTotal = bookings[0].GetCost();
 
             System.Console.WriteLine();
-            System.Console.WriteLine(currYear.ToString());
+            //System.Console.WriteLine(currYear.ToString());
+            System.Console.WriteLine("Month- " + currMonth.ToString());
 
             //System.Console.WriteLine(bookings[0].ToStringFormatted());
 
             for (int i = 1; i < Booking.GetCount(); i++){
-                if (currYear == bookings[i].GetYear() && bookings[i].GetStatus() == "completed"){
+                if (currMonth == bookings[i].GetMonth() && bookings[i].GetStatus() == "completed"){
                     // System.Console.WriteLine(bookings[i].ToStringFormatted());
                     // System.Console.WriteLine($"${bookings[i].GetCost()} \n");
-                    revYearTotal += bookings[i].GetCost();
+                    revMonthTotal += bookings[i].GetCost();
 
-                } else ProcessYearBreak(ref revYearTotal, bookings[i], ref currYear);
+                    // if(currMonth == bookings[i].GetMonth()){
+                    //     revMonthTotal += bookings[i].GetCost();
+                    // } else ProcessMonthBreak(ref revMonthTotal, bookings[i], ref currMonth);
+
+                } else{
+                    ProcessMonthBreak(ref revMonthTotal, bookings[i], ref currMonth);
+                } 
 
             }
-            ProcessYearBreak(currYear, revYearTotal);
+            // ProcessYearBreak(currYear, revYearTotal);
+            ProcessMonthBreak(currMonth, revMonthTotal);
+        }
+
+        public void RevenueByMonthAndYear(){
+            int currYear = bookings[0].GetYear();
+            int currMonth = bookings[0].GetMonth();
+            int revYearTotal = bookings[0].GetCost();
+            int revMonthTotal = bookings[0].GetCost();
+
+            System.Console.WriteLine();
+            System.Console.WriteLine(currYear.ToString());
+            System.Console.WriteLine(currMonth.ToString());
+
+            //System.Console.WriteLine(bookings[0].ToStringFormatted());
+
+            for (int i = 1; i < Booking.GetCount(); i++){
+                if (currMonth == bookings[i].GetMonth() && bookings[i].GetStatus() == "completed"){
+                    // System.Console.WriteLine(bookings[i].ToStringFormatted());
+                    // System.Console.WriteLine($"${bookings[i].GetCost()} \n");
+                    revMonthTotal += bookings[i].GetCost();
+
+                    // if(currMonth == bookings[i].GetMonth()){
+                    //     revMonthTotal += bookings[i].GetCost();
+                    // } else ProcessMonthBreak(ref revMonthTotal, bookings[i], ref currMonth);
+
+                    if (currYear == bookings[i].GetYear()){
+                        revYearTotal += bookings[i].GetCost();
+                    } else ProcessYearBreak(ref revYearTotal, bookings[i], ref currYear);
+
+                } else{
+                    ProcessMonthBreak(ref revMonthTotal, bookings[i], ref currMonth);
+                } 
+
+            }
+            // ProcessYearBreak(currYear, revYearTotal);
+            ProcessMonthBreak(currMonth, revMonthTotal);
         }
 
 
-        public void ProcessMonthBreak(ref int revTotal, Booking newBooking, ref int currMonth){
+        public void ProcessMonthBreak(ref int revMonthTotal, Booking newBooking, ref int currMonth){
             //System.Console.WriteLine(newBooking.ToStringFormatted());
 
-            currMonth = newBooking.GetMonth();
-            revTotal = 0;
+            System.Console.WriteLine($"Monthy Revenue: ${revMonthTotal}");
 
-            System.Console.WriteLine(currMonth);
+            currMonth = newBooking.GetMonth();
+            revMonthTotal = newBooking.GetCost();
+
+            System.Console.WriteLine("Month- " + currMonth.ToString());
+        }
+
+        public void ProcessMonthBreak(int currMonth, int revMonthTotal){
+            System.Console.WriteLine($"Monthly Revenue: ${revMonthTotal}");
         }
         public void ProcessYearBreak(ref int revYearTotal, Booking newBooking, ref int currYear){
             //System.Console.WriteLine(newBooking.ToStringFormatted());
