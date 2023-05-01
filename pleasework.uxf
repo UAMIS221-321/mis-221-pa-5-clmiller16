@@ -1,4 +1,4 @@
-<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text>Space for diagram notes:</help_text><element><id>UMLClass</id><coordinates><x>10</x><y>10</y><w>210</w><h>390</h></coordinates><panel_attributes>Trainer
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text>Space for diagram notes:</help_text><element><id>UMLClass</id><coordinates><x>0</x><y>0</y><w>420</w><h>390</h></coordinates><panel_attributes>Trainer
 --
 -ID: int
 -name: string
@@ -23,7 +23,7 @@
 +GetCount(): int
 +IncCount(): void
 +ToStringFormatted(): string
-+ToFile(): string</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>560</x><y>10</y><w>210</w><h>550</h></coordinates><panel_attributes>Booking
++ToFile(): string</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1150</x><y>0</y><w>880</w><h>550</h></coordinates><panel_attributes>Booking
 --
 -sessionID: int
 -customerName: string
@@ -59,7 +59,7 @@
 +GetCount(): int
 +IncCount(): void
 +ToStringFormatted(): string
-+ToFile(): string</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>240</x><y>10</y><w>290</w><h>520</h></coordinates><panel_attributes>Listing
++ToFile(): string</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>440</x><y>0</y><w>680</w><h>520</h></coordinates><panel_attributes>Listing
 --
 -ID: int
 -name: string
@@ -93,4 +93,67 @@
 +GetCount(): int
 +IncCount(): void
 +ToStringFormatted(): string
-+ToFile(): string</panel_attributes><additional_attributes></additional_attributes></element></diagram>
++ToFile(): string</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>210</x><y>400</y><w>210</w><h>190</h></coordinates><panel_attributes>TrainerUtility
+--
+-trainers: Trainer[]
+--
++TrainerUtility(trainers: Trainer[])
++GetAllTrainersFromFIle(): void
++AddTrainer(max: int): void
++Save(): void
+-Find(searchVal: int): int
+-FindBinary(searchVal: int): int
++UpdateTrainer(): void
++DeleteTrainer(): string</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>900</x><y>530</y><w>210</w><h>220</h></coordinates><panel_attributes>ListingUtility
+--
+-listings: Listing[]
+--
++ListingUtility(listings: Listing[])
++GetAllListingsFromFIle(): void
++AddListing(max: int): void
++Save(): void
+-Find(searchVal: int): int
++UpdateListing(): void
+-ValidInputTaken(userInput: string): string
++DeleteListing(): void
++DeleteListingsForTrainer(trainerName: string): void
++SetListingTaken(stringUserInput: string): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1750</x><y>570</y><w>270</w><h>360</h></coordinates><panel_attributes>BookingUtility
+--
+-bookings: Booking[]
+--
++BookingUtility(bookings: Booking[])
++GetAllBookingsFromFIle(): void
++AddBooking(): void
++BookSession(stringUserInput: string): void
++Save(): void
++Save2(): void
+-Find(searchVal: int): int
++UpdateBooking(): void
++SortByEmail(): void
++SortByCustomerNameThenByDate(): void
++SortByDate(): void
++Swap(x: int, y: int): void
++CompleteOrCancel(): void
+-GetSubMenuChoice(): string
+-DisplaySubMenu(): void
+-ValidSubMenuChoice(userInput: string): bool
+-RouteSubMenu(userInput: string): void
+-CompleteAppointment(): void
+-CancelAppointment(): void
+-NoShowAppointment(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1210</x><y>570</y><w>500</w><h>250</h></coordinates><panel_attributes>BookingReport
+--
+-bookings: Booking[]
+--
++BookingReport(bookings: Booking[])
++PrintAllBookings(): void
++SessionsForCustomer(): void
++SessionsPerCustomer(): void
++ProcessBreak(curr: ref string, count: ref int, newBooking: Booking): void
++ProcessBreak(curr: string, count: int): void
++RevenueByYear(): void
++RevenueByMonth(): void
++RevenueByMonthAndYear(): void
++ProcessMonthBreak(revMonthTotal: ref int, newBooking: Booking, currMonth: ref int)
++ProcessMonthBreak(currMonth: int, revMonthTotal: int)
++ProcessYearBreak(revYearTotal: ref int, newBooking: Booking, currYear: ref int)
++ProcessYearBreak(currYear: int, revYearTotal: int)</panel_attributes><additional_attributes></additional_attributes></element></diagram>

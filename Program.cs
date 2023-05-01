@@ -211,9 +211,9 @@ static void Route(int userInput, string currentUser){
     } else if (userInput == 1){
         ManageListings(currentUser);
     } else if (userInput == 2){
-        ManageBookings();
+        ManageBookings(currentUser);
     } else {
-        RunReports();
+        RunReports(currentUser);
     }
 }
 
@@ -228,7 +228,7 @@ static void ManageTrainers(string currentUser){
         }
     } else{
         System.Console.WriteLine("\nYou do not have access to this\n");
-        System.Console.WriteLine("(Press any key to continue)");
+        System.Console.WriteLine("Press any key to continue");
         Console.ReadKey();
     }
 
@@ -535,12 +535,19 @@ static void DeleteListing(){
 
 // _______________________________________________________________________________
 
-static void ManageBookings(){
-    int selectedIndex = Run("booking");
-    while (selectedIndex != 4){
-        RouteBooking(selectedIndex);
-        selectedIndex = Run("booking");
-    }    
+static void ManageBookings(string currentUser){
+    if(currentUser.ToUpper() != "TRAINER"){
+        int selectedIndex = Run("booking");
+        while (selectedIndex != 4){
+            RouteBooking(selectedIndex);
+            selectedIndex = Run("booking");
+        }   
+    } else{
+        System.Console.WriteLine("\nPlease re-enter the app as a customer");
+        System.Console.WriteLine("\nPress any key to continue");
+        Console.ReadKey();
+    }
+ 
 }
 
 static string GetBookingChoice(){
@@ -880,12 +887,19 @@ static void ViewBookedSessions(){
 // report.IDByEmail();
 
 //_________________________________________________________________________________________________________________________
-static void RunReports(){
-    int selectedIndex = Run("report");
-    while (selectedIndex != 6){
-        RouteReports(selectedIndex);
-        selectedIndex = Run("report");
+static void RunReports(string currentUser){
+    if (currentUser.ToUpper() == "TRAINER"){
+        int selectedIndex = Run("report");
+        while (selectedIndex != 6){
+            RouteReports(selectedIndex);
+            selectedIndex = Run("report");
+        }        
+    } else {
+        System.Console.WriteLine("\nYou do not have access to this\n");
+        System.Console.WriteLine("Press any key to continue");
+        Console.ReadKey();
     }
+
 }
 
 static string GetReportChoice(){
