@@ -1,0 +1,96 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text>Space for diagram notes:</help_text><element><id>UMLClass</id><coordinates><x>10</x><y>10</y><w>210</w><h>390</h></coordinates><panel_attributes>Trainer
+--
+-ID: int
+-name: string
+-address: string
+-email: string
+-deleted: bool
+-count: int
+--
++Trainer()
++Trainer(ID: int, name: string, address: string, email: string, deleted: bool)
++SetID(ID: int): void
++GetID(): int
++SetName(name: string): void
++GetName(): string
++SetAddress(address: string): void
++GetAddress(): string
++SetEmail(Email: string): void
++GetEmail(): string
++SetDeleted(deleted: bool): void
++GetDeleted(): bool
++SetCount(count: int): void
++GetCount(): int
++IncCount(): void
++ToStringFormatted(): string
++ToFile(): string</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>560</x><y>10</y><w>210</w><h>550</h></coordinates><panel_attributes>Booking
+--
+-sessionID: int
+-customerName: string
+-customerEmail: string
+-trainingDate: DateOnly
+-trainerID: int
+-trainerName: string
+-status: string
+-cost: int
+-count: int
+--
++Booking()
++Booking(status: string, sessionID: int, customerName: string, customerEmail: string, trainingDate: DateOnly, trainerID: int, trainerName: string, cost: int)
++SetSessionID(ID: int): void
++GetSessionID(): int
++SetCustomerName(name: string): void
++GetCustomerName(): string
++SetCustomerEmail(name: string): void
++GetCustomerEmail(): string
++SetTrainingDate(trainingDate: DateOnly): void
++GetTrainingDate(): DateOnly
++GetMonth(): int
++GetYear(): int
++SetTrainerID(trainerID: int): void
++GetTrainerID(): int
++SetTrainerName(trainerName: string): void
++GetTrainerName(): string
++SetStatus(status: string): void
++GetStatus(): string
++SetCost(cost: int): void
++GetCost(): int
++SetCount(count: int): void
++GetCount(): int
++IncCount(): void
++ToStringFormatted(): string
++ToFile(): string</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>240</x><y>10</y><w>290</w><h>520</h></coordinates><panel_attributes>Listing
+--
+-ID: int
+-name: string
+-date: DateOnly
+-time: string
+-cost: int
+-taken: string
+-trainerID: int
+-deleted: bool
+-count: int
+--
++Listing()
++Listing(ID: int, name: string, date: DateOnly, time: string, cost: int, taken: string, trainerID: int, deleted: bool, count: int)
++SetID(ID: int): void
++GetID(): int
++SetName(name: string): void
++GetName(): string
++SetDate(date: DateOnly): void
++GetDate(): DateOnly
++SetTime(time: string): void
++GetTime(): string
++SetCost(cost: int): void
++GetCost(): int
++SetTaken(taken: string): void
++GetTaken(): string
++SetDeleted(deleted: bool): void
++GetDeleted(): bool
++SetTrainerID(trainer: int): void
++GetTrainerID(): int
++SetCount(count: int): void
++GetCount(): int
++IncCount(): void
++ToStringFormatted(): string
++ToFile(): string</panel_attributes><additional_attributes></additional_attributes></element></diagram>

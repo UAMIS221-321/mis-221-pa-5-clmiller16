@@ -638,7 +638,7 @@ static void ViewAvailableSessionsCursorPosition(){
     Console.SetCursorPosition(55, top + 1);
     System.Console.WriteLine("Time");
     Console.SetCursorPosition(75, top + 1);
-    System.Console.WriteLine("Cost");
+    System.Console.WriteLine("Cost ($)");
     Console.SetCursorPosition(85, top + 1);
     System.Console.WriteLine("Status");
     Console.SetCursorPosition(105, top + 1);
