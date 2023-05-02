@@ -387,15 +387,15 @@ namespace mis_221_pa_5_clmiller16
 
             System.Console.WriteLine("\nWhat type of workout would you like to complete?\n");
             System.Console.WriteLine("Options Include:");
-            System.Console.WriteLine("1. Dunk Contest\n2. Excercise\n3. 1v1");
+            System.Console.WriteLine("1. Dunk Contest\n2. Exercise\n3. 1v1");
             string workoutType = Console.ReadLine();
 
             if (workoutType.ToUpper() == "DUNK CONTEST" || workoutType == "1"){
                 DunkContest();
-            } else if (workoutType.ToUpper() == "EXCERCISE" || workoutType == "2"){
-                Excercise();
+            } else if (workoutType.ToUpper() == "EXERCISE" || workoutType == "2"){
+                Exercise();
             } else if (workoutType.ToUpper() == "1V1" || workoutType == "3"){
-
+                oneVSone();
             }
             
         }
@@ -444,27 +444,27 @@ namespace mis_221_pa_5_clmiller16
                 if (dunkStyle == "1"){
                     System.Console.WriteLine("\nSlam Dunk!\nPress any key to see what score the judges awarded you\n");
                     Console.ReadKey();
-                    System.Console.WriteLine("Score: 1");
+                    System.Console.WriteLine("Score: 10");
                 } else if (dunkStyle == "2"){
                     System.Console.WriteLine("\nSlam Dunk!\nPress any key to see what score the judges awarded you\n");
                     Console.ReadKey();
-                    System.Console.WriteLine("Score: 2");
+                    System.Console.WriteLine("Score: 9.5");
                 } else if (dunkStyle == "3"){
                     System.Console.WriteLine("\nSlam Dunk!\nPress any key to see what score the judges awarded you\n");
                     Console.ReadKey();
-                    System.Console.WriteLine("Score: 3");
+                    System.Console.WriteLine("Score: 9");
                 } else if (dunkStyle == "4"){
                     System.Console.WriteLine("\nSlam Dunk!\nPress any key to see what score the judges awarded you\n");
                     Console.ReadKey();
-                    System.Console.WriteLine("Score: 4");
+                    System.Console.WriteLine("Score: 8.5");
                 } else if (dunkStyle == "5"){
                     System.Console.WriteLine("\nSlam Dunk!\nPress any key to see what score the judges awarded you\n");
                     Console.ReadKey();
-                    System.Console.WriteLine("Score: 5");
+                    System.Console.WriteLine("Score: 8");
                 } else if (dunkStyle == "6"){
                     System.Console.WriteLine("\nSlam Dunk!\nPress any key to see what score the judges awarded you\n");
                     Console.ReadKey();
-                    System.Console.WriteLine("Score: 6");
+                    System.Console.WriteLine("Score: 7.5");
                 } else if (dunkStyle == "7"){
                     System.Console.WriteLine("\nSlam Dunk!\nPress any key to see what score the judges awarded you\n");
                     Console.ReadKey();
@@ -487,7 +487,7 @@ namespace mis_221_pa_5_clmiller16
             inFile.Close();
         }
 
-        private void Excercise(){
+        private void Exercise(){
             Console.Clear();
 
             System.Console.WriteLine("What type of workout would you like to complete?");
@@ -521,6 +521,56 @@ namespace mis_221_pa_5_clmiller16
             }
 
             Console.ReadKey();
+        }
+
+        private void oneVSone(){
+            Console.Clear();
+
+            System.Console.WriteLine("Who would you like to play 1v1 against?");
+            System.Console.WriteLine("1. Zach Lavine\n2. DeMar DeRozan\n3. Michael Jordan");
+
+            string response = Console.ReadLine();
+            Random rnd = new Random();
+            int difficulty = -1;
+
+            if (response.ToUpper() == "1" || response.ToUpper() == "ZACH LAVINE"){
+                ShowGraphic();
+                difficulty = rnd.Next(1,10);
+                if (difficulty == 1){
+                    System.Console.WriteLine("You lost the game :(");
+                } else{
+                    System.Console.WriteLine("You beat Zach Lavine!");
+                }
+            } else if (response.ToUpper() == "2" || response.ToUpper() == "DEMAR DEROZAN"){
+                ShowGraphic();
+                difficulty = rnd.Next(1,4);
+                if (difficulty == 1){
+                    System.Console.WriteLine("You lost the game :(");
+                } else{
+                    System.Console.WriteLine("You beat DeMar DeRozan!");
+                }
+            } else if (response.ToUpper() == "3" || response.ToUpper() == "MICHAEL JORDAN"){
+                ShowGraphic();
+                difficulty = rnd.Next(1,3);
+                if (difficulty == 1){
+                    System.Console.WriteLine("You lost the game :(");
+                } else{
+                    System.Console.WriteLine("You beat Michael Jordn! Please come speak to the creater of this app, he would like to offer you a cookie.");
+                }
+            }
+
+            Console.ReadKey();
+        }
+
+        private void ShowGraphic(){
+            StreamReader inFile = new StreamReader("onevone.txt");
+            string line = inFile.ReadLine();
+            while (line!=null){
+                System.Console.WriteLine(line);
+                line = inFile.ReadLine();
+            }
+
+            inFile.Close();
         }
 
         private void CancelAppointment(){
