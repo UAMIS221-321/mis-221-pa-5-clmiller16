@@ -3,7 +3,7 @@ Console.Clear();
 
 Console.CursorVisible = true;
 
-
+//displays a black and red Chicago Bulls Logo
 StreamReader inFile = new StreamReader("bulls.txt");
 string line = inFile.ReadLine();
 while (line != null){
@@ -19,22 +19,22 @@ inFile.Close();
 
 System.Console.WriteLine("\nWelcome to Train Like a Champion- The Exclusive Trainers for the Chicago Bulls! \n\nAre you a customer or a trainer?");
 string currentUser = Console.ReadLine();
-if(currentUser == "t"){
+if(currentUser == "t"){ // checks if a trainer using app
     currentUser = "trainer";
 }
-if(currentUser == "c"){
+if(currentUser == "c"){ //checks if a customer using app
     currentUser = "customer";
 }
-while (currentUser.ToUpper() != "TRAINER" && currentUser.ToUpper() != "CUSTOMER"){
+while (currentUser.ToUpper() != "TRAINER" && currentUser.ToUpper() != "CUSTOMER"){ // must either enter a trainer or customer
     System.Console.WriteLine("**Please enter either customer or trainer**");
     currentUser = Console.ReadLine();
 }
 
 if (currentUser.ToUpper() == "TRAINER"){
-    System.Console.WriteLine("What is your password?");
+    System.Console.WriteLine("What is your password?"); // password validation for trainers
     string password = Console.ReadLine();
     string contents = File.ReadAllText("passwords.txt");
-    while (!contents.Contains(password))
+    while (!contents.Contains(password)) // checks if the password entered is in the passwords file
     {
         System.Console.WriteLine("Incorrect Password- Please try again");
         password = Console.ReadLine();
@@ -44,32 +44,7 @@ if (currentUser.ToUpper() == "TRAINER"){
     Console.ReadKey();
 }
 
-
-
-// ATTEMPT AT USING OOP FOR THE USER TYPE
-// User currentUser = new User();
-// currentUser.SetUserType(user);
-
-// System.Console.WriteLine(currentUser.GetUserType());
-
-// Console.ReadKey();
-
-// int selectedIndex = 0;
-// string[] options = {"1:   Trainer Info    ", "2:   Session Listings", "3:   Bookings        ", "4:   Run Reports     ", "5:   Exit App        "};
-
-// int length = options.Length;
-
-
-
-// selectedIndex = Run(ref selectedIndex, options, length);
-
-
-// string userInput = GetMenuChoice();
-// while (userInput != "5"){
-//     Route(userInput, currentUser);
-//     userInput = GetMenuChoice();
-// }
-
+//Main Menu
 int selectedIndex = Run("main");
 while (selectedIndex != 4){
     Route(selectedIndex, currentUser);
@@ -77,7 +52,7 @@ while (selectedIndex != 4){
 }
 
 
-
+// arrow key menu system
 static int Run(string menuVersion){
 
     int selectedIndex = 0;
@@ -117,6 +92,7 @@ static int Run(string menuVersion){
     return selectedIndex;
 }
 
+// different menu options stored in an array for the arrow key menu system
 static string[] GetMenuVersion(string menuVersion){
     if (menuVersion == "main"){
         string[] options = {"1:   Trainer Info    ", "2:   Session Listings", "3:   Bookings        ", "4:   Run Reports     ", "5:   Exit App        "};
@@ -145,14 +121,14 @@ static string[] GetMenuVersion(string menuVersion){
     }
 }
 
-
+//displays the options for arrow key menu system
 static void DisplayOptions(ref int selectedIndex, string[] options, string menuVersion){
 
     for (int i = 0; i < options.Length; i++){
         string currentOption = options[i];
         string prefix;
 
-        if (i == selectedIndex){
+        if (i == selectedIndex){ // highlights the selected menu choice
             prefix = " ";
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.BackgroundColor = ConsoleColor.Black;
@@ -166,6 +142,7 @@ static void DisplayOptions(ref int selectedIndex, string[] options, string menuV
     }
     Console.ResetColor();
 
+    // displays the content either in the trainers or listings file while in the trainer or listing arrowkey menu
     if (menuVersion == "listing"){
         DisplayListingMenu();
     } else if (menuVersion == "trainer"){
@@ -175,7 +152,7 @@ static void DisplayOptions(ref int selectedIndex, string[] options, string menuV
 
 }
 
-if (currentUser.ToUpper() != "TRAINER"){
+if (currentUser.ToUpper() != "TRAINER"){ //displays a lifter ascii for trainers upon exit
     StreamReader inFile2 = new StreamReader("lifter.txt");
     string line2 = inFile2.ReadLine();
     while (line2 != null){
@@ -198,8 +175,8 @@ if (currentUser.ToUpper() != "TRAINER"){
     //System.Console.WriteLine("___________________________________________________________________\n");
 
     Console.CursorVisible = true;
-} else {
-    StreamReader inFile2 = new StreamReader("basketball.txt");
+} else { 
+    StreamReader inFile2 = new StreamReader("basketball.txt"); // displays a basketball ascii for customers
         string line2 = inFile2.ReadLine();
         while (line2 != null){
             Console.ResetColor();
@@ -227,39 +204,40 @@ if (currentUser.ToUpper() != "TRAINER"){
 
 
 
-// methods
-static string GetMenuChoice(){
-    DisplayMenu();
-    string userInput = Console.ReadLine();
+//NOT USED- WAS FOR OLD MENU SYSTEM
+// static string GetMenuChoice(){
+//     DisplayMenu();
+//     string userInput = Console.ReadLine();
 
-    while (!ValidMenuChoice(userInput)){
-        Console.WriteLine("Invalid menu choice.  Please Enter a Valid Menu Choice");
-        Console.WriteLine("Press any key to continue....");
-        Console.ReadKey();
+//     while (!ValidMenuChoice(userInput)){
+//         Console.WriteLine("Invalid menu choice.  Please Enter a Valid Menu Choice");
+//         Console.WriteLine("Press any key to continue....");
+//         Console.ReadKey();
 
-        DisplayMenu();
-        userInput = Console.ReadLine();
-    }
+//         DisplayMenu();
+//         userInput = Console.ReadLine();
+//     }
 
-    return userInput;
-}
+//     return userInput;
+// }
 
 
-static void DisplayMenu(){
-    Console.Clear();
-    Console.WriteLine("1:   Trainer Info");
-    Console.WriteLine("2:   Session Listings");
-    Console.WriteLine("3:   Bookings");
-    Console.WriteLine("4:   Run Reports");
-    Console.WriteLine("5:   Exit App");
-}
+// static void DisplayMenu(){
+//     Console.Clear();
+//     Console.WriteLine("1:   Trainer Info");
+//     Console.WriteLine("2:   Session Listings");
+//     Console.WriteLine("3:   Bookings");
+//     Console.WriteLine("4:   Run Reports");
+//     Console.WriteLine("5:   Exit App");
+// }
 
-static bool ValidMenuChoice(string userInput){
-    if (userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4" || userInput == "5"){
-        return true;
-    } else return false;
-}
+// static bool ValidMenuChoice(string userInput){
+//     if (userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4" || userInput == "5"){
+//         return true;
+//     } else return false;
+// }
 
+// for main menu 
 static void Route(int userInput, string currentUser){
 
     if (userInput == 0){
@@ -276,8 +254,8 @@ static void Route(int userInput, string currentUser){
 // MANAGE TRAINERS
 static void ManageTrainers(string currentUser){
 
-    if (currentUser.ToUpper() == "TRAINER"){
-        int selectedIndex = Run("trainer");
+    if (currentUser.ToUpper() == "TRAINER"){ // only allows trainers to use this part of the app
+        int selectedIndex = Run("trainer"); // arrow key menu system 
         while (selectedIndex != 3){
             RouteTrainer(selectedIndex);
             selectedIndex = Run("trainer");
@@ -290,22 +268,24 @@ static void ManageTrainers(string currentUser){
 
 }
 
-static string GetTrainerChoice(){
-    DisplayTrainerMenu();
-    string userInput = Console.ReadLine();
+// static string GetTrainerChoice(){
+//     DisplayTrainerMenu();
+//     string userInput = Console.ReadLine();
 
-    while (!ValidMenuChoiceTrainer(userInput)){
-        Console.WriteLine("Invalid menu choice.  Please Enter a Valid Menu Choice");
-        Console.WriteLine("Press any key to continue....");
-        Console.ReadKey();
+//     while (!ValidMenuChoiceTrainer(userInput)){
+//         Console.WriteLine("Invalid menu choice.  Please Enter a Valid Menu Choice");
+//         Console.WriteLine("Press any key to continue....");
+//         Console.ReadKey();
 
-        DisplayTrainerMenu();
-        userInput = Console.ReadLine();
-    }
+//         DisplayTrainerMenu();
+//         userInput = Console.ReadLine();
+//     }
 
-    return userInput;
-}
+//     return userInput;
+// }
 
+
+// displays all the trainers while in the trainer menu
 static void DisplayTrainerMenu(){
     // Console.Clear();
     // Console.WriteLine("1:   Add Trainer");
@@ -314,11 +294,13 @@ static void DisplayTrainerMenu(){
     // Console.WriteLine("4:   Exit");
     // System.Console.WriteLine();
 
+    //Setup
     Trainer[] trainers = new Trainer[100];
     TrainerUtility utility = new TrainerUtility(trainers);
     utility.GetAllTrainersFromFile();
     int count = Trainer.GetCount();
 
+    //Column Headers
     System.Console.WriteLine("\nTrainers:");
     (int left, int top) = Console.GetCursorPosition();
     Console.SetCursorPosition(0,top + 1);
@@ -332,7 +314,7 @@ static void DisplayTrainerMenu(){
 
     (left, top) = Console.GetCursorPosition();
     int numSessionsPrinted = 0;
-    for (int i = 0; i < count; i++){
+    for (int i = 0; i < count; i++){ // prints each trainer alligned under the appropiate column
         if (trainers[i].GetDeleted() == false){
             //System.Console.WriteLine(trainers[i].ToStringFormatted());
             Console.SetCursorPosition(0, top + numSessionsPrinted);
@@ -351,11 +333,11 @@ static void DisplayTrainerMenu(){
 
 }
 
-static bool ValidMenuChoiceTrainer(string userInput){
-    if (userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4"){
-        return true;
-    } else return false;
-}
+// static bool ValidMenuChoiceTrainer(string userInput){
+//     if (userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4"){
+//         return true;
+//     } else return false;
+// }
 
 static void RouteTrainer(int userInput){
 
@@ -372,6 +354,7 @@ static void RouteTrainer(int userInput){
     }
 }
 
+// to add a trainer
 static void AddTrainer(){
     Trainer[] trainers = new Trainer[100];
     TrainerUtility utility = new TrainerUtility(trainers);
@@ -383,6 +366,7 @@ static void AddTrainer(){
     
     //Trainer.FindMaxID(trainers);
 
+    // finds the max id
     int max = trainers[0].GetID();
     for (int i = 0; i < count; i++){
         if (trainers[i].GetID() > max){
@@ -399,6 +383,7 @@ static void AddTrainer(){
     Console.ReadKey();
 }
 
+// to edit a trainer
 static void EditTrainer(){
     Trainer[] trainers = new Trainer[100];
     TrainerUtility utility = new TrainerUtility(trainers);
@@ -414,6 +399,7 @@ static void EditTrainer(){
     Console.ReadKey();
 }
 
+// to delete a trainer
 static void DeleteTrainer(){
     Trainer[] trainers = new Trainer[100];
     TrainerUtility utility = new TrainerUtility(trainers);
@@ -443,7 +429,7 @@ static void DeleteTrainer(){
 // _____________________________________________________________________
 // _____________________________________________________________________
 
-
+// checks if a trainer using the app, then routes to arrowkey menu system
 static void ManageListings(string currentUser){
     if (currentUser.ToUpper() == "TRAINER"){
         int selectedIndex = Run("listing");
@@ -458,22 +444,23 @@ static void ManageListings(string currentUser){
     }
 }
 
-static string GetListingChoice(){
-    DisplayListingMenu();
-    string userInput = Console.ReadLine();
+// static string GetListingChoice(){
+//     DisplayListingMenu();
+//     string userInput = Console.ReadLine();
 
-    while (!ValidMenuChoiceTrainer(userInput)){
-        Console.WriteLine("Invalid menu choice.  Please Enter a Valid Menu Choice");
-        Console.WriteLine("Press any key to continue....");
-        Console.ReadKey();
+//     while (!ValidMenuChoiceTrainer(userInput)){
+//         Console.WriteLine("Invalid menu choice.  Please Enter a Valid Menu Choice");
+//         Console.WriteLine("Press any key to continue....");
+//         Console.ReadKey();
 
-        DisplayListingMenu();
-        userInput = Console.ReadLine();
-    }
+//         DisplayListingMenu();
+//         userInput = Console.ReadLine();
+//     }
 
-    return userInput;
-}
+//     return userInput;
+// }
 
+// displays all the listings while in the listing menu
 static void DisplayListingMenu(){
     // Console.Clear();
     // Console.WriteLine("1:   Add Listing");
@@ -486,6 +473,7 @@ static void DisplayListingMenu(){
     utility.GetAllListingsFromFile();
     int count = Listing.GetCount();
 
+    // displays column headers
     System.Console.WriteLine("\nListings:");
     (int left, int top) = Console.GetCursorPosition();
     Console.SetCursorPosition(0,top + 1);
@@ -503,6 +491,7 @@ static void DisplayListingMenu(){
     Console.SetCursorPosition(105, top + 1);
     System.Console.WriteLine("Trainer ID");
 
+    // displays column content
     (left, top) = Console.GetCursorPosition();
     int numSessionsPrinted = 0;
     for (int i = 0; i < count; i++){
@@ -542,6 +531,7 @@ static void RouteListing(int userInput){
     }
 }
 
+// to add a listing
 static void AddListing(){
     Listing[] listings = new Listing[100];
     ListingUtility utility = new ListingUtility(listings);
@@ -566,6 +556,7 @@ static void AddListing(){
     Console.ReadKey();
 }
 
+// to edit a listing
 static void EditListing(){
     Listing[] listings = new Listing[100];
     ListingUtility utility = new ListingUtility(listings);
@@ -578,6 +569,7 @@ static void EditListing(){
     Console.ReadKey();
 }
 
+// to delete a listing
 static void DeleteListing(){
     Listing[] listings = new Listing[100];
     ListingUtility utility = new ListingUtility(listings);
@@ -591,6 +583,7 @@ static void DeleteListing(){
 
 // _______________________________________________________________________________
 
+// checks if a trainer using the app then routes to arrowkey menu system
 static void ManageBookings(string currentUser){
     if(currentUser.ToUpper() != "TRAINER"){
         int selectedIndex = Run("booking");
@@ -606,46 +599,46 @@ static void ManageBookings(string currentUser){
  
 }
 
-static string GetBookingChoice(){
-    DisplayBookingMenu();
-    string userInput = Console.ReadLine();
+// static string GetBookingChoice(){
+//     DisplayBookingMenu();
+//     string userInput = Console.ReadLine();
 
-    while (!ValidMenuChoiceBooking(userInput)){
-        Console.WriteLine("Invalid menu choice.  Please Enter a Valid Menu Choice");
-        Console.WriteLine("Press any key to continue....");
-        Console.ReadKey();
+//     while (!ValidMenuChoiceBooking(userInput)){
+//         Console.WriteLine("Invalid menu choice.  Please Enter a Valid Menu Choice");
+//         Console.WriteLine("Press any key to continue....");
+//         Console.ReadKey();
 
-        DisplayBookingMenu();
-        userInput = Console.ReadLine();
-    }
+//         DisplayBookingMenu();
+//         userInput = Console.ReadLine();
+//     }
 
-    return userInput;
-}
+//     return userInput;
+// }
 
-static bool ValidMenuChoiceBooking(string userInput){
-    if (userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4" || userInput == "5"){
-        return true;
-    } else return false;
-}
+// static bool ValidMenuChoiceBooking(string userInput){
+//     if (userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4" || userInput == "5"){
+//         return true;
+//     } else return false;
+// }
 
-static void DisplayBookingMenu(){
-    Console.Clear();
-    Console.WriteLine("1:   View All Available Sessions");
-    Console.WriteLine("2:   View Sessions By Trainer");
-    Console.WriteLine("3:   Book a Session");
-    Console.WriteLine("4:   Complete/Cancel a Session");
-    Console.WriteLine("5:   Exit");
+// static void DisplayBookingMenu(){
+//     Console.Clear();
+//     Console.WriteLine("1:   View All Available Sessions");
+//     Console.WriteLine("2:   View Sessions By Trainer");
+//     Console.WriteLine("3:   Book a Session");
+//     Console.WriteLine("4:   Complete/Cancel a Session");
+//     Console.WriteLine("5:   Exit");
 
-    Booking[] bookings = new Booking[100];
-    BookingUtility utility = new BookingUtility(bookings);
-    utility.GetAllBookingsFromFile();
-    int count = Booking.GetCount();
+//     Booking[] bookings = new Booking[100];
+//     BookingUtility utility = new BookingUtility(bookings);
+//     utility.GetAllBookingsFromFile();
+//     int count = Booking.GetCount();
 
-    // System.Console.WriteLine("Sessions:");
-    // for (int i = 0; i < count; i++){
-    //     System.Console.WriteLine(bookings[i].ToStringFormatted());
-    // }
-}
+//     // System.Console.WriteLine("Sessions:");
+//     // for (int i = 0; i < count; i++){
+//     //     System.Console.WriteLine(bookings[i].ToStringFormatted());
+//     // }
+// }
 
 static void RouteBooking(int userInput){
 
@@ -660,29 +653,30 @@ static void RouteBooking(int userInput){
     } else DoASession();
 }
 
-static void ViewAvailableSessions(){
-    Listing[] listings = new Listing[100];
-    ListingUtility utility = new ListingUtility(listings);
+// static void ViewAvailableSessions(){
+//     Listing[] listings = new Listing[100];
+//     ListingUtility utility = new ListingUtility(listings);
 
-    utility.GetAllListingsFromFile();
-    int count = Listing.GetCount();
+//     utility.GetAllListingsFromFile();
+//     int count = Listing.GetCount();
 
-    System.Console.WriteLine("\nAvailable Sessions:");
-    (int left, int top) = Console.GetCursorPosition();
-    Console.SetCursorPosition(0,top + 1);
-    System.Console.WriteLine("Session ID");
-    Console.SetCursorPosition(12, top + 1);
-    System.Console.WriteLine("Trainer Name");
-    for (int i = 0; i < count; i++){
-        if (listings[i].GetTaken() == "available"){
-            System.Console.WriteLine(listings[i].ToStringFormatted());
-        }
-    }
+//     System.Console.WriteLine("\nAvailable Sessions:");
+//     (int left, int top) = Console.GetCursorPosition();
+//     Console.SetCursorPosition(0,top + 1);
+//     System.Console.WriteLine("Session ID");
+//     Console.SetCursorPosition(12, top + 1);
+//     System.Console.WriteLine("Trainer Name");
+//     for (int i = 0; i < count; i++){
+//         if (listings[i].GetTaken() == "available"){
+//             System.Console.WriteLine(listings[i].ToStringFormatted());
+//         }
+//     }
 
-    System.Console.WriteLine("Press any key to continue");
-    Console.ReadKey();
-}
+//     System.Console.WriteLine("Press any key to continue");
+//     Console.ReadKey();
+// }
 
+// to view all the available sessions
 static void ViewAvailableSessionsCursorPosition(){
     Listing[] listings = new Listing[100];
     ListingUtility utility = new ListingUtility(listings);
@@ -690,6 +684,7 @@ static void ViewAvailableSessionsCursorPosition(){
     utility.GetAllListingsFromFile();
     int count = Listing.GetCount();
 
+    // column headers
     System.Console.WriteLine("\nAvailable Sessions:");
     (int left, int top) = Console.GetCursorPosition();
     Console.SetCursorPosition(0,top + 1);
@@ -707,6 +702,7 @@ static void ViewAvailableSessionsCursorPosition(){
     Console.SetCursorPosition(105, top + 1);
     System.Console.WriteLine("Trainer ID");
 
+    // column content
     (left, top) = Console.GetCursorPosition();
     int numSessionsPrinted = 0;
     for (int i = 0; i < count; i++){
@@ -734,6 +730,7 @@ static void ViewAvailableSessionsCursorPosition(){
     Console.ReadKey();
 }
 
+// view all the available sessions for a certain trainer
 static void ViewAvailableSessionsByTrainer(){
     System.Console.WriteLine("Which trainer would you like to see the listings for?");
     string trainerName = Console.ReadLine();
@@ -745,6 +742,7 @@ static void ViewAvailableSessionsByTrainer(){
     utility.GetAllListingsFromFile();
     int count = Listing.GetCount();
 
+    // column headers
     System.Console.WriteLine("\nAvailable Sessions:");
     (int left, int top) = Console.GetCursorPosition();
     Console.SetCursorPosition(0,top + 1);
@@ -762,6 +760,7 @@ static void ViewAvailableSessionsByTrainer(){
     Console.SetCursorPosition(105, top + 1);
     System.Console.WriteLine("Trainer ID");
 
+    // column content
     (left, top) = Console.GetCursorPosition();
     int numSessionsPrinted = 0;
     for (int i = 0; i < count; i++){
@@ -791,7 +790,7 @@ static void ViewAvailableSessionsByTrainer(){
     Console.ReadKey();
 }
 
-
+// to book a session
 static void BookASession(){
     ViewAvailableSessionsCursorPosition();
 
@@ -830,7 +829,7 @@ static void BookASession(){
     string stringUserInput = Console.ReadLine(); 
 
     utility.BookSession(stringUserInput);
-    utility1.SetListingTaken(stringUserInput);
+    utility1.SetListingTaken(stringUserInput); // sets a listings to taken when you book it
     utility.Save();
     // utility1.Save();
 
@@ -840,31 +839,34 @@ static void BookASession(){
 
 }
 
-static void AddBooking(){
-    Booking[] bookings = new Booking[100];
-    BookingUtility utility = new BookingUtility(bookings);
-    // BookingReport report = new BookingReport(bookings);
+// to add a booking
+// static void AddBooking(){
+//     Booking[] bookings = new Booking[100];
+//     BookingUtility utility = new BookingUtility(bookings);
+//     // BookingReport report = new BookingReport(bookings);
 
-    utility.GetAllBookingsFromFile();
-    utility.AddBooking();
-    utility.Save();
+//     utility.GetAllBookingsFromFile();
+//     utility.AddBooking();
+//     utility.Save();
 
-    System.Console.WriteLine("Press any key to continue");
-    Console.ReadKey();
-}
+//     System.Console.WriteLine("Press any key to continue");
+//     Console.ReadKey();
+// }
 
-static void EditBooking(){
-    Booking[] bookings = new Booking[100];
-    BookingUtility utility = new BookingUtility(bookings);
-    // BookingReport report = new BookingReport(bookings);
+// to edit a booking
+// static void EditBooking(){
+//     Booking[] bookings = new Booking[100];
+//     BookingUtility utility = new BookingUtility(bookings);
+//     // BookingReport report = new BookingReport(bookings);
 
-    utility.GetAllBookingsFromFile();
-    utility.UpdateBooking();
+//     utility.GetAllBookingsFromFile();
+//     utility.UpdateBooking();
 
-    System.Console.WriteLine("Press any key to continue");
-    Console.ReadKey();
-}
+//     System.Console.WriteLine("Press any key to continue");
+//     Console.ReadKey();
+// }
 
+// to complete/cancel/no-show
 static void DoASession(){
     Booking[] bookings = new Booking[100];
     BookingUtility utility = new BookingUtility(bookings);
@@ -884,23 +886,24 @@ static void DoASession(){
     // Console.ReadKey();
 }
 
-static void ViewBookedSessions(){
-    Booking[] bookings = new Booking[100];
-    BookingUtility utility = new BookingUtility(bookings);
 
-    utility.GetAllBookingsFromFile();
-    int count = Booking.GetCount();
+// static void ViewBookedSessions(){
+//     Booking[] bookings = new Booking[100];
+//     BookingUtility utility = new BookingUtility(bookings);
 
-    System.Console.WriteLine("\nBooked Sessions:");
-    for (int i = 0; i < count; i++){
-        if (bookings[i].GetStatus() == "booked"){
-            System.Console.WriteLine(bookings[i].ToStringFormatted());
-        }
-    }
+//     utility.GetAllBookingsFromFile();
+//     int count = Booking.GetCount();
 
-    System.Console.WriteLine("Press any key to continue");
-    Console.ReadKey();
-}
+//     System.Console.WriteLine("\nBooked Sessions:");
+//     for (int i = 0; i < count; i++){
+//         if (bookings[i].GetStatus() == "booked"){
+//             System.Console.WriteLine(bookings[i].ToStringFormatted());
+//         }
+//     }
+
+//     System.Console.WriteLine("Press any key to continue");
+//     Console.ReadKey();
+// }
 
 // static void DeleteListing(){
 //     Listing[] listings = new Listing[100];
@@ -948,6 +951,8 @@ static void ViewBookedSessions(){
 // report.IDByEmail();
 
 //_________________________________________________________________________________________________________________________
+
+// checks if a trainer using the app, then routes to arrowkey menu system
 static void RunReports(string currentUser){
     if (currentUser.ToUpper() == "TRAINER"){
         int selectedIndex = Run("report");
@@ -963,38 +968,38 @@ static void RunReports(string currentUser){
 
 }
 
-static string GetReportChoice(){
-    DisplayReportMenu();
-    string userInput = Console.ReadLine();
+// static string GetReportChoice(){
+//     DisplayReportMenu();
+//     string userInput = Console.ReadLine();
 
-    while (!ValidMenuChoiceReport(userInput)){
-        Console.WriteLine("Invalid menu choice.  Please Enter a Valid Menu Choice");
-        Console.WriteLine("Press any key to continue....");
-        Console.ReadKey();
+//     while (!ValidMenuChoiceReport(userInput)){
+//         Console.WriteLine("Invalid menu choice.  Please Enter a Valid Menu Choice");
+//         Console.WriteLine("Press any key to continue....");
+//         Console.ReadKey();
 
-        DisplayReportMenu();
-        userInput = Console.ReadLine();
-    }
+//         DisplayReportMenu();
+//         userInput = Console.ReadLine();
+//     }
 
-    return userInput;
-}
+//     return userInput;
+// }
 
-static void DisplayReportMenu(){
-    Console.Clear();
-    Console.WriteLine("1:   Individual Customer Sessions");
-    Console.WriteLine("2:   Historical Customer Sessions");
-    Console.WriteLine("3:   Historical Revenue Report");
-    Console.WriteLine("4:   Monthly Revenue Report");
-    Console.WriteLine("5:   Yearly Revenue Report");
-    Console.WriteLine("6:   View All Customer Data");
-    Console.WriteLine("7:   Exit");
-}
+// static void DisplayReportMenu(){
+//     Console.Clear();
+//     Console.WriteLine("1:   Individual Customer Sessions");
+//     Console.WriteLine("2:   Historical Customer Sessions");
+//     Console.WriteLine("3:   Historical Revenue Report");
+//     Console.WriteLine("4:   Monthly Revenue Report");
+//     Console.WriteLine("5:   Yearly Revenue Report");
+//     Console.WriteLine("6:   View All Customer Data");
+//     Console.WriteLine("7:   Exit");
+// }
 
-static bool ValidMenuChoiceReport(string userInput){
-    if (userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4" || userInput == "5" || userInput == "6" || userInput == "7"){
-        return true;
-    } else return false;
-}
+// static bool ValidMenuChoiceReport(string userInput){
+//     if (userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4" || userInput == "5" || userInput == "6" || userInput == "7"){
+//         return true;
+//     } else return false;
+// }
 
 static void RouteReports(int userInput){
 
@@ -1013,6 +1018,7 @@ static void RouteReports(int userInput){
     } else ViewCustomerData();
 }
 
+// view all the sessions for a certain customer
 static void IndividualCustomerSessions(){
     Booking[] bookings = new Booking[100];
     BookingUtility utility = new BookingUtility(bookings);
@@ -1028,6 +1034,7 @@ static void IndividualCustomerSessions(){
     Console.ReadKey();
 }
 
+// views everything in transactions.txt
 static void ViewCustomerData(){
 
     Booking[] bookings = new Booking[100];
@@ -1036,6 +1043,7 @@ static void ViewCustomerData(){
     utility.GetAllBookingsFromFile();
     int count = Booking.GetCount();
     
+    // column headers
     System.Console.WriteLine("\nCustomer Sessions Data:");
     (int left, int top) = Console.GetCursorPosition();
     Console.SetCursorPosition(0,top + 1);
@@ -1053,6 +1061,7 @@ static void ViewCustomerData(){
     Console.SetCursorPosition(110, top + 1);
     System.Console.WriteLine("Status");
 
+    // column content
     (left, top) = Console.GetCursorPosition();
     int numSessionsPrinted = 0;
     for (int i = 0; i < count; i++){
@@ -1080,6 +1089,8 @@ static void ViewCustomerData(){
     Console.ReadKey();
 }
 
+
+// sessions sorted by date
 static void HistoricalCustomerSessions(){
     Booking[] bookings = new Booking[100];
     BookingUtility utility = new BookingUtility(bookings);
@@ -1091,6 +1102,7 @@ static void HistoricalCustomerSessions(){
     utility.GetAllBookingsFromFile();
     utility.SortByCustomerNameThenByDate();
 
+    // column headers
     System.Console.WriteLine("\nSessions by Customer then by Date:");
     (int left, int top) = Console.GetCursorPosition();
     Console.SetCursorPosition(0,top + 1);
@@ -1108,6 +1120,7 @@ static void HistoricalCustomerSessions(){
     Console.SetCursorPosition(110, top + 1);
     System.Console.WriteLine("Status");
 
+    // column content
     (left, top) = Console.GetCursorPosition();
     int numSessionsPrinted = 0;
     for (int i = 0; i < Booking.GetCount(); i++){
@@ -1138,6 +1151,7 @@ static void HistoricalCustomerSessions(){
     Console.ReadKey();
 }
 
+// revenu by month and year
 static void HistoricalRevenueReport(){
     Booking[] bookings = new Booking[100];
     BookingUtility utility = new BookingUtility(bookings);
@@ -1160,7 +1174,7 @@ static void HistoricalRevenueReport(){
     Console.ReadKey();
 }
 
-
+// revenue by month
 static void MonthlyRevenueReport(){
     Booking[] bookings = new Booking[100];
     BookingUtility utility = new BookingUtility(bookings);
@@ -1183,6 +1197,7 @@ static void MonthlyRevenueReport(){
     Console.ReadKey();
 }
 
+// revenue by year
 static void YearlyRevenueReport(){
     Booking[] bookings = new Booking[100];
     BookingUtility utility = new BookingUtility(bookings);

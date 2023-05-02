@@ -9,7 +9,7 @@ namespace mis_221_pa_5_clmiller16
         }     
 
 
-
+        // gets all the listings
         public void GetAllListingsFromFile()
         {
             //open
@@ -35,6 +35,7 @@ namespace mis_221_pa_5_clmiller16
             inFile.Close();
         }
 
+        // adds a listing with (the max id + 1) ID
         public void AddListing(int max)
         {
             // System.Console.WriteLine("Please enter the ID");
@@ -60,6 +61,8 @@ namespace mis_221_pa_5_clmiller16
             Listing.IncCount();
         }
 
+        // saves to listings.txt
+
         public void Save()
         {
             StreamWriter outFile = new StreamWriter("listings.txt");
@@ -73,6 +76,7 @@ namespace mis_221_pa_5_clmiller16
 
         }
 
+        // finds the index where the listing is found
         private int Find(int searchVal)
         {
             for(int i = 0; i < Listing.GetCount(); i++)
@@ -85,6 +89,8 @@ namespace mis_221_pa_5_clmiller16
             return -1;
         }
 
+
+        // finds the index of the listing based on the ID you input, then updates the content
         public void UpdateListing()
         {
             System.Console.WriteLine("What is the ID of the listing you want to update");
@@ -117,6 +123,7 @@ namespace mis_221_pa_5_clmiller16
             }   
         }
 
+        // checks if someone entered "available" or "talen" --> so the data isn't messed up
         static string ValidInputTaken(string userInput){
             while (userInput != "available" && userInput != "taken"){
                 System.Console.WriteLine("(Please enter available or taken)");
@@ -126,6 +133,7 @@ namespace mis_221_pa_5_clmiller16
             return userInput;
         }
 
+        // soft delete--> sets deleted to true        
         public void DeleteListing(){
             System.Console.WriteLine("What is the ID of the listing you want to delete?");
             int deleteID = int.Parse(Console.ReadLine());
@@ -133,6 +141,8 @@ namespace mis_221_pa_5_clmiller16
             listings[deleteID - 1].SetDeleted(true);
         }
 
+        // When you delet a trainer, it deletes all the listings for that trainer-->
+        // it doesn't make sense to have listings for a trainer that doesn't exist
         public void DeleteListingsForTrainer(string trainerName){
             for (int i = 0; i < Listing.GetCount(); i++){
                 if (listings[i].GetName() == trainerName){
@@ -143,7 +153,7 @@ namespace mis_221_pa_5_clmiller16
         }
 
         
-
+        // when you book a session, this sets the listing from available to taken
         public void SetListingTaken(string stringUserInput){
             int userInput = int.Parse(stringUserInput);
 

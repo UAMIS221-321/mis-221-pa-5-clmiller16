@@ -9,7 +9,7 @@ namespace mis_221_pa_5_clmiller16
         }     
 
 
-
+        // gets all the trainers 
         public void GetAllTrainersFromFile()
         {
             //open
@@ -35,6 +35,7 @@ namespace mis_221_pa_5_clmiller16
             inFile.Close();
         }
 
+        // adds a trainer with (the max id + 1) ID
         public void AddTrainer(int max)
         {
             int count = Trainer.GetCount();
@@ -68,7 +69,7 @@ namespace mis_221_pa_5_clmiller16
         //     return max;
         // }
 
-
+        // saves to trainers.txt
         public void Save()
         {
             StreamWriter outFile = new StreamWriter("trainers.txt");
@@ -81,7 +82,7 @@ namespace mis_221_pa_5_clmiller16
             outFile.Close();
 
         }
-
+        // finds the index where the trainer is found
         private int Find(int searchVal)
         {
             for(int i = 0; i < Trainer.GetCount(); i++)
@@ -94,6 +95,7 @@ namespace mis_221_pa_5_clmiller16
             return -1;
         }
 
+        // binary search to find the same thing (index of where the trainer is found)
         private int FindBinary(int searchVal){
             int last = Trainer.GetCount();
             int first = 0;
@@ -123,6 +125,7 @@ namespace mis_221_pa_5_clmiller16
 
         }
 
+        // finds the index of the trainer based on the ID you input, then updates the content
         public void UpdateTrainer()
         {
             System.Console.WriteLine("What is the ID of the trainer you want to update");
@@ -162,6 +165,8 @@ namespace mis_221_pa_5_clmiller16
 
         // }
 
+
+        // soft delete--> sets deleted to true
         public string DeleteTrainer(){
             System.Console.WriteLine("What is the ID of the trainer you want to delete?");
             string userInput = Console.ReadLine();

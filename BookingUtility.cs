@@ -14,7 +14,7 @@ namespace mis_221_pa_5_clmiller16
         }     
 
 
-
+        // gets all the bookings
         public void GetAllBookingsFromFile()
         {
             //open
@@ -39,31 +39,34 @@ namespace mis_221_pa_5_clmiller16
             //close
             inFile.Close();
         }
-
-        public void AddBooking()
-        {
-            System.Console.WriteLine("Please enter the session ID");
-            Booking myBooking = new Booking();
-            myBooking.SetSessionID(int.Parse(Console.ReadLine()));
-            System.Console.WriteLine("Please enter the customer name");
-            myBooking.SetCustomerName(Console.ReadLine());
-            System.Console.WriteLine("Please enter the customer email address");
-            myBooking.SetCustomerEmail(Console.ReadLine());
-            System.Console.WriteLine("Please enter training date");
-            myBooking.SetTrainingDate(DateOnly.Parse(Console.ReadLine()));
-            System.Console.WriteLine("Please enter the trainer ID");
-            myBooking.SetTrainerID(int.Parse(Console.ReadLine()));
-            System.Console.WriteLine("Please enter the trainer name");
-            myBooking.SetTrainerName(Console.ReadLine());
-            System.Console.WriteLine("Please enter the status");
-            myBooking.SetStatus(Console.ReadLine());
-            System.Console.WriteLine("Please enter the cost");
-            myBooking.SetCost(int.Parse(Console.ReadLine()));
+        
+        // adds a booking
+        // public void AddBooking()
+        // {
+        //     System.Console.WriteLine("Please enter the session ID");
+        //     Booking myBooking = new Booking();
+        //     myBooking.SetSessionID(int.Parse(Console.ReadLine()));
+        //     System.Console.WriteLine("Please enter the customer name");
+        //     myBooking.SetCustomerName(Console.ReadLine());
+        //     System.Console.WriteLine("Please enter the customer email address");
+        //     myBooking.SetCustomerEmail(Console.ReadLine());
+        //     System.Console.WriteLine("Please enter training date");
+        //     myBooking.SetTrainingDate(DateOnly.Parse(Console.ReadLine()));
+        //     System.Console.WriteLine("Please enter the trainer ID");
+        //     myBooking.SetTrainerID(int.Parse(Console.ReadLine()));
+        //     System.Console.WriteLine("Please enter the trainer name");
+        //     myBooking.SetTrainerName(Console.ReadLine());
+        //     System.Console.WriteLine("Please enter the status");
+        //     myBooking.SetStatus(Console.ReadLine());
+        //     System.Console.WriteLine("Please enter the cost");
+        //     myBooking.SetCost(int.Parse(Console.ReadLine()));
            
-            bookings[Booking.GetCount()] = myBooking;
-            Booking.IncCount();
-        }
+        //     bookings[Booking.GetCount()] = myBooking;
+        //     Booking.IncCount();
+        // }
 
+
+        // Books a session
         public void BookSession(string stringUserInput){
             // System.Console.WriteLine("Which session ID would you like to book?");
             // string stringUserInput = Console.ReadLine(); 
@@ -79,26 +82,18 @@ namespace mis_221_pa_5_clmiller16
 
             StreamReader inFile = new StreamReader("listings.txt");
 
-            int myCount = 0;
             string line = inFile.ReadLine();
-            int HEREWEGO = -1;
             while(line != null)
             {
                 string[] temp = line.Split('#');
-                // myCount++;
 
-                // for (int i = 0; i < temp.Length; i++){
-                //     System.Console.WriteLine(temp[i]);
-                // }
-
+                // pulls info from listings to book a session
                 for (int i = 0; i < temp.Length; i++){
                     if (stringUserInput == temp[i]){
-                        // string[] temp2 = temp;
                         myBooking.SetTrainerName(temp[1]);
                         myBooking.SetTrainingDate(DateOnly.Parse(temp[2]));
                         myBooking.SetTrainerID(int.Parse(temp[7]));
                         myBooking.SetCost(int.Parse(temp[4]));
-                        //HEREWEGO = myBooking.GetTrainerID();
                     }
                 }
 
@@ -107,69 +102,8 @@ namespace mis_221_pa_5_clmiller16
 
             inFile.Close();
 
-
-
-
-            // StreamReader inFile2 = new StreamReader("trainers.txt");
-
-            // //int myCount = 0;
-            // string line2 = inFile2.ReadLine();
-            // while(line2 != null)
-            // {
-            //     string[] temperory = line2.Split('#');
-            //     //myCount++;
-
-            //     // for (int i = 0; i < temperory.Length; i++){
-            //     //     if (stringUserInput == temperory[i]){
-            //     //         // string[] temp2 = temp;
-
-            //     //         //NONE OF THIS IS EXECUTING!!
-            //     //         System.Console.WriteLine(temperory[i]);
-            //     //         System.Console.WriteLine(temperory[0]);
-            //     //         System.Console.WriteLine(temperory[1]);
-            //     //         System.Console.WriteLine(temperory[2]);
-            //     //         Console.ReadKey();
-            //     //         myBooking.SetTrainerID(int.Parse(temperory[0]));
-            //     //     }
-            //     // }
-
-            //     if (HEREWEGO == int.Parse(temperory[0])){
-            //         myBooking.SetTrainerID(int.Parse(temperory[0]));
-            //     }
-
-            //     line2 = inFile2.ReadLine();
-            // }
-
-            // inFile2.Close();
-
             bookings[Booking.GetCount()] = myBooking; // AHHHHHHHHH
 
-            // for (int x = 0; x < bookings.Length; x++){
-            //     System.Console.WriteLine(bookings[x].ToStringFormatted());
-            // }
-            
-
-
-
-
-
-
-            // Listing myListing = new Listing();
-
-
-            // myBooking.SetTrainingDate(myListing.GetDate());
-            // myBooking.SetTrainerID(myListing.GetID());
-            // myBooking.SetTrainerName(myListing.GetName());
-
-
-
-            // myBooking.SetTrainingDate(myListing.GetDate());
-            // myBooking.SetTrainerID(myListing.GetID());
-            // myBooking.SetTrainerName(myListing.GetName());
-
-            // Save();
-
-            //pull info from listing here
         }
 
         public void Save2()
@@ -212,6 +146,7 @@ namespace mis_221_pa_5_clmiller16
 
         }
 
+        // finds the index where the listing is found
         private int Find(int searchVal)
         {
             for(int i = 0; i < Booking.GetCount(); i++)
@@ -224,6 +159,7 @@ namespace mis_221_pa_5_clmiller16
             return -1;
         }
 
+        // finds the index of the booking based on the ID you input, then updates the content
         public void UpdateBooking()
         {
             System.Console.WriteLine("What is the ID of the session you want to update");
@@ -267,6 +203,7 @@ namespace mis_221_pa_5_clmiller16
         //     bookings[deleteID - 1].SetDeleted(true);
         // }
 
+        // sorts the bookings alphabetically by customer email
         public void SortByEmail(){
             for (int i = 0; i < Booking.GetCount() - 1; i++){
                 int min = i;
@@ -282,6 +219,7 @@ namespace mis_221_pa_5_clmiller16
             }
         }
 
+        // sorts alphabetically by name then chronologically by date
         public void SortByCustomerNameThenByDate(){
             for (int i = 0; i < Booking.GetCount() - 1; i++){
                 int min  = i;
@@ -299,6 +237,7 @@ namespace mis_221_pa_5_clmiller16
             }
         }
 
+        // sorts chronologically by date
         public void SortByDate(){
             for (int i = 0; i < Booking.GetCount() - 1; i++){
                 int min  = i;
@@ -323,48 +262,41 @@ namespace mis_221_pa_5_clmiller16
 
         public void CompleteOrCancel(int selectedIndex){
 
-            // string userInput = GetSubMenuChoice();
-            // while (userInput != "4"){
-            //     RouteSubMenu(userInput);
-            //     userInput = GetSubMenuChoice();
-            // }
-
             RouteSubMenu(selectedIndex);
 
             //here will take a string and feed it to RouteSubMenu
-
         }
 
-        private string GetSubMenuChoice(){
-            DisplaySubMenu();
-            string userInput = Console.ReadLine();
+        // private string GetSubMenuChoice(){
+        //     DisplaySubMenu();
+        //     string userInput = Console.ReadLine();
 
-            while (!ValidSubMenuChoice(userInput)){
-                Console.WriteLine("Invalid menu choice.  Please Enter a Valid Menu Choice");
-                Console.WriteLine("Press any key to continue....");
-                Console.ReadKey();
+        //     while (!ValidSubMenuChoice(userInput)){
+        //         Console.WriteLine("Invalid menu choice.  Please Enter a Valid Menu Choice");
+        //         Console.WriteLine("Press any key to continue....");
+        //         Console.ReadKey();
 
-                DisplaySubMenu();
-                userInput = Console.ReadLine(); // change to get submenuchoice!!!
-            }
+        //         DisplaySubMenu();
+        //         userInput = Console.ReadLine(); // change to get submenuchoice!!!
+        //     }
 
-            return userInput;
+        //     return userInput;
 
-        }
+        // }
 
-        private void DisplaySubMenu(){
-            Console.Clear();
-            System.Console.WriteLine("1:    Complete an Appointment");
-            System.Console.WriteLine("2:    Cancel an Appointment");
-            System.Console.WriteLine("3:    No-Show an Appointment");
-            System.Console.WriteLine("4:    Exit");
-        }
+        // private void DisplaySubMenu(){
+        //     Console.Clear();
+        //     System.Console.WriteLine("1:    Complete an Appointment");
+        //     System.Console.WriteLine("2:    Cancel an Appointment");
+        //     System.Console.WriteLine("3:    No-Show an Appointment");
+        //     System.Console.WriteLine("4:    Exit");
+        // }
         
-        private bool ValidSubMenuChoice(string userInput){
-            if (userInput == "1" || userInput == "2"|| userInput == "3"|| userInput == "4"){
-                return true;
-            } else return false;
-        }
+        // private bool ValidSubMenuChoice(string userInput){
+        //     if (userInput == "1" || userInput == "2"|| userInput == "3"|| userInput == "4"){
+        //         return true;
+        //     } else return false;
+        // }
 
         private void RouteSubMenu(int selectedIndex){
             Console.CursorVisible = true;
@@ -375,6 +307,7 @@ namespace mis_221_pa_5_clmiller16
             } else NoShowAppointment();
         }
 
+        // to complete an appointment- sets to completed and runs workouts
         private void CompleteAppointment(){
             System.Console.WriteLine("What is the ID of the session you want to complete?");
             int searchVal = int.Parse(Console.ReadLine());
@@ -400,6 +333,7 @@ namespace mis_221_pa_5_clmiller16
             
         }
 
+        // dunk contest
         private void DunkContest(){
             Console.Clear();
 
@@ -410,8 +344,10 @@ namespace mis_221_pa_5_clmiller16
 
             System.Console.WriteLine("Welcome to the Chicago Bulls Official Dunk Contest- It is your job to impress the judges!\n");
             System.Console.WriteLine("Pick a number between 1 and 7 to decide which dunk you want to attempt tonight.\n");
-            string dunkStyle = Console.ReadLine();
+            string dunkStyle = Console.ReadLine(); // this will choose a dunk style, this does not affect odds of failing a dunk attempt-- each dunk style has an associated score
 
+
+            // generates a random number of failed attempts
             Random rnd = new Random();
             int failedAttempts = -1;
             if(difficulty == 1){
@@ -425,6 +361,7 @@ namespace mis_221_pa_5_clmiller16
             }
             //System.Console.WriteLine(failedAttempts);
             
+            // you are only allowed to fail 3 dunks before receiving a score of 0
             int maxAttempts = 3;
             for (int i = 0; i < failedAttempts; i++){
                 
@@ -434,7 +371,9 @@ namespace mis_221_pa_5_clmiller16
                     System.Console.WriteLine("FAILED ATTEMPT\n");
                 }
             }
+            
 
+            // messages if you failed all 3 or the result depending on which style dunk you choose
             if (failedAttempts >= 3){
                 System.Console.WriteLine("You failed 3 attempts\n\nScore: 0");
             } else{
@@ -476,6 +415,7 @@ namespace mis_221_pa_5_clmiller16
             
         }
 
+        // displays the ascii art for the dunk you choose to do
         private void DunkTheBall(string dunkStyle){
             StreamReader inFile = new StreamReader("dunkcontest" + dunkStyle + ".txt");
             string line = inFile.ReadLine();
@@ -487,6 +427,8 @@ namespace mis_221_pa_5_clmiller16
             inFile.Close();
         }
 
+
+        // allows you to choose to do weight lifitng or cardio and displayed the appropiate ascii art
         private void Exercise(){
             Console.Clear();
 
@@ -523,6 +465,7 @@ namespace mis_221_pa_5_clmiller16
             Console.ReadKey();
         }
 
+        // choose who you want to play against, MJ is the hardes to beat
         private void oneVSone(){
             Console.Clear();
 
@@ -535,24 +478,24 @@ namespace mis_221_pa_5_clmiller16
 
             if (response.ToUpper() == "1" || response.ToUpper() == "ZACH LAVINE"){
                 ShowGraphic();
-                difficulty = rnd.Next(1,10);
-                if (difficulty == 1){
+                difficulty = rnd.Next(1,100);
+                if (difficulty < 10){
                     System.Console.WriteLine("You lost the game :(");
                 } else{
                     System.Console.WriteLine("You beat Zach Lavine!");
                 }
             } else if (response.ToUpper() == "2" || response.ToUpper() == "DEMAR DEROZAN"){
                 ShowGraphic();
-                difficulty = rnd.Next(1,4);
-                if (difficulty == 1){
+                difficulty = rnd.Next(1,100);
+                if (difficulty < 40){
                     System.Console.WriteLine("You lost the game :(");
                 } else{
                     System.Console.WriteLine("You beat DeMar DeRozan!");
                 }
             } else if (response.ToUpper() == "3" || response.ToUpper() == "MICHAEL JORDAN"){
                 ShowGraphic();
-                difficulty = rnd.Next(1,3);
-                if (difficulty == 1){
+                difficulty = rnd.Next(1,100);
+                if (difficulty < 90){
                     System.Console.WriteLine("You lost the game :(");
                 } else{
                     System.Console.WriteLine("You beat Michael Jordn! Please come speak to the creater of this app, he would like to offer you a cookie.");
@@ -562,6 +505,8 @@ namespace mis_221_pa_5_clmiller16
             Console.ReadKey();
         }
 
+
+        // shows the 1v1 ascii graphic
         private void ShowGraphic(){
             StreamReader inFile = new StreamReader("onevone.txt");
             string line = inFile.ReadLine();
@@ -573,6 +518,7 @@ namespace mis_221_pa_5_clmiller16
             inFile.Close();
         }
 
+        // sets booking to cancelled
         private void CancelAppointment(){
             System.Console.WriteLine("What is the ID of the session you want to cancel?");
             int searchVal = int.Parse(Console.ReadLine());
@@ -584,6 +530,7 @@ namespace mis_221_pa_5_clmiller16
             } else System.Console.WriteLine("Session not found");     
         }
 
+        // sets booking to cancelled
         private void NoShowAppointment(){
             System.Console.WriteLine("What is the ID of the session you've decided not to show up to?");
             int searchVal = int.Parse(Console.ReadLine());
@@ -593,6 +540,9 @@ namespace mis_221_pa_5_clmiller16
                 bookings[foundIndex].SetStatus("no-show");
                 Save2();
             } else System.Console.WriteLine("Session not found");
+
+            System.Console.WriteLine("Not showing up to something you said you'd be there for is shameful--- side eye");
+            Console.ReadKey();
         }
 
 
